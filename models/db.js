@@ -1,4 +1,4 @@
-// Create Database
+// Connect to Database
 const mongoose = require('mongoose');
 
 try {
@@ -9,3 +9,4 @@ try {
 
 //require the schemas
 require('./user.js');
+require('./artifact.js');
