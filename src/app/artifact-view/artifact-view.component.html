@@ -1,0 +1,25 @@
+<button mat-button class="backButton" [routerLink]="['/collection']">Back</button>
+<div *ngIf="artifact" class="mainContent">
+  <img src={{artifact.imgURL}}>
+  <div class="info">
+    <div class="text">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dolor sed viverra ipsum nunc aliquet bibendum enim. In massa tempor nec feugiat. Nunc aliquet bibendum enim facilisis gravida. Nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Amet luctus venenatis lectus magna fringilla. 
+    </div>
+    <div class="dates">
+      Important date 1: 1/1/2000
+      <br>
+      Important date 2: 2/2/2002
+    </div>
+    <div class="currentOwner">
+      Current Owner: 
+      <br>
+      Bob
+    </div>
+    <div class="prevOwners">
+      Previous Owners:
+      <br>
+      Dave
+      <br>
+      Mary
+  </div>
+</div>

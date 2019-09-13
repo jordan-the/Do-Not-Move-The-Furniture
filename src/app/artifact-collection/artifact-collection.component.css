@@ -1,0 +1,49 @@
+.topContent {
+  height: 5vh;
+}
+
+.accountButton {
+  float: right;
+}
+
+.sideContent {
+  width: 20%;
+  height: 90vh;
+  float: left;
+}
+
+.search {
+  border: 1px solid black;
+  width: 100%;
+}
+
+.filter {
+  border: 1px solid black;
+  position: relative;
+  top: 10px;
+  height: 80%;
+  width: 100%;
+}
+
+.artifactContent {
+  padding: 5px;
+  border: 1px solid black;
+  width: 79%;
+  height: 90vh;
+  float: right;
+}
+
+.artifactTile {
+  background: lightgray;
+}
+
+
+.artifactButton {
+  height: 100%;
+  width: 100%;
+}
+
+img {
+  width: auto;
+  height: 80%;
+}

@@ -1,0 +1,19 @@
+<mat-card>
+  Sign In
+  <mat-divider></mat-divider>
+  <div class="loginContainer">
+    <mat-form-field>
+      <input matInput placeholder="Email Address" type="email">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Password" type="password">
+    </mat-form-field>
+  </div>
+  <button mat-button [routerLink]="['/home']">Log in</button>
+  <br>
+  <a>Forgot your password?</a>
+  <mat-divider></mat-divider>
+  <br>
+  <button mat-button>Sign up</button>
+</mat-card>
