@@ -1,14 +1,14 @@
-const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
+//This file is done by Qifan Tang
+//It is for user schema
 
-const userSchema = mongoose.Schema(
-    {
+const mongoose = require("mongoose");
+//const passportLocalMongoose = require('passport-local-mongoose');
+
+const userSchema = mongoose.Schema({
         username: String,
         password: String,
-        email: String
-    }
-);
+        email: String});
 
-userSchema.plugin(passportLocalMongoose);
+//userSchema.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);
