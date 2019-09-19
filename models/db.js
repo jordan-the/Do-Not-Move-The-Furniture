@@ -2,7 +2,7 @@
 //It is for establish connection with database
 
 // Connect to Database
-const mongoose = require("mongoose");
+var mongoose = require("mongoose");
 
 try {
     mongoose.connect("mongodb+srv://qifan:donotmovethefurniture@cluster0-wdsdl.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true });
@@ -15,3 +15,4 @@ require("./user.js");
 require("./artifact.js");
 require("./family.js");
 require("./category.js");
+require("./image.js");

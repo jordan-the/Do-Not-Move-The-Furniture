@@ -1,9 +1,9 @@
 //This file is done by Qifan Tang
 //It is for category schema
 
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
-const categorySchema = mongoose.Schema({
+var categorySchema = mongoose.Schema({
     name: String
     });
 

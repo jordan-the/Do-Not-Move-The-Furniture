@@ -1,9 +1,9 @@
 //This file is done by Qifan Tang
 //It is for artifact schema
 
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
-const artifactSchema = mongoose.Schema({
+var artifactSchema = mongoose.Schema({
     name: String,
     discription: String,
     image: String,

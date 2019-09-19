@@ -1,7 +1,8 @@
 //This file is done by Qifan Tang
 //It is for actions on artifacts
+//include edit, add, get, delete artifacts and images.
 
-//require database,api and schema
+//import database
 const db = require("../models/db.js");
 const mongoose = require("mongoose");
 const Artifact = mongoose.model("Artifact");
@@ -46,6 +47,7 @@ module.exports.addArtifactInfo = function(req,img, res) {
         hostId: img.public_id
         //hostId: result.id.toString()
     });
+//require database,api and schema
 
     artifact.save(function (err, artifact){
         if (!err) {

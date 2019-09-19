@@ -1,10 +1,12 @@
 //This file is done by Qifan Tang
 //It is for actions on family
+//It include all functions for familiy
+//Edit, add, delete etc.
 
 //require database,api and schema
-const db = require("../models/db.js");
-const mongoose = require("mongoose");
-const Artifact = mongoose.model("Family");
+var db = require("../models/db.js");
+var mongoose = require("mongoose");
+var Artifact = mongoose.model("Family");
 
 //add family member to database
 module.exports.addFamily = function(req, res) {

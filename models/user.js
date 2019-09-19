@@ -1,10 +1,10 @@
 //This file is done by Qifan Tang
 //It is for user schema
 
-const mongoose = require("mongoose");
+var mongoose = require("mongoose");
 //const passportLocalMongoose = require('passport-local-mongoose');
 
-const userSchema = mongoose.Schema({
+var userSchema = mongoose.Schema({
         username: String,
         password: String,
         email: String});

@@ -1,10 +1,12 @@
 //This file is done by Qifan Tang
 //It is for actions on category
+//It includes all functions for category
+//edit, add, delete etc.
 
 //require database,api and schema
-const db = require("../models/db.js");
-const mongoose = require("mongoose");
-const Category = mongoose.model("Category");
+var db = require("../models/db.js");
+var mongoose = require("mongoose");
+var Category = mongoose.model("Category");
 
 
 //add category to database
