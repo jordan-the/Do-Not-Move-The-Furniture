@@ -1,0 +1,42 @@
+<!-- web page for user to edit personal detail -->
+<div class = "tab">
+    
+    <div class = "tab_header">
+        <ul>
+            <li (click)="changeTab('1')" class={{tabOne}}>Account</li>
+            <li (click)="changeTab('2')" class={{tabTwo}}>Password</li>
+            <li (click)="changeTab('3')" class={{tabThree}}>Email</li>
+        </ul>
+    </div>
+
+     <div class = "tab_content">
+        <div [hidden]="tabIndex != '1'" >
+            <ul>
+                <li>  
+                    UserName: <input type="text" id="username" [(ngModel)]="userInfo.name"> 
+                </li>
+            </ul>
+        </div>
+    
+        <div [hidden]="tabIndex != '2'">
+            <ul>
+                <li>
+                    Current Password: <input type="password" id="password" [(ngModel)]="userInfo.password">
+                </li>
+                <li>
+                    New Password:     <input type="password" name=""id="password">
+                </li>
+                <li>
+                    Security Passcode: <input type="password" name=""id="password">
+            </li>
+            </ul>
+        </div>
+    
+        <div [hidden]="tabIndex != '3'" >
+            <ul>
+                <li>Email Address：<input type="email" id="email" [(ngModel)]="userInfo.email"></li>
+            </ul>                        
+        </div>
+    </div>
+    <button class="changeButton">change</button>
+</div>

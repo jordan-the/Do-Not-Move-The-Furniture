@@ -1,0 +1,23 @@
+<!-- manage page -->
+<div>
+    <h1 class="header">
+        <button mat-button class="homeButton" [routerLink]="['/home']">Home</button>
+        Manage
+    </h1>
+    <div class = "tab_header">
+        <ul>
+            <li (click)="changeTab('1')" class={{tabOne}}>Personal Detail</li>
+            <li (click)="changeTab('2')" class={{tabTwo}}>Family Member</li>
+        </ul>
+    </div>
+
+    <div class = "tab_content">
+        <div [hidden]="tabIndex != '1'" >
+            <app-personal-detail></app-personal-detail>
+        </div>
+    
+        <div [hidden]="tabIndex != '2'">
+            <app-family-member></app-family-member>
+        </div>
+    </div>
+</div>
