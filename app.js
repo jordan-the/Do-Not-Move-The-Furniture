@@ -14,9 +14,11 @@ const PORT = process.env.PORT || 3000;
 //require('./models/db.js');
 
 //require controller
-const controller = require("./controllers/controller.js");
-const ac = require("./controllers/artifactController.js");
-const cc = require("./controllers/categoryController.js");
+var controller = require("./controllers/controller.js");
+var ac = require("./controllers/artifactController.js");
+var cc = require("./controllers/categoryController.js");
+var ic = require("./controllers/imageController.js");
+
 // Set the view engine
 app.set("view engine","ejs");
 
@@ -34,12 +36,17 @@ app.listen(PORT,function(){
 
 //testing api
 //artifact controller testing
-//ac.addArtifact();
+//ac.addArtifactInfo2();
+
+var result = ic.addImage2();
+console.log(result);
+
 //cc.getOneCategory();
 //ac.getAllArtifacts();
 //ac.getOneArtifact({_id: '5d725bdff18690df4098211f'});
 //ac.editArtifact();
 //ac.deleteArtifact();
+ac.addInfo2();
 
 //category controller testing
 //cc.getAllCategories();
@@ -47,3 +54,4 @@ app.listen(PORT,function(){
 //image controller testing
 //ic.uploadimg();
 //ic.findimg();
+//ac.addArtifact();

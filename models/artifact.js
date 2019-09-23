@@ -5,10 +5,10 @@ var mongoose = require('mongoose');
 
 var artifactSchema = mongoose.Schema({
     name: String,
-    discription: String,
-    image: String,
+    description: String,
     time: Date,
-    hostId: String
+    currentLocation: String,
+    originLocation: String
     });
 
 

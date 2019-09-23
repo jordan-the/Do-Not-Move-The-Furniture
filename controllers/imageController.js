@@ -54,3 +54,16 @@ module.exports.deleteImg = function(imageId) {
     cloudinary.uploader.destroy(imageId);
     console.log("image deleted");
 };
+
+
+module.exports.getImgByArtifact = function(imageId){
+    Image.find(function(err, images){
+        if (!err) {
+            //do sometihing
+            console.log(images);
+        } else {
+            console.log("failed to get images");
+            res.sendStatus(400);
+        }
+    })
+};

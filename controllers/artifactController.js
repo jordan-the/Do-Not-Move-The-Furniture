@@ -3,55 +3,24 @@
 //include edit, add, get, delete artifacts and images.
 
 //import database
-const db = require("../models/db.js");
-const mongoose = require("mongoose");
-const Artifact = mongoose.model("Artifact");
-
-//require image hosting api
-const cloudinary = require("cloudinary").v2;
-
-//setting api config
-cloudinary.config({
-    cloud_name: "dnmtf",
-    api_key: "285384815636574",
-    api_secret: "koP_fitGdGntiPk_DJ6yrNnp8fY"
-});
-
-//requre controller
-const ac = require("../controllers/artifactController.js");
-
-module.exports.addArtifact = function(req, res){
-    cloudinary.uploader.upload("controllers/testimg.jpeg",function(err, img){
-        if(!err){
-            console.log("image uploaded");
-            ac.addArtifactInfo(req, img, res);
-        } else {
-            console.log("failed to upload image");
-            console.log(err);
-        }
-    });
-};
+var db = require("../models/db.js");
+var mongoose = require("mongoose");
+var Artifact = mongoose.model("Artifact");
 
 //add artifact to database
-module.exports.addArtifactInfo = function(req,img, res) {
-
+module.exports.addArtifact = function(req,img, res) {
     var artifact = new Artifact({
         name: "name",
         //name: req.body.username,
-        discription: "word discription",
-        //discription: req.body.discription,
-        //image: result.url.toString(),
-        image: img.url,
+        description: "word discription",
+        //description: req.body.discription,
         time: "2002-12-09",
-        //time: req.body.time
-        hostId: img.public_id
-        //hostId: result.id.toString()
+        currentLocation: "location",
+        originLocation: "location"
     });
-//require database,api and schema
 
     artifact.save(function (err, artifact){
         if (!err) {
-
             //do sometihing
             console.log("successfully added artifact");
             console.log(artifact);
