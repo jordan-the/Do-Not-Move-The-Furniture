@@ -1,0 +1,40 @@
+* {
+    margin: 0; 
+    padding: 0;
+    list-style: none;
+}
+
+.family {
+    text-align: center;
+}
+
+.familyList ul li{
+    height: 7vh;
+    margin-top: 4%;
+    line-height: 50px;
+    background-color: #ffecc7;
+    border: 1px solid #fac551;
+}
+
+.familyList ul li p{
+    float: left;
+    width: 33.3%;
+}
+
+input{
+    width: 40%;
+    height: 25px;
+}
+
+.editButton{
+    float: right;
+    width: 7vh;
+    height: 7vh;
+    background-color: #4daff9;
+    border: 1px solid #008cff;
+    border-radius: 20%;
+}
+
+.editButton:hover {
+    font-weight: bolder;
+} 

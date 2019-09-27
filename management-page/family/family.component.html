@@ -1,0 +1,15 @@
+<!-- Web page list all the family members -->
+<h1 class=“topLine”>
+    <button mat-button class="homeButton" [routerLink]="['/home']">Home</button>
+    Family Member
+</h1>
+
+<br>
+
+<ol *ngFor="let member of familyList">
+    <li>
+        <div> Name: {{member.name}}</div>
+        <div>Email: {{member.email}}</div>
+    </li>
+    <br>
+</ol>

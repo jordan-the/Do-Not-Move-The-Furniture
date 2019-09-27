@@ -1,0 +1,13 @@
+<!-- Web page for user to change the edit details of family members -->
+<div class="family">
+    <div class="familyList">
+        <ul *ngFor="let member of familyList; let i=index">
+            <li>
+                <p>{{i+1}}. Name: <input type="text" id="familyMember" [(ngModel)]="member.name"></p>
+                <p>Birthday: <input type="text" id="birthday" [(ngModel)]="member.birthday"></p>
+                <p>Email: <input type="text" id="email" [(ngModel)]="member.email">
+                <button class="editButton">Edit</button></p>
+            </li>
+        </ul>
+    </div>
+</div>
