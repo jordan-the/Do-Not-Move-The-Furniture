@@ -38,15 +38,11 @@ app.listen(PORT,function(){
 //artifact controller testing
 //ac.addArtifactInfo2();
 
-var result = ic.addImage2();
-console.log(result);
-
 //cc.getOneCategory();
 //ac.getAllArtifacts();
 //ac.getOneArtifact({_id: '5d725bdff18690df4098211f'});
 //ac.editArtifact();
 //ac.deleteArtifact();
-ac.addInfo2();
 
 //category controller testing
 //cc.getAllCategories();
