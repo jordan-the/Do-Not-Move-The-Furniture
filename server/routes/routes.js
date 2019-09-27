@@ -8,6 +8,11 @@ var controller = require("../controllers/controller");
 //coming soon page
 router.get("/",controller.coming);
 
+router.get("/api/artifact",controller.coming);
+
+router.get("/api/artifact/:id",controller.coming);
+
+router.post("/api/artifact",controller.coming);
 
 module.exports = router;
 
