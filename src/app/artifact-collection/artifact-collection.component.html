@@ -1,32 +1,33 @@
-<div class="topContent">
-  <button mat-button class="homeButton" [routerLink]="['/home']">Home</button>
-  <button mat-button class="accountButton" [routerLink]="['']">My Account</button>
-</div>
+<div class="content">
+	<div class="topContent">
+		<button mat-button class="homeButton" [routerLink]="['/home']">Home</button>
+		<button mat-button class="accountButton" [routerLink]="['']">My Account</button>
+	</div>
 
-<div class="sideContent">
-  <mat-form-field class="search">
-    <input matInput placeholder="Search" type="search">
-  </mat-form-field>
-  <div class="filter">
-    <mat-checkbox>Category1</mat-checkbox>
-    <br>
-    <mat-checkbox>Category2</mat-checkbox>
-    <br>
-    <mat-checkbox>Category3</mat-checkbox>
-  </div>
-</div>
+	<div class="sideContent">
+		<mat-form-field class="search">
+			<input matInput placeholder="Search" type="search">
+		</mat-form-field>
+		<div class="filter">
+			<div *ngFor="let category of categories" class="cat">
+				<mat-checkbox (click)="includeFilter(category.id)">{{category.name}}</mat-checkbox>
+				<br>
+			</div>
+		</div>
+	</div>
 
-<div class="artifactContent">
-  <mat-grid-list cols="6" gutterSize="5px">
-    <mat-grid-tile *ngFor="let artifact of artifacts" class="artifactTile">
-      <button mat-button class="artifactButton" [routerLink]="['/view',artifact.id]">
-        <img src={{artifact.imgURL}}>
-        <br>
-        {{artifact.name}}
-      </button>
-    </mat-grid-tile>
-    <mat-grid-tile class="addArtifactTile">
-      <button mat-button class="artifactButton" [routerLink]="['/create']">Add Artifact</button>
-    </mat-grid-tile>
-  </mat-grid-list>
+	<div class="artifactContent">
+		<mat-grid-list cols="6" gutterSize="5px">
+			<mat-grid-tile *ngFor="let artifact of filteredArtifacts" class="artifactTile">
+				<button mat-button class="artifactButton" (click)="openArtifact(artifact)">
+					<img src={{artifact.imgURL}}>
+					<br>
+					{{artifact.name}}
+				</button>
+			</mat-grid-tile>
+			<mat-grid-tile class="addArtifactTile">
+				<button mat-button class="artifactButton" (click)="openCreate()">Add Artifact</button>
+			</mat-grid-tile>
+		</mat-grid-list>
+	</div>
 </div>

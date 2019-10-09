@@ -1,1 +1,5 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.mat-dialog-container {
+    background-color: #ffecc7;
+}

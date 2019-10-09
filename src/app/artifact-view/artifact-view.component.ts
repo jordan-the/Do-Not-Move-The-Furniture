@@ -1,30 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DUMMYARTIFACTS } from '../dummy-info';
-
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
+import { DUMMYARTIFACTS, DUMMYCATEGORIES, DUMMYFAMILY } from '../dummy-info';
+import { Artifact } from '../data-structures';
 
 @Component({
-  selector: 'app-artifact-view',
-  templateUrl: './artifact-view.component.html',
-  styleUrls: ['./artifact-view.component.css']
+  	selector: 'app-artifact-view',
+  	templateUrl: './artifact-view.component.html',
+  	styleUrls: ['./artifact-view.component.css']
 })
 export class ArtifactViewComponent implements OnInit {
 
-  artifact;
+  	artifact;
+  	people = [];
 
-  constructor(
-    private route: ActivatedRoute,
-  ) { }
+  	constructor(
+		public dialogRef: MatDialogRef<ArtifactViewComponent>,
+		@Inject(MAT_DIALOG_DATA) public data: Artifact
+	) { }
 
-  ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      var artif;
-      for (artif in DUMMYARTIFACTS) {
-        if (artif.id == +params.get('artifactId')) {
-          this.artifact = artif;
-        }
-      }
-  });
-}
-
+  	ngOnInit() {
+		this.artifact = this.data;
+    	this.people = DUMMYFAMILY.filter(x => (this.artifact.associatedPeople.indexOf(x.id) > -1));
+		console.log(this.artifact);
+		console.log(this.people);
+	}
+	  
+	closeThis() {
+		this.dialogRef.close()
+	}
 }
