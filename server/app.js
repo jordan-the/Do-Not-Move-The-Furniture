@@ -34,20 +34,3 @@ app.listen(PORT,function(){
     console.log("Express listening on port 3000");
 });
 
-//testing api
-//artifact controller testing
-//ac.addArtifactInfo2();
-
-//cc.getOneCategory();
-//ac.getAllArtifacts();
-//ac.getOneArtifact({_id: '5d725bdff18690df4098211f'});
-//ac.editArtifact();
-//ac.deleteArtifact();
-
-//category controller testing
-//cc.getAllCategories();
-
-//image controller testing
-//ic.uploadimg();
-//ic.findimg();
-//ac.addArtifact();
