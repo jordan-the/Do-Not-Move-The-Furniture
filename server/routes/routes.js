@@ -23,6 +23,29 @@ router.get("/api/image/:id", controller.getImageByArtifact);
 
 router.get("/api/image/delete/:id", controller.deleteImageById);
 
+//category api
+router.get("/api/category", controller.getCategory);
+
+router.post("/api/category", controller.addCategory);
+
+router.post("/api/category/:id", controller.editCategory);
+
+router.get("/api/category/delete/:id", controller.deleteCategory);
+
+//family api
+router.get("/api/family", controller.getAllFamily);
+
+router.get("/api/family/:id", controller.getOneFamily);
+
+router.post("/api/family", controller.addFamily);
+
+router.post("/api/family/:id", controller.editFamily);
+
+router.get("/api/family/delete/:id", controller.deleteFamily);
+
+//checking connection
 router.get("/api", controller.checkConnection);
+
+
 module.exports = router;
 

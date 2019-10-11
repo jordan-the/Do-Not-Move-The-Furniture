@@ -55,5 +55,39 @@ module.exports.getImageByArtifact = function(req,res){
 };
 
 //category
+module.exports.getCategory = function(req,res){
+    cc.getAllCategories(req,res);
+};
+
+module.exports.addCategory = function(req,res){
+    cc.addCategory(req,res);
+};
+
+module.exports.editCategory = function(req,res){
+    cc.editCategory(req, res);
+};
+
+module.exports.deleteCategory = function(req,res){
+    cc.deleteCategory(req,res);
+};
 
 //family member
+module.exports.addFamily = function(req,res){
+    fc.addFamily(req,res);
+};
+
+module.exports.editFamily = function(req,res){
+    fc.editFamily(req,res);
+};
+
+module.exports.deleteFamily = function(req,res){
+    fc.deleteFamily(req, res);
+};
+
+module.exports.getAllFamily = function(req,res){
+    fc.getAllFamilys(req,res);
+};
+
+module.exports.getOneFamily = function(req,res){
+    fc.getOneFamily(req,res);
+};

@@ -11,12 +11,28 @@ var Artifact = mongoose.model("Family");
 //add family member to database
 module.exports.addFamily = function(req, res) {
     var family = new Family({
+        name: req.body.name
+    });
+
+    family.save(function (err, family){
+        if (!err) {
+            res.send("successfully added family member");
+        } else {
+            console.log("failed to add family member");
+            res.sendStatus(400);
+        }
+    });
+};
+
+
+//add family member to database
+module.exports.addFamily2 = function(req, res) {
+    var family = new Family({
         name: "name"
     });
 
     family.save(function (err, family){
         if (!err) {
-
             //do sometihing
             console.log("successfully added family member");
         } else {
@@ -31,7 +47,7 @@ module.exports.getAllFamilys = function(req, res) {
     Family.find(function(err, families){
         if (!err) {
             //do sometihing
-            console.log(families);
+            res.send(families);
         } else {
             console.log("failed to get families");
             res.sendStatus(400);
@@ -41,11 +57,10 @@ module.exports.getAllFamilys = function(req, res) {
 
 //get a single member by id.
 module.exports.getOneFamily = function(req, res) {
-    //Artifact.findOne({_id: req.params.id}, function(err, artifact){
-    Family.findOne({_id: "5d725bdff18690df4098211f"}, function(err, family){
+    Family.findOne({_id: req.params.id}, function(err, family){
         if (!err) {
             //do sometihing
-            console.log(family);
+            res.send(family);
         } else {
             console.log("failed to get family by id");
             res.sendStatus(400);
@@ -56,26 +71,23 @@ module.exports.getOneFamily = function(req, res) {
 //edit an family member by id
 module.exports.editFamily = function(req, res) {
     //Artifact.findOne({_id: req.params.id}, function(err, artifact){
-    Family.findOne({_id: "5d725bdff18690df4098211f"}, function(err, family){
+    Family.findOne({_id: req.params.id}, function(err, family){
         if (!err) {
             //do sometihing
-            console.log(family);
+            res.send(family);
         } else {
             console.log("failed to get family by id");
             res.sendStatus(400);
         }
-
-        family.name = "changed";
-        console.log(family);
     })
 };
 
 //delete an family member
 module.exports.deleteFamily = function(req, res) {
-    Family.deleteOne({_id:"5d725bdff18690df4098211f"}, function(err){
+    Family.deleteOne({_id: req.params.id}, function(err){
         if (!err) {
             //do sometihing
-            console.log("family member deleted");
+            res.send("family member deleted");
         } else {
             console.log("failed to delete family by id");
             res.sendStatus(400);
