@@ -6,7 +6,7 @@
 //require database,api and schema
 var db = require("../models/db.js");
 var mongoose = require("mongoose");
-var Artifact = mongoose.model("Family");
+var Family = mongoose.model("Family");
 
 //add family member to database
 module.exports.addFamily = function(req, res) {
@@ -70,7 +70,6 @@ module.exports.getOneFamily = function(req, res) {
 
 //edit an family member by id
 module.exports.editFamily = function(req, res) {
-    //Artifact.findOne({_id: req.params.id}, function(err, artifact){
     Family.findOne({_id: req.params.id}, function(err, family){
         if (!err) {
             //do sometihing

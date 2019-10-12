@@ -43,6 +43,17 @@ router.post("/api/family/:id", controller.editFamily);
 
 router.get("/api/family/delete/:id", controller.deleteFamily);
 
+//user api
+router.get("/api/user", controller.getUser);
+
+router.get("/api/user/:id", controller.getUserByID);
+
+router.get("/api/user/email/:email", controller.getUserByEmail);
+
+router.post("/api/user", controller.addUser);
+
+router.post("/api/user/:id", controller.editUser);
+
 //checking connection
 router.get("/api", controller.checkConnection);
 

@@ -9,6 +9,7 @@ var mongoose = require("mongoose");
 var ac = require("../controllers/artifactController.js");
 var cc = require("../controllers/categoryController.js");
 var fc = require("../controllers/familyController.js");
+var uc = require("../controllers/userController.js");
 
 //connect routes to controllers
 module.exports.checkConnection = function(req,res){
@@ -90,4 +91,24 @@ module.exports.getAllFamily = function(req,res){
 
 module.exports.getOneFamily = function(req,res){
     fc.getOneFamily(req,res);
+};
+
+module.exports.addUser = function(req,res){
+    uc.addUser(req,res);
+};
+
+module.exports.getUser = function(req,res){
+    uc.getUser(req,res);
+};
+
+module.exports.getUserByID = function(req,res){
+    uc.getOneUser(req,res);
+};
+
+module.exports.getUserByEmail = function(req,res){
+    uc.getOneUserByEmail(req,res);
+};
+
+module.exports.editUser = function(req,res){
+    uc.editUser(req,res);
 };
