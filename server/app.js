@@ -18,6 +18,7 @@ var controller = require("./controllers/controller.js");
 var ac = require("./controllers/artifactController.js");
 var cc = require("./controllers/categoryController.js");
 var ic = require("./controllers/imageController.js");
+var uc = require("./controllers/userController.js");
 
 // Set the view engine
 app.set("view engine","ejs");

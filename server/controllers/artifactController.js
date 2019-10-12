@@ -20,7 +20,7 @@ module.exports.addArtifact = function(req, res) {
 
     artifact.save(function (err, artifact){
         if (!err) {
-            res.send("successfully added artifact")
+            res.send("successfully added artifact");
         } else {
             console.log("failed to add artifact");
             res.sendStatus(400);
