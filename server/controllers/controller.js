@@ -10,6 +10,7 @@ var ac = require("../controllers/artifactController.js");
 var cc = require("../controllers/categoryController.js");
 var fc = require("../controllers/familyController.js");
 var uc = require("../controllers/userController.js");
+var ic = require("../controllers/imageController.js");
 
 //connect routes to controllers
 module.exports.checkConnection = function(req,res){
