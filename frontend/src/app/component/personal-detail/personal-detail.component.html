@@ -1,0 +1,27 @@
+<h1>
+    <button mat-button class="homeButton" [routerLink]="['/home']">Home</button>
+    Personal Detail
+</h1>
+
+<div>
+    <div>
+        <ul>
+            <li>
+                Name: <input type="text" id="username" [(ngModel)]="user.name"> 
+                <button class="changeButton">edit</button>
+            </li>
+            <li>
+                Email Address：
+                <input type="email" id="email" [(ngModel)]="user.email">
+                <button class="changeButton">edit</button>
+            </li>
+            <li>
+                <!-- <p>Current Password: **********</p> -->
+                <p>New Password: <input type="newPassword" name="" id="password"></p>
+                <p>Confirm Pass: <input type="confirmPassword" name="" id="password"></p>
+                <button class="changeButton">edit</button>  
+            </li>
+        </ul>
+    </div>
+</div>
+        

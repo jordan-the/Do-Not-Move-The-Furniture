@@ -1,0 +1,41 @@
+* {
+    margin: 0; 
+    padding: 0;
+    text-align: center;
+    list-style: none;
+}
+
+h1 {
+    /* top: 20px; */
+    height: 70px;
+    line-height: 70px;
+    background-color: #D5E8D4;
+    border: 1px solid #000000;
+}
+
+.homeButton {
+    float: left;
+    height: 70px;
+    width: 70px;
+    border-right: 1px solid #000000;
+}
+.editButton {
+    float: right;
+    height: 70px;
+    width: 70px;
+    border-left: 1px solid #000000;
+} 
+
+ul li{
+    margin-top: 4%;
+    height: 7vh;
+    line-height: 7vh;
+    background-color: #FFECC7;
+    border: 1px solid #FAC551;
+}
+
+ul li p{
+    float: left;
+    width: calc(100% / 2);
+}
+
