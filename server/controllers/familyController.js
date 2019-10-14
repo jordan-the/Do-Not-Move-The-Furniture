@@ -11,8 +11,8 @@ var Family = mongoose.model("Family");
 //add family member to database
 module.exports.addFamily = function(req, res) {
     var family = new Family({
-        name: req.body.name,
-        bday: req.body.bday
+        name: req.body.name
+        //bday: req.body.bday
     });
 
     family.save(function (err, family){
@@ -29,7 +29,8 @@ module.exports.addFamily = function(req, res) {
 //add family member to database
 module.exports.addFamily2 = function(req, res) {
     var family = new Family({
-        name: "name"
+        name: "name",
+        bday: "2019-10-14"
     });
 
     family.save(function (err, family){

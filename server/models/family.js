@@ -4,8 +4,8 @@
 var mongoose = require("mongoose");
 
 var familySchema = mongoose.Schema({
-    name: String,
-    bday: Date
+    name: String
+    //bday: Date
 });
 
 module.exports = mongoose.model("Family", familySchema);

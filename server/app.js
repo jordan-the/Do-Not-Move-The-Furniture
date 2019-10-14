@@ -19,7 +19,7 @@ var ac = require("./controllers/artifactController.js");
 var cc = require("./controllers/categoryController.js");
 var ic = require("./controllers/imageController.js");
 var uc = require("./controllers/userController.js");
-
+var fc = require("./controllers/familyController.js");
 // Set the view engine
 app.set("view engine","ejs");
 
@@ -34,4 +34,3 @@ app.use("/",router);
 app.listen(PORT,function(){
     console.log("Express listening on port 3000");
 });
-
