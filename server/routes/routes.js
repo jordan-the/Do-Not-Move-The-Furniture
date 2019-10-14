@@ -12,7 +12,7 @@ router.get("/api/artifact/:id", controller.getOneArtifact);
 
 router.post("/api/artifact", controller.addArtifact);
 
-router.post("/api/artifact/:id", controller.editArtifact);
+router.post("/api/edit/artifact/:id", controller.editArtifact);
 
 router.get("/api/artifact/delete/:id", controller.deleteArtifact);
 
@@ -57,6 +57,8 @@ router.post("/api/user/:id", controller.editUser);
 //checking connection
 router.get("/api", controller.checkConnection);
 router.post("/api", controller.testPost);
+router.post("/api/addFakeImage", controller.addFakeImage);
+
 
 module.exports = router;
 

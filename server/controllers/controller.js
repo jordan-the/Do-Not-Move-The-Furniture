@@ -15,7 +15,19 @@ var ic = require("../controllers/imageController.js");
 //connect routes to controllers
 module.exports.checkConnection = function(req,res){
     res.send("successfully connected");
-}
+};
+
+module.exports.testPost = function(req,res){
+    console.log(req.body);
+    //console.log(req.body.name);
+    res.send("received");
+};
+
+module.exports.addFakeImage = function(req,res){
+    ic.addImage2(req,res);
+};
+
+
 //artifacts
 module.exports.getAllArtifact = function(req,res){
     ac.getAllArtifacts(req,res);
@@ -113,10 +125,4 @@ module.exports.getUserByEmail = function(req,res){
 
 module.exports.editUser = function(req,res){
     uc.editUser(req,res);
-};
-
-module.exports.testPost = function(req,res){
-    console.log(req.body);
-    //console.log(req.body.name);
-    res.send("received");
 };

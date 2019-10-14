@@ -23,7 +23,6 @@ var fc = require("./controllers/familyController.js");
 
 //require bodyparser
 const bodyParser = require('body-parser');
-
 app.use(bodyParser.urlencoded({extended: false}));
 
 

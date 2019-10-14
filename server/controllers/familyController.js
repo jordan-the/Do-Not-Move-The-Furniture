@@ -10,10 +10,11 @@ var Family = mongoose.model("Family");
 
 //add family member to database
 module.exports.addFamily = function(req, res) {
-    console.log(req.body.name);
+    console.log(req);
+    console.log(req.body);
     var family = new Family({
-        name: req.body.name
-        //bday: req.body.bday
+        name: req.body.name,
+        bday: req.body.bday
     });
 
     family.save(function (err, family){

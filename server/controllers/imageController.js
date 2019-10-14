@@ -8,6 +8,9 @@ var db = require("../models/db.js");
 var mongoose = require("mongoose");
 var Image = mongoose.model("Image");
 
+//require artifact Controller
+var ac = require("../controllers/artifactController.js")
+
 //require image hosting api
 var cloudinary = require("cloudinary").v2;
 
@@ -29,6 +32,10 @@ module.exports.addImage = function(req,res){
                 url: img.url,
                 artifactId: req.params.id
             });
+            //if the image is primary modify the attribute in artifact
+            if(req.body.isPrimary == 1){
+                ac.editPrimaryImage(req, res, img.url);
+            }
 
             image.save(function (err, image){
                 if (!err) {
@@ -107,23 +114,21 @@ module.exports.getImgByArtifact = function(req,res){
 //this is for testing
 
 //this function is for upload the image to host and database
-module.exports.addImage2 = function(artifactId){
+module.exports.addImage2 = function(req, res){
     //upload the image to host
-    cloudinary.uploader.upload("controllers/testimg.jpeg",function(err, img){
+    cloudinary.uploader.upload("server/controllers/testimg.jpeg",function(err, img){
         if(!err){
-            console.log("image uploaded");
             //upload info to database
             var image = new Image({
                 hostId: img.public_id,
                 url: img.url,
-                artifactId: artifactId
+                artifactId: req.body.artifactId
             });
 
             image.save(function (err, image){
                 if (!err) {
                     //do sometihing
-                    console.log("successfully added image");
-                    console.log(image);
+                    res.send("image added");
                 } else {
                     console.log("failed to add image");
                     res.sendStatus(400);

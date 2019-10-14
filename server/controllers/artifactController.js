@@ -62,6 +62,7 @@ module.exports.editArtifact = function(req, res) {
             artifact.currentLocation = req.body.currentLocation;
             artifact.originLocation = req.body.originLocation;
             artifact.familyId = req.body.familyId;
+            artifact.category = req.body.category;
             res.send(artifact);
         } else {
             console.log("failed to get artifact by id");
@@ -122,5 +123,16 @@ module.exports.editArtifact2 = function(req, res) {
         artifact.name = "changed";
         artifact.discription = "also changed";
         artifact.time = "2000-12-09";
+    })
+};
+
+module.exports.editPrimaryImage = function(req, res, imageUrl){
+    Artifact.findOne({_id: req.params.id}, function(err, artifact){
+        if(!err){
+            artifact.primaryImage = imageUrl;
+        } else {
+            console.log("failed to add primary image");
+            res.sendStatus(400);
+        }
     })
 };
