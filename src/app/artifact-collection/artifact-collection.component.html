@@ -18,9 +18,9 @@
 
 	<div class="artifactContent">
 		<mat-grid-list cols="6" gutterSize="5px">
-			<mat-grid-tile *ngFor="let artifact of filteredArtifacts" class="artifactTile">
+			<mat-grid-tile *ngFor="let artifact of artifacts" class="artifactTile">
 				<button mat-button class="artifactButton" (click)="openArtifact(artifact)">
-					<img src={{artifact.imgURL}}>
+					<img class="image" src="{{artifact.primaryImage}}">
 					<br>
 					{{artifact.name}}
 				</button>

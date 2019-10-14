@@ -10,9 +10,13 @@ import { ArtifactViewComponent } from '../artifact-view/artifact-view.component'
 export class CreateComponent implements OnInit {
 
   	constructor(
+		public dialogRef: MatDialogRef<ArtifactViewComponent>,
   	) { }
 
   	ngOnInit() {
   	}
 
+	closeThis() {
+		this.dialogRef.close()
+	}
 }

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialModule } from '../material-module';
 
@@ -18,7 +19,8 @@ import { PreviousOwnersComponent } from './previous-owners/previous-owners.compo
 import { UploadFilesDirective } from './upload-files/upload-files.directive';
 import { ImageDirectiveDirective } from './upload-files/image-directive.directive';
 import { TitleComponent } from './title/title.component';
-
+import { ArtifactService } from './artifact.service';
+ 
 @NgModule({
     declarations: [
         AppComponent,
@@ -40,8 +42,9 @@ import { TitleComponent } from './title/title.component';
         AppRoutingModule,
         MaterialModule,
         BrowserAnimationsModule,
+        HttpClientModule,
     ],
-    providers: [],
+    providers: [ArtifactService],
     bootstrap: [AppComponent],
     entryComponents: [
         ArtifactViewComponent,

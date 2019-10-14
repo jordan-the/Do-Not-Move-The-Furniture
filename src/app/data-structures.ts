@@ -1,11 +1,12 @@
 export class Artifact {
-    id: number;
-    name: string;
-    imgURL: string;
-    information: string;
-    dates: string[];
-    associatedPeople: number[];
-    categories: number[];
+    _id: string;    
+    name: String;
+    description: String;
+    time: String;
+    //year,month,date
+    currentLocation: String;
+    originLocation: String;
+    familyId: String;
 }
 
 export class FamilyMember {
@@ -18,4 +19,10 @@ export class FamilyMember {
 export class Category {
     id: number;
     name: string;
+}
+
+export class Image {
+    hostId: String;
+    url: String;
+    artifactId: String;
 }
