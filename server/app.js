@@ -20,6 +20,13 @@ var cc = require("./controllers/categoryController.js");
 var ic = require("./controllers/imageController.js");
 var uc = require("./controllers/userController.js");
 var fc = require("./controllers/familyController.js");
+
+//require bodyparser
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({extended: false}));
+
+
 // Set the view engine
 app.set("view engine","ejs");
 

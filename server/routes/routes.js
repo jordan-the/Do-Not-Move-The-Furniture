@@ -56,7 +56,7 @@ router.post("/api/user/:id", controller.editUser);
 
 //checking connection
 router.get("/api", controller.checkConnection);
-
+router.post("/api", controller.testPost);
 
 module.exports = router;
 

@@ -37,6 +37,7 @@ module.exports.addArtifact = function(req,res){
     ac.addArtifact(req,res);
 };
 
+
 //to delete an artifact, also need to delete the images as well
 module.exports.deleteArtifact = function(req,res){
     ic.deleteImgByArtifact(req,res);
@@ -112,4 +113,10 @@ module.exports.getUserByEmail = function(req,res){
 
 module.exports.editUser = function(req,res){
     uc.editUser(req,res);
+};
+
+module.exports.testPost = function(req,res){
+    console.log(req.body);
+    //console.log(req.body.name);
+    res.send("received");
 };

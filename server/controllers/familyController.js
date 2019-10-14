@@ -10,6 +10,7 @@ var Family = mongoose.model("Family");
 
 //add family member to database
 module.exports.addFamily = function(req, res) {
+    console.log(req.body.name);
     var family = new Family({
         name: req.body.name
         //bday: req.body.bday
