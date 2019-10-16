@@ -20,6 +20,7 @@ import { UploadFilesDirective } from './upload-files/upload-files.directive';
 import { ImageDirectiveDirective } from './upload-files/image-directive.directive';
 import { TitleComponent } from './title/title.component';
 import { ArtifactService } from './artifact.service';
+import { FormsModule } from '@angular/forms';
  
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import { ArtifactService } from './artifact.service';
         MaterialModule,
         BrowserAnimationsModule,
         HttpClientModule,
+        FormsModule,
     ],
     providers: [ArtifactService],
     bootstrap: [AppComponent],

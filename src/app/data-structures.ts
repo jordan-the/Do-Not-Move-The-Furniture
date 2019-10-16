@@ -1,9 +1,11 @@
 export class Artifact {
-    _id: string;    
+    _id: String;
     name: String;
     description: String;
     time: String;
     //year,month,date
+    primaryImage: String;
+    category: String;
     currentLocation: String;
     originLocation: String;
     familyId: String;
@@ -17,7 +19,7 @@ export class FamilyMember {
 }
 
 export class Category {
-    id: number;
+    _id: string;
     name: string;
 }
 

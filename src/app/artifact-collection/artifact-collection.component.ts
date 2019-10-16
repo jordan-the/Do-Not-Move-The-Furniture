@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ArtifactService } from '../artifact.service';
-import { Artifact } from '../data-structures';
+import { Artifact, Category } from '../data-structures';
 import { ArtifactViewComponent } from '../artifact-view/artifact-view.component';
 import { CreateComponent } from '../create/create.component';
 
@@ -15,13 +15,19 @@ export class ArtifactCollectionComponent implements OnInit {
 
     artifacts: Artifact[];
     filteredArtifacts: Artifact[];
+    searchedArtifacts: Artifact[];
 
     //temp
     familyId = "family";
     userId = "user";
 
-    categories = [];
-    filters = [];
+    categories: Category[];
+    filters: Category[] = [];
+
+    searchTerms = [];
+
+    //used by search bar
+    searchText = "";
 
     constructor(
         public dialog: MatDialog,
@@ -31,39 +37,44 @@ export class ArtifactCollectionComponent implements OnInit {
 
     ngOnInit() {
         this.artifactService.getArtifacts().subscribe(artifacts => this.artifacts = artifacts);
-        this.filteredArtifacts = this.artifacts;
+        this.artifactService.getArtifacts().subscribe(artifacts => this.filteredArtifacts = artifacts);
+        this.artifactService.getCategories().subscribe(categories => this.categories = categories);
     }
 
-    // includeFilter(filter) {
-    //     var i = this.filters.indexOf(filter);
-    //     if (i > -1) {
-    //         this.filters.splice(i, 1);
-    //     } else {
-    //         this.filters.push(filter);
-    //     }
-    //     this.updateArtifacts();
-    // }
+    includeFilter(filter) {
+        var i = this.filters.indexOf(filter);
+        if (i > -1) {
+            this.filters.splice(i, 1);
+        } else {
+            this.filters.push(filter);
+        }
+        this.updateArtifacts();
+    }
 
-    // updateArtifacts() {
-    //     if (this.filters.length == 0) {
-    //         this.filteredArtifacts = this.artifacts;
-    //     } else {
-    //         console.log("Hello")
-    //         this.filteredArtifacts = this.artifacts.filter(x => (this.isFiltered(x)))
-    //     }
-    // }
+    updateArtifacts() {
+        this.filteredArtifacts = this.artifacts.filter(x => (this.isFiltered(x)))
+    }
 
-    // isFiltered(x: Artifact) {
-    //     console.log(x.categories)
-    //     console.log(this.filters)
-    //     for (var i of this.filters) {
-    //         console.log(x.categories.indexOf(i))
-    //         if (x.categories.indexOf(i) == -1) {
-    //             return false;
-    //         }
-    //     }
-    //     return true;
-    // }
+    isFiltered(x: Artifact) {
+        for (var filter of this.filters) {
+            if (x.category == filter._id) {
+                return false;
+            }
+        }
+        console.log(this.searchTerms);
+
+        for (var term of this.searchTerms) {
+            if (!(x.name.includes(term) || x.description.includes(term))) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    search(text: String) {
+        this.searchTerms = text.split(",");
+        this.updateArtifacts();
+    }
 
     openArtifact(x: Artifact) {
 
@@ -97,5 +108,6 @@ export class ArtifactCollectionComponent implements OnInit {
 
         this.dialog.open(CreateComponent, dialogConfig);
     }
+
 
 }
