@@ -17,31 +17,9 @@ module.exports.addCategory = function(req, res) {
 
     category.save(function (err, category){
         if (!err) {
-
-            //do sometihing
-            console.log("successfully added category");
-            console.log(category);
+            res.status(200).json({"message":"category added"});
         } else {
-            console.log("failed to add category");
-            res.sendStatus(400);
-        }
-    });
-};
-//add category to database
-module.exports.addCategory2 = function(req, res) {
-    var category = new Category({
-        name: "name"
-    });
-
-    category.save(function (err, category){
-        if (!err) {
-
-            //do sometihing
-            console.log("successfully added category");
-            console.log(category);
-        } else {
-            console.log("failed to add category");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to addcategory"});
         }
     });
 };
@@ -50,27 +28,23 @@ module.exports.addCategory2 = function(req, res) {
 module.exports.getAllCategories = function(req, res) {
     Category.find(function(err, categories){
         if (!err) {
-            //do sometihing
-            res.send(categories);
+            res.status(200).json(categories);
         } else {
-            console.log("failed to get categories");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to get all categories"});
         }
     });
 };
 
 
-//edit an artifact by id
+//edit an vategory by id
 module.exports.editCategory = function(req, res) {
-    //Artifact.findOne({_id: req.params.id}, function(err, artifact){
     Category.findOne({_id: req.params.id}, function(err, category){
         if (!err) {
             //do sometihing
             category.name = req.body.name;
-            res.send("successfully changed category");
+            res.status(200).json({"message":"category edited"});
         } else {
-            console.log("failed to get category by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to edit category"});
         }
     })
 };
@@ -80,10 +54,9 @@ module.exports.deleteCategory = function(req, res) {
     Category.deleteOne({_id:req.params.id}, function(err){
         if (!err) {
             //do sometihing
-            res.send("category deleted");
+            res.status(200).json({"message":"category deleted"});
         } else {
-            console.log("failed to delete category by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to delete category"});
         }
     })
 };

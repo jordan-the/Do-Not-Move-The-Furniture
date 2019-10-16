@@ -17,11 +17,9 @@ module.exports.addUser = function(req, res) {
 
     user.save(function (err, user){
         if (!err) {
-            console.log("successfully added user");
-            res.send("successfully added user");
+            res.status(200).json({"message":"user added"});
         } else {
-            console.log("failed to add user");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to add user"});
         }
     });
 };
@@ -30,10 +28,9 @@ module.exports.addUser = function(req, res) {
 module.exports.getUser = function(req, res) {
     User.find(function(err, users){
         if (!err) {
-            res.send(users);
+            res.status(200).json(users);
         } else {
-            console.log("failed to get users");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to get all users"});
         }
     });
 };
@@ -42,10 +39,9 @@ module.exports.getUser = function(req, res) {
 module.exports.getOneUser = function(req, res) {
     User.findOne({_id: req.params.id}, function(err, user){
         if (!err) {
-            res.send(user);
+            res.status(200).json(user);
         } else {
-            console.log("failed to get user by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to get user by id"});
         }
     })
 };
@@ -54,10 +50,9 @@ module.exports.getOneUser = function(req, res) {
 module.exports.getOneUserByEmail = function(req, res) {
     User.findOne({email: req.params.email}, function(err, user){
         if (!err) {
-            res.send(user);
+            res.status(200).json(user);
         } else {
-            console.log("failed to get user by email");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to get user by email"});
         }
     })
 };
@@ -69,10 +64,10 @@ module.exports.editUser = function(req, res) {
             user.name = req.body.name;
             user.password = req.body.password;
             user.email = req.body.email;
-            res.send(user);
+
+            res.status(200).json({"message":"user edited"});
         } else {
-            console.log("failed to get user by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to edit user"});
         }
     })
 };

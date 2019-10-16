@@ -22,9 +22,12 @@ var uc = require("./controllers/userController.js");
 var fc = require("./controllers/familyController.js");
 
 //require bodyparser
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+const cors = require("cors");
+app.use(cors());
 
 // Set the view engine
 app.set("view engine","ejs");
@@ -40,3 +43,4 @@ app.use("/",router);
 app.listen(PORT,function(){
     console.log("Express listening on port 3000");
 });
+

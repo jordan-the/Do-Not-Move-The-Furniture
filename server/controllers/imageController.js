@@ -33,21 +33,19 @@ module.exports.addImage = function(req,res){
                 artifactId: req.params.id
             });
             //if the image is primary modify the attribute in artifact
-            if(req.body.isPrimary == 1){
-                ac.editPrimaryImage(req, res, img.url);
-            }
+            //if(req.body.isPrimary == 1){
+            //    ac.editPrimaryImage(req, res, img.url);
+            //}
 
             image.save(function (err, image){
                 if (!err) {
-                    res.send("image added to database and cloudinary");
+                    res.status(200).json({"message":"image added"});
                 } else {
-                    console.log("failed to add image to database");
-                    res.sendStatus(400);
+                    res.status(400).json({"message":"failed to add image"});
                 }
             });
         } else {
-            console.log("failed to upload image to cloudinary");
-            console.log(err);
+            res.status(400).json({"message":"failed to upload image to cloudinary"});
         }
     });
 };
@@ -60,15 +58,13 @@ module.exports.deleteImgById = function(req,res) {
             //delete the database info
             Image.deleteOne({hostId: req.params.id}, function(err){
                 if (!err){
-                    res.send("image deleted");
+                    res.status(200).json({"message":"image deleted"});
                 } else {
-                    console.log("failed to delete image by id in database");
-                    res.sendStatus(400);
+                    res.status(400).json({"message":"failed to delete image"});
                 }
             });
         } else {
-            console.log("failed to delete image by id in cloudinary");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed todelete image in cloudinary"});
         }
     });
 };
@@ -83,18 +79,16 @@ module.exports.deleteImgByArtifact = function(req,res){
                     //delete in database
                     Image.deleteOne({_id: image._id}, function(err){
                         if (err){
-                            console.log("failed to delete image in database");
-                            res.sendStatus(400);
+                            res.status(400).json({"message":"failed to delete images by artifact"});
                         }
                     })
                 } else {
-                    console.log("failed to delete image in cloudinary");
-                    res.sendStatus(400);
+                    res.status(400).json({"message":"failed to delete image in cloudinary"});
                 }
-            })
+            });
         }
-        console.log("all images for artifact deleted");
-    })
+        res.status(200).json({"message":"images deleted"});
+    });
 };
 
 
@@ -102,41 +96,9 @@ module.exports.deleteImgByArtifact = function(req,res){
 module.exports.getImgByArtifact = function(req,res){
     Image.find({artifactId: req.params.id}, function(err, images){
         if (!err) {
-            res.send(images);
+            res.status(200).json(images);
         } else {
-            console.log("failed to get images");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to get all images by artifact"});
         }
     })
-};
-
-
-//this is for testing
-
-//this function is for upload the image to host and database
-module.exports.addImage2 = function(req, res){
-    //upload the image to host
-    cloudinary.uploader.upload("server/controllers/testimg.jpeg",function(err, img){
-        if(!err){
-            //upload info to database
-            var image = new Image({
-                hostId: img.public_id,
-                url: img.url,
-                artifactId: req.body.artifactId
-            });
-
-            image.save(function (err, image){
-                if (!err) {
-                    //do sometihing
-                    res.send("image added");
-                } else {
-                    console.log("failed to add image");
-                    res.sendStatus(400);
-                }
-            });
-        } else {
-            console.log("failed to upload image");
-            console.log(err);
-        }
-    });
 };
