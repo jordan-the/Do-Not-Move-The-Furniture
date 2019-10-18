@@ -15,6 +15,7 @@ export class PersonalDetailComponent implements OnInit {
   user: any = {};
   createForm: FormGroup;
 
+
   constructor(private userService: UserService, private route: ActivatedRoute, private snackBar: MatSnackBar, private fb: FormBuilder) { 
     this.updateForm();
   }
@@ -22,8 +23,9 @@ export class PersonalDetailComponent implements OnInit {
   updateForm() {
     this.createForm = this.fb.group({
       name: ['', Validators.required],
-      password: '',
       email: '',
+      password: '',
+      confirmPass: '',
     });
   }
   
@@ -35,14 +37,33 @@ export class PersonalDetailComponent implements OnInit {
         console.log(this.user);
         this.createForm.get("name").setValue(this.user.name);
         this.createForm.get("email").setValue(this.user.email);
+        this.createForm.get("password").setValue("");
+        this.createForm.get("confirmPass").setValue("");
       })
     })
   }
 
   updateUser(name, password, email) {
     this.userService.updateUser(this.id, name, password, email).subscribe(() => {
+      console.log(this.id, name, password, email);
       this.snackBar.open('User updated successfully', 'OK', {duration: 3000}) ;
+      this.ngOnInit();
     });
+  }
+
+  updateUserPass(newPass, confirmPass) {
+    if(newPass == confirmPass) {
+      this.userService.updateUser(this.id, this.user.name, newPass, this.user.email).subscribe(() => {
+        console.log(this.id, name, newPass, this.user.email);
+        this.snackBar.open('User updated successfully', 'OK', {duration: 3000}) ;
+        this.ngOnInit();
+      });
+    }
+
+    else{
+      this.snackBar.open('User updated Unsuccessfully, please check', 'OK', {duration: 3000}) ;
+      this.ngOnInit();
+    }
   }
 
   

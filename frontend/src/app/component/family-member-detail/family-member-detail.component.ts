@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { FamilyService} from '../../family.service';
-
+import { Router } from '@angular/router';
 import { Family } from '../../family.model';
 
 @Component({
@@ -15,25 +15,34 @@ export class FamilyMemberDetailComponent implements OnInit {
   createForm: FormGroup;
 
 
-  constructor(private familyService: FamilyService, private fb: FormBuilder) { 
+  constructor(private familyService: FamilyService, private fb: FormBuilder, private router: Router) { 
     this.createForm = this.fb.group({
-      name: [null, Validators.required],
-      bday: null
+      name: ["", Validators.required],
+      bday: ""
     })
   }
 
   addFamily(name, bday) {
     console.log(name, bday);
     this.familyService.addFamily(name, bday).subscribe(() => {
-      this.fetchFamily();
+      this.router.navigate([`/familyMemberList`]);
     })
   }
   
   delateFamily(id) {
+    console.log(id);
     this.familyService.deleteFamily(id).subscribe(() =>{
-      this.fetchFamily();
+      this.router.navigate([`/familyMemberList`]);
     })
   }  
+
+  updateFamily(id, name, bday) {
+    console.log(id, name, bday);
+    this.familyService.updateFamily(id, name, bday).subscribe(() => {
+      // this.router.navigate([`/familyMemberList`]);
+      this.fetchFamily();
+    })
+  }
 
   ngOnInit() {
     this.fetchFamily();

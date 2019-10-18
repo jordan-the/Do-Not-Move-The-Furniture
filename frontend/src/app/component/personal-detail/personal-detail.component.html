@@ -6,21 +6,28 @@
 <div>
     <div>
         <ul>
-            <li>
-                Name: <input type="text" id="username" [(ngModel)]="user.name"> 
-                <button class="changeButton">edit</button>
-            </li>
-            <li>
-                Email Address：
-                <input type="email" id="email" [(ngModel)]="user.email">
-                <button class="changeButton">edit</button>
-            </li>
-            <li>
-                <!-- <p>Current Password: **********</p> -->
-                <p>New Password: <input type="newPassword" name="" id="password"></p>
-                <p>Confirm Pass: <input type="confirmPassword" name="" id="password"></p>
-                <button class="changeButton">edit</button>  
-            </li>
+            <form [formGroup] ="createForm">
+                <li>
+                    Name: <input placeholder="user name" formControlName="name" #name> 
+                    <button class="changeButton" (click)="updateUser(name.value, user.password, user.email)">edit</button>
+                </li>
+                <li>
+                    Email Address：
+                    <input placeholder="user email" formControlName="email" #email>
+                    <button class="changeButton" (click)="updateUser(user.name, user.password, email.value)">edit</button>
+                </li>
+                <li>
+                    <!-- <p>Current Password: **********</p> -->
+                    <p>New Password: 
+                        <!-- <input type="newPassword" name="" id="password"> -->
+                        <input type="password" formControlName="password" #password>
+                    </p>
+                    <p>Confirm Password: 
+                        <input type="password" formControlName="confirmPass" #confirmPass>
+                    </p>
+                    <button class="changeButton" (click)="updateUserPass(password.value, confirmPass.value)">edit</button>  
+                </li>
+            </form>
         </ul>
     </div>
 </div>

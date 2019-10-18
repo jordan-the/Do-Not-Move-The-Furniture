@@ -22,8 +22,8 @@ const routes: Routes = [
   { path: 'familyMemberList', component: FamilMemberListComponent},
   { path: 'familyMembersDetail', component: FamilyMemberDetailComponent},
   { path: 'personalDetail/:id', component: PersonalDetailComponent},
-  // { path: '', redirectTo: "familyMemberList", pathMatch: 'full'}
-  { path: '', redirectTo: "familyMembersDetail", pathMatch: 'full'}
+  { path: '', redirectTo: "familyMemberList", pathMatch: 'full'}
+  // { path: '', redirectTo: "personalDetail/:id", pathMatch: 'full'}
 ];
 
 

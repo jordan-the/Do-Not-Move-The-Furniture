@@ -10,7 +10,7 @@
             <li>
                 <p>Name: <input type="text" id="familyMember" [(ngModel)]="member.name"></p>
                 <p>Birthday: <input type="text" id="birthday" [(ngModel)]="member.bday"></p>
-                <button class="editButton">Edit</button>
+                <button class="editButton" (click)="updateFamily(member._id, member.name, member.bday)">Edit</button>
                 <button class="delateButton" (click)="delateFamily(member._id)">Delete</button>
             </li>
         </ul>
