@@ -39,8 +39,7 @@ export class FamilyMemberDetailComponent implements OnInit {
   updateFamily(id, name, bday) {
     console.log(id, name, bday);
     this.familyService.updateFamily(id, name, bday).subscribe(() => {
-      // this.router.navigate([`/familyMemberList`]);
-      this.fetchFamily();
+      this.router.navigate([`/familyMemberList`]);
     })
   }
 
