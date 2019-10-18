@@ -65,7 +65,13 @@ module.exports.editUser = function(req, res) {
             user.password = req.body.password;
             user.email = req.body.email;
 
-            res.status(200).json({"message":"user edited"});
+            user.save(function (err, user){
+                if (!err) {
+                    res.status(200).json({"message":"user edited"});
+                } else {
+                    res.status(400).json({"message":"failed to edit user"});
+                }
+            });
         } else {
             res.status(400).json({"message":"failed to edit user"});
         }

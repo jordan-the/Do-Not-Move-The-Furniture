@@ -19,7 +19,7 @@ module.exports.addCategory = function(req, res) {
         if (!err) {
             res.status(200).json({"message":"category added"});
         } else {
-            res.status(400).json({"message":"failed to addcategory"});
+            res.status(400).json({"message":"failed to add category"});
         }
     });
 };
@@ -40,9 +40,15 @@ module.exports.getAllCategories = function(req, res) {
 module.exports.editCategory = function(req, res) {
     Category.findOne({_id: req.params.id}, function(err, category){
         if (!err) {
-            //do sometihing
             category.name = req.body.name;
-            res.status(200).json({"message":"category edited"});
+            
+            category.save(function (err, category){
+                if (!err) {
+                    res.status(200).json({"message":"category edited"});
+                } else {
+                    res.status(400).json({"message":"failed to edit category"});
+                }
+            });
         } else {
             res.status(400).json({"message":"failed to edit category"});
         }

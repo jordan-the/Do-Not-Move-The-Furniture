@@ -50,7 +50,16 @@ module.exports.getOneFamily = function(req, res) {
 module.exports.editFamily = function(req, res) {
     Family.findOne({_id: req.params.id}, function(err, family){
         if (!err) {
-            res.status(200).json(family);
+            family.name = req.body.name;
+            family.bday = req.body.bday;
+
+            family.save(function (err, family){
+                if (!err) {
+                    res.status(200).json({"message":"family edited"});
+                } else {
+                    res.status(400).json({"message":"failed to edit family"});
+                }
+            });
         } else {
             res.status(400).json({"message":"failed to edit family"});
         }

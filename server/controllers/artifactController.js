@@ -60,7 +60,14 @@ module.exports.editArtifact = function(req, res) {
             artifact.originLocation = req.body.originLocation;
             artifact.familyId = req.body.familyId;
             artifact.category = req.body.category;
-            res.status(200).json(artifact);
+            
+            artifact.save(function (err, artifact){
+                if (!err) {
+                    res.status(200).json({"message":"successfully edited artifact"});
+                } else {
+                    res.status(400).json({"message":"failed to edit artifact"});
+                }
+            });
         } else {
             res.status(400).json({"message":"failed to edit artifact"});
         }
