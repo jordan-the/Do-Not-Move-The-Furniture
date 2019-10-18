@@ -1,0 +1,34 @@
+<h1>
+    <button mat-button class="homeButton" [routerLink]="['/home']">Home</button>
+    Personal Detail
+</h1>
+
+<div>
+    <div>
+        <ul>
+            <form [formGroup] ="createForm">
+                <li>
+                    Name: <input placeholder="user name" formControlName="name" #name> 
+                    <button class="changeButton" (click)="updateUser(name.value, user.password, user.email)">edit</button>
+                </li>
+                <li>
+                    Email Address：
+                    <input placeholder="user email" formControlName="email" #email>
+                    <button class="changeButton" (click)="updateUser(user.name, user.password, email.value)">edit</button>
+                </li>
+                <li>
+                    <!-- <p>Current Password: **********</p> -->
+                    <p>New Password: 
+                        <!-- <input type="newPassword" name="" id="password"> -->
+                        <input type="password" formControlName="password" #password>
+                    </p>
+                    <p>Confirm Password: 
+                        <input type="password" formControlName="confirmPass" #confirmPass>
+                    </p>
+                    <button class="changeButton" (click)="updateUserPass(password.value, confirmPass.value)">edit</button>  
+                </li>
+            </form>
+        </ul>
+    </div>
+</div>
+        

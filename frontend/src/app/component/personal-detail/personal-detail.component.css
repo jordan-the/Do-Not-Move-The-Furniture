@@ -1,0 +1,53 @@
+* {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.homeButton {
+    float: left;
+    height: 70px;
+    width: 70px;
+    border-right: 1px solid #000000;
+}
+
+h1 {
+    height: 70px;
+    line-height: 70px;
+    background-color: #D5E8D4;
+    border: 1px solid #000000;
+}
+
+ul li{
+    position: relative;
+    height: 7vh;
+    margin-top: 4%;
+    line-height: 7vh;
+    background-color: #FFECC7;
+    border: 1px solid #FAC551;
+}
+
+ul li p {
+    float: left;
+    width: calc(( 100% - 7vh - 2px) / 2);
+}
+
+ul li input{
+    width: 30%;
+    height: 5vh;
+}
+
+
+.changeButton {
+    float: right;
+    width: 7vh;
+    height: 7vh;
+    background-color: #4DAFF9;
+    border: 1px solid #008CFF;
+    border-radius: 20%;
+}
+
+.changeButton:hover {
+    font-weight: bolder;
+}
