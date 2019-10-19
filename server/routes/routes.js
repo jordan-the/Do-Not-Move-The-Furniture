@@ -54,6 +54,19 @@ router.post("/api/user", controller.addUser);
 
 router.post("/api/user/:id", controller.editUser);
 
+//ac relationshiop api
+router.get("/api/relationship", controller.getRelationship);
+
+router.get("/api/relationship/category", controller.getRelationshipByCategory);
+
+router.get("/api/relationship/artifact/:id", controller.getRelationshipByArtifact);
+
+router.get("/api/relationship/:id", controller.getRelationshipById);
+
+router.post("/api/relationship", controller.addRelationship);
+
+router.get("/api/relationship/delete/:id", controller.deleteRelationship);
+
 //checking connection
 router.get("/api", controller.checkConnection);
 router.post("/api", controller.testPost);
