@@ -28,3 +28,7 @@ export class Image {
     url: String;
     artifactId: String;
 }
+
+export class Msg {
+    message: String;
+}

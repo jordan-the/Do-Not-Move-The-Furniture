@@ -3,7 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ArtifactService } from '../artifact.service';
 import { Artifact, Category } from '../data-structures';
 import { ArtifactViewComponent } from '../artifact-view/artifact-view.component';
-import { CreateComponent } from '../create/create.component';
+import { ArtifactFormComponent } from '../artifact-form/artifact-form.component';
 
 @Component({
     selector: 'app-artifact-collection',
@@ -106,7 +106,7 @@ export class ArtifactCollectionComponent implements OnInit {
         dialogConfig.data = [this.userId, this.familyId]
         dialogConfig.width = "50vw";
 
-        this.dialog.open(CreateComponent, dialogConfig);
+        this.dialog.open(ArtifactFormComponent, dialogConfig);
     }
 
 

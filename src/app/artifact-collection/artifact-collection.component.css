@@ -1,6 +1,6 @@
-body {
+/* body {
     background-color: #D5E8D4;
-}
+} */
 
 .topContent {
     height: 5vh;
@@ -38,6 +38,7 @@ body {
     height: 90vh;
     border: 1px solid black;
     background-color: #FFFFFF;
+    overflow: auto;
 }
  
 .artifactTile {

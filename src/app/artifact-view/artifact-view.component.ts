@@ -43,6 +43,13 @@ export class ArtifactViewComponent implements OnInit {
 	}
 	  
 	closeThis() {
-		this.dialogRef.close()
+		this.dialogRef.close();
+	}
+
+	deleteArtifact() {
+		var out;
+		this.artifactService.deleteArtifact(this.artifact._id).subscribe(outMessage => out = outMessage);
+
+		console.log(out)
 	}
 }

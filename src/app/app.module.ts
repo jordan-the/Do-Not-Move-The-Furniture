@@ -10,17 +10,17 @@ import { AppComponent } from './app.component';
 import { ArtifactCollectionComponent } from './artifact-collection/artifact-collection.component';
 import { ArtifactViewComponent } from './artifact-view/artifact-view.component';
 import { TestComponent } from './test/test.component';
-import { CreateComponent } from './create/create.component';
-import { UploadFilesComponent } from './upload-files/upload-files.component';
-import { DescriptionComponent } from './description/description.component';
-import { CatagoryComponent } from './catagory/catagory.component';
-import { AcquisitionDateComponent } from './acquisition-date/acquisition-date.component';
-import { PreviousOwnersComponent } from './previous-owners/previous-owners.component';
-import { UploadFilesDirective } from './upload-files/upload-files.directive';
-import { ImageDirectiveDirective } from './upload-files/image-directive.directive';
-import { TitleComponent } from './title/title.component';
 import { ArtifactService } from './artifact.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ArtifactFormModule } from './artifact-form/artifact-form.module';
+import { PersonalDetailComponent } from './personal-detail/personal-detail.component';
+import { FamilyMemberDetailComponent } from './family-member-detail/family-member-detail.component';
+import { FamilMemberListComponent } from './famil-member-list/famil-member-list.component';
+import { UserService } from './user.service';
+import { FamilyService } from './family.service';
+import { FrontPageComponent } from './front-page/front-page.component';
+import { MenuComponent } from './menu/menu.component';
+import { LoginComponent } from './login/login.component';
  
 @NgModule({
     declarations: [
@@ -28,15 +28,12 @@ import { FormsModule } from '@angular/forms';
         ArtifactCollectionComponent,
         ArtifactViewComponent,
         TestComponent,
-        CreateComponent,
-        UploadFilesComponent,
-        DescriptionComponent,
-        CatagoryComponent,
-        AcquisitionDateComponent,
-        PreviousOwnersComponent,
-        UploadFilesDirective,
-        ImageDirectiveDirective,
-        TitleComponent,
+        PersonalDetailComponent,
+        FamilyMemberDetailComponent,
+        FamilMemberListComponent,
+        FrontPageComponent,
+        MenuComponent,
+        LoginComponent,
     ],
     imports: [
         BrowserModule,
@@ -45,12 +42,14 @@ import { FormsModule } from '@angular/forms';
         BrowserAnimationsModule,
         HttpClientModule,
         FormsModule,
+        ArtifactFormModule,
+        ReactiveFormsModule,
+        
     ],
-    providers: [ArtifactService],
+    providers: [ArtifactService,UserService,FamilyService],
     bootstrap: [AppComponent],
     entryComponents: [
         ArtifactViewComponent,
-        CreateComponent,
     ]
 })
 export class AppModule { }
