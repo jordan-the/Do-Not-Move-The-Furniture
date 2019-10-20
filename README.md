@@ -10,7 +10,13 @@ Starting the back-end server:
 'npm install express'
 5. using npm install mongoose
 'npm install mongoose'
-6. run app with node.js
+6. using npm install cloudinary
+'npm install cloudinary'
+7. using npm install body-parser
+'npm install body-parser'
+8. using npm install cors
+'npm install cors'
+9. run app with node.js
 'node app.js'
 
 Starting the front-end:
