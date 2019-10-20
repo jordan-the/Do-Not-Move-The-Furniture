@@ -2,12 +2,20 @@
 IT Project
 
 --Version 1.0--
-HOW TO USE:
+Starting the back-end server:
 1. install node.js
 2. install npm
-3. using npm install express
+3. go into server folder
+4. using npm install express
 'npm install express'
-4. using npm install mongoose
+5. using npm install mongoose
 'npm install mongoose'
-5. run app with node.js
+6. run app with node.js
 'node app.js'
+
+Starting the front-end:
+1. go into frontend folder
+2. using npm install angular
+'npm install @angular/cli'
+3. run app with angular
+'ng serve'
