@@ -105,6 +105,7 @@ export class ArtifactCollectionComponent implements OnInit {
         dialogConfig.autoFocus = true;
         dialogConfig.data = [this.userId, this.familyId]
         dialogConfig.width = "50vw";
+        dialogConfig.height = "100vh";
 
         this.dialog.open(ArtifactFormComponent, dialogConfig);
     }
