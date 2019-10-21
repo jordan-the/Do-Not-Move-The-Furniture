@@ -12,18 +12,14 @@ var Category = mongoose.model("Category");
 //add category to database
 module.exports.addCategory = function(req, res) {
     var category = new Category({
-        name: "name"
+        name: req.body.name
     });
 
     category.save(function (err, category){
         if (!err) {
-
-            //do sometihing
-            console.log("successfully added category");
-            console.log(category);
+            res.status(200).json({"message":"category added"});
         } else {
-            console.log("failed to add category");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to add category"});
         }
     });
 };
@@ -32,42 +28,41 @@ module.exports.addCategory = function(req, res) {
 module.exports.getAllCategories = function(req, res) {
     Category.find(function(err, categories){
         if (!err) {
-            //do sometihing
-            console.log(categories);
+            res.status(200).json(categories);
         } else {
-            console.log("failed to get categories");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to get all categories"});
         }
     });
 };
 
 
-//edit an artifact by id
+//edit an vategory by id
 module.exports.editCategory = function(req, res) {
-    //Artifact.findOne({_id: req.params.id}, function(err, artifact){
-    Category.findOne({_id: "5d725bdff18690df4098211f"}, function(err, category){
+    Category.findOne({_id: req.params.id}, function(err, category){
         if (!err) {
-            //do sometihing
-            console.log(category);
+            category.name = req.body.name;
+            
+            category.save(function (err, category){
+                if (!err) {
+                    res.status(200).json({"message":"category edited"});
+                } else {
+                    res.status(400).json({"message":"failed to edit category"});
+                }
+            });
         } else {
-            console.log("failed to get category by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to edit category"});
         }
-
-        category.name = "changed name";
-        console.log(category);
     })
 };
 
 //delete an artifact
 module.exports.deleteCategory = function(req, res) {
-    Category.deleteOne({_id:"5d725bdff18690df4098211f"}, function(err){
+    Category.deleteOne({_id:req.params.id}, function(err){
         if (!err) {
             //do sometihing
-            console.log("category deleted");
+            res.status(200).json({"message":"category deleted"});
         } else {
-            console.log("failed to delete category by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to delete category"});
         }
     })
 };

@@ -18,6 +18,16 @@ var controller = require("./controllers/controller.js");
 var ac = require("./controllers/artifactController.js");
 var cc = require("./controllers/categoryController.js");
 var ic = require("./controllers/imageController.js");
+var uc = require("./controllers/userController.js");
+var fc = require("./controllers/familyController.js");
+
+//require bodyparser
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
+const cors = require("cors");
+app.use(cors());
 
 // Set the view engine
 app.set("view engine","ejs");
@@ -33,21 +43,3 @@ app.use("/",router);
 app.listen(PORT,function(){
     console.log("Express listening on port 3000");
 });
-
-//testing api
-//artifact controller testing
-//ac.addArtifactInfo2();
-
-//cc.getOneCategory();
-//ac.getAllArtifacts();
-//ac.getOneArtifact({_id: '5d725bdff18690df4098211f'});
-//ac.editArtifact();
-//ac.deleteArtifact();
-
-//category controller testing
-//cc.getAllCategories();
-
-//image controller testing
-//ic.uploadimg();
-//ic.findimg();
-//ac.addArtifact();

@@ -1,0 +1,22 @@
+<div class=catagories>
+    <span class=catagory>
+        <p>Catagory</p>
+    </span>
+    <div class=textbox>
+        <input #newCatagory 
+        (keyup.enter)="addCatagory(newCatagory.value)"
+        list="catagories" name="catagory" 
+        style="width: 400px">
+        <datalist id="catagories">
+            <option value="letters">
+            <option value="paintings">
+            <option value="portrait">
+            <option value="heirlooms">
+            <option value="journals">
+        </datalist>
+        <button (click)="addCatagory(newCatagory.value)">Add</button>
+    </div>
+</div>
+<div>
+    <p *ngFor="let c of catagories" (click)="removeCatagory(c)">{{c}}</p>
+</div>

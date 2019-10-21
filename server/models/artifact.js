@@ -6,10 +6,15 @@ var mongoose = require('mongoose');
 var artifactSchema = mongoose.Schema({
     name: String,
     description: String,
-    time: Date,
+    year: String,
+    monoth: String,
+    date: String,
+    primaryImage: String,
+    category: String,
     currentLocation: String,
-    originLocation: String
-    });
+    originLocation: String,
+    familyId: String
+});
 
 
 module.exports = mongoose.model("Artifact", artifactSchema);

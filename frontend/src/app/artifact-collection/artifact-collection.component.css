@@ -1,0 +1,58 @@
+/* body {
+    background-color: #D5E8D4;
+} */
+
+.topContent {
+    height: 5vh;
+}
+  
+.accountButton {
+    float: right;
+}
+  
+.sideContent {
+    width: 19%;
+    height: 90vh;
+    float: left;
+}
+  
+.search {
+    width: 100%;
+    border: 1px solid black;
+    background-color: #FFFFFF;
+}
+  
+.filter {
+    position: relative;
+    top: 10px;
+    height: 80%;
+    width: 100%;
+    border: 1px solid black;
+    background-color: #FFFFFF;
+}
+  
+.artifactContent {
+    float: right;
+    padding: 5px;
+    width: 79%;
+    height: 90vh;
+    border: 1px solid black;
+    background-color: #FFFFFF;
+    overflow: auto;
+}
+ 
+.artifactTile {
+    background: #FFECC7;
+}
+  
+  
+.artifactButton {
+    height: 100%;
+    width: 100%;
+}
+  
+img {
+    height: 80%;
+    width: 100%;
+    object-fit: contain;
+}

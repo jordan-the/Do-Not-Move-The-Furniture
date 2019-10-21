@@ -6,22 +6,20 @@
 //require database,api and schema
 var db = require("../models/db.js");
 var mongoose = require("mongoose");
-var Artifact = mongoose.model("Family");
+var Family = mongoose.model("Family");
 
 //add family member to database
 module.exports.addFamily = function(req, res) {
     var family = new Family({
-        name: "name"
+        name: req.body.name,
+        bday: req.body.bday
     });
 
     family.save(function (err, family){
         if (!err) {
-
-            //do sometihing
-            console.log("successfully added family member");
+            res.status(200).json({"message":"family added"});
         } else {
-            console.log("failed to add family member");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to add family"});
         }
     });
 };
@@ -30,55 +28,51 @@ module.exports.addFamily = function(req, res) {
 module.exports.getAllFamilys = function(req, res) {
     Family.find(function(err, families){
         if (!err) {
-            //do sometihing
-            console.log(families);
+            res.status(200).json(families);
         } else {
-            console.log("failed to get families");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to get families"});
         }
     });
 };
 
 //get a single member by id.
 module.exports.getOneFamily = function(req, res) {
-    //Artifact.findOne({_id: req.params.id}, function(err, artifact){
-    Family.findOne({_id: "5d725bdff18690df4098211f"}, function(err, family){
+    Family.findOne({_id: req.params.id}, function(err, family){
         if (!err) {
-            //do sometihing
-            console.log(family);
+            res.status(200).json(family);
         } else {
-            console.log("failed to get family by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to get family"});
         }
     })
 };
 
 //edit an family member by id
 module.exports.editFamily = function(req, res) {
-    //Artifact.findOne({_id: req.params.id}, function(err, artifact){
-    Family.findOne({_id: "5d725bdff18690df4098211f"}, function(err, family){
+    Family.findOne({_id: req.params.id}, function(err, family){
         if (!err) {
-            //do sometihing
-            console.log(family);
-        } else {
-            console.log("failed to get family by id");
-            res.sendStatus(400);
-        }
+            family.name = req.body.name;
+            family.bday = req.body.bday;
 
-        family.name = "changed";
-        console.log(family);
+            family.save(function (err, family){
+                if (!err) {
+                    res.status(200).json({"message":"family edited"});
+                } else {
+                    res.status(400).json({"message":"failed to edit family"});
+                }
+            });
+        } else {
+            res.status(400).json({"message":"failed to edit family"});
+        }
     })
 };
 
 //delete an family member
 module.exports.deleteFamily = function(req, res) {
-    Family.deleteOne({_id:"5d725bdff18690df4098211f"}, function(err){
+    Family.deleteOne({_id: req.params.id}, function(err){
         if (!err) {
-            //do sometihing
-            console.log("family member deleted");
+            res.status(200).json({"message":"family deleted"});
         } else {
-            console.log("failed to delete family by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to delete family"});
         }
     })
 };

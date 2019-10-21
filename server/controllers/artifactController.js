@@ -8,25 +8,21 @@ var mongoose = require("mongoose");
 var Artifact = mongoose.model("Artifact");
 
 //add artifact to database
-module.exports.addArtifact = function(req,img, res) {
+module.exports.addArtifact = function(req, res) {
     var artifact = new Artifact({
-        name: "name",
-        //name: req.body.username,
-        description: "word discription",
-        //description: req.body.discription,
-        time: "2002-12-09",
-        currentLocation: "location",
-        originLocation: "location"
+        name: req.body.name,
+        description: req.body.description,
+        time: req.body.time,
+        currentLocation: req.body.currentLocation,
+        originLocation: req.body.originLocation,
+        familyId: req.body.familyId
     });
 
     artifact.save(function (err, artifact){
         if (!err) {
-            //do sometihing
-            console.log("successfully added artifact");
-            console.log(artifact);
+            res.status(200).json({"message":"successfully added artifact"});
         } else {
-            console.log("failed to add artifact");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to add artifact"});
         }
     });
 };
@@ -35,61 +31,69 @@ module.exports.addArtifact = function(req,img, res) {
 module.exports.getAllArtifacts = function(req, res) {
     Artifact.find(function(err, artifacts){
         if (!err) {
-            //do sometihing
-            console.log(artifacts);
+            res.status(200).json(artifacts);
         } else {
-            console.log("failed to get artifacts");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to get all artifacts"});
         }
     });
 };
 
 //get a single artifact by id.
 module.exports.getOneArtifact = function(req, res) {
-    //Artifact.findOne({_id: req.params.id}, function(err, artifact){
-    Artifact.findOne({_id: "5d725bdff18690df4098211f"}, function(err, artifact){
+    Artifact.findOne({_id: req.params.id}, function(err, artifact){
         if (!err) {
-            //do sometihing
-            console.log(artifact);
+            res.status(200).json({artifact});
         } else {
-            console.log("failed to get artifact by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to get artifact by id"});
         }
     })
 };
 
 //edit an artifact by id
 module.exports.editArtifact = function(req, res) {
-    Artifact.findOne({_id: "5d725bdff18690df4098211f"}, function(err, artifact){
+    Artifact.findOne({_id: req.params.id}, function(err, artifact){
         if (!err) {
-            //do sometihing
-            console.log(artifact);
+            artifact.name = req.body.name;
+            artifact.description = req.body.description;
+            artifact.time = req.body.time;
+            artifact.currentLocation = req.body.currentLocation;
+            artifact.originLocation = req.body.originLocation;
+            artifact.familyId = req.body.familyId;
+            artifact.category = req.body.category;
+            
+            artifact.save(function (err, artifact){
+                if (!err) {
+                    res.status(200).json({"message":"successfully edited artifact"});
+                } else {
+                    res.status(400).json({"message":"failed to edit artifact"});
+                }
+            });
         } else {
-            console.log("failed to get artifact by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to edit artifact"});
         }
-        artifact.name = "changed";
-        artifact.discription = "also changed";
-        artifact.time = "2000-12-09";
     })
 };
 
 //delete an artifact
 module.exports.deleteArtifact = function(req, res) {
-    //Artifact.findOne({_id: req.params.id}, function(err, artifact){
-    //delete the image first
-    Artifact.findOne({_id:"5d7e25f9bbb10a17647a5ab7"}, function(err, artifact){
-        var result = cloudinary.uploader.destroy(artifact.hostId);
-        console.log("image deleted");
-    });
     //delete the mongoDB info
-    Artifact.deleteOne({_id:"5d7e25f9bbb10a17647a5ab7"}, function(err){
+    Artifact.deleteOne({_id: req.params.id}, function(err){
         if (!err) {
-            //do sometihing
-            console.log("artifact deleted");
+            res.status(200).json({"message":"artifact deleted"});
         } else {
-            console.log("failed to delete artifact by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to delete artifact"});
+        }
+    })
+};
+
+//edit primary image
+module.exports.editPrimaryImage = function(req, res, imageUrl){
+    Artifact.findOne({_id: req.params.id}, function(err, artifact){
+        if(!err){
+            artifact.primaryImage = imageUrl;
+            res.status(200).json({"message":"primary image added"});
+        } else {
+            res.status(400).json({"message":"failed to add primary image"});
         }
     })
 };
