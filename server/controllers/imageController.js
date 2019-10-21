@@ -72,7 +72,7 @@ module.exports.deleteImgById = function(req,res) {
 //delete all images related to the artifact
 module.exports.deleteImgByArtifact = function(req,res){
     Image.find({artifactId: req.params.id}, function(err, images){
-        for (image in images) {
+        for (image of images) {
             //delete in coudinary
             cloudinary.uploader.destory(image.hostId, function(err){
                 if (!err){

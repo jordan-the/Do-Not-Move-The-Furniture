@@ -12,7 +12,9 @@ module.exports.addArtifact = function(req, res) {
     var artifact = new Artifact({
         name: req.body.name,
         description: req.body.description,
-        time: req.body.time,
+        year : req.body.year,
+        month: req.body.month,
+        day: req.body.day,
         currentLocation: req.body.currentLocation,
         originLocation: req.body.originLocation,
         familyId: req.body.familyId
