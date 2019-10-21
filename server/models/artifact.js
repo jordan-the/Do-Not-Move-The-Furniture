@@ -8,7 +8,7 @@ var artifactSchema = mongoose.Schema({
     description: String,
     year: String,
     monoth: String,
-    date: String,
+    day: String,
     primaryImage: String,
     category: String,
     currentLocation: String,
