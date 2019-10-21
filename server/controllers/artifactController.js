@@ -57,7 +57,9 @@ module.exports.editArtifact = function(req, res) {
         if (!err) {
             artifact.name = req.body.name;
             artifact.description = req.body.description;
-            artifact.time = req.body.time;
+            artifact.year = req.body.year;
+            artifact.month = req.body.month;
+            artifact.day = req.body.day;
             artifact.currentLocation = req.body.currentLocation;
             artifact.originLocation = req.body.originLocation;
             artifact.familyId = req.body.familyId;
