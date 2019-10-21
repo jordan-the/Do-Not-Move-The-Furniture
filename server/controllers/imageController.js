@@ -85,7 +85,7 @@ module.exports.deleteImgByArtifact = function(req,res){
                 } else {
                     res.status(400).json({"message":"failed to delete image in cloudinary"});
                 }
-            });
+            }); 
         }
         res.status(200).json({"message":"images deleted"});
     });
