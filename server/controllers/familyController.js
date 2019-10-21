@@ -12,7 +12,7 @@ var Family = mongoose.model("Family");
 module.exports.addFamily = function(req, res) {
     var family = new Family({
         name: req.body.name,
-        bday: req.body.bday.toString()
+        bday: req.body.bday.toString().slice(0,10)
     });
 
     family.save(function (err, family){
