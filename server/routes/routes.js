@@ -70,7 +70,7 @@ router.get("/api/relationship/delete/:id", controller.deleteRelationship);
 //checking connection
 router.get("/api", controller.checkConnection);
 router.post("/api", controller.testPost);
-router.post("/api/addFakeImage", controller.addFakeImage);
+router.post("/api/addFakeImage/:id", controller.addFakeImage);
 
 
 module.exports = router;

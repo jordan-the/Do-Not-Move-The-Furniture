@@ -102,3 +102,28 @@ module.exports.getImgByArtifact = function(req,res){
         }
     })
 };
+
+
+//this function is for upload the image to host and database
+module.exports.addFakeImage = function(req,res){
+    cloudinary.uploader.upload("./server/images/lc3.jpg",function(err, img){
+        if(!err){
+            var image = new Image({
+                hostId: img.public_id,
+                url: img.url,
+                artifactId: req.params.id
+            });
+
+            image.save(function (err, image){
+                if (!err) {
+                    res.status(200).json({"message":"image added"});
+                } else {
+                    res.status(400).json({"message":"failed to add image"});
+                }
+            });
+        } else {
+            console.log(err);
+            res.status(400).json({"message":"failed to upload image to cloudinary"});
+        }
+    });
+};
