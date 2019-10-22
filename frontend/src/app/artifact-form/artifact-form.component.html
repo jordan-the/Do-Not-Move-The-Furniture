@@ -2,7 +2,7 @@
 
 <form [formGroup]="artifactForm">
     <app-title [artifactForm]="artifactForm"></app-title>
-    <app-upload-files></app-upload-files>
+    <app-upload-files (fileEvent) = "getImages($event)"></app-upload-files>
     <app-description [artifactForm]="artifactForm"></app-description>
     <app-catagory></app-catagory>
     <app-acquisition-date [artifactForm]="artifactForm"></app-acquisition-date>
