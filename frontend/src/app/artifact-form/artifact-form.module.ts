@@ -10,6 +10,7 @@ import { UploadFilesDirective } from './upload-files/upload-files.directive'
 import { ImageDirective } from './upload-files/image.directive';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LocationComponent } from './location/location.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DescriptionComponent,
     TitleComponent,
     UploadFilesDirective,
-    ImageDirective
+    ImageDirective,
+    LocationComponent
   ],
   imports: [
     CommonModule,
