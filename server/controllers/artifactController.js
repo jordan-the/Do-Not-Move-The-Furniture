@@ -17,7 +17,8 @@ module.exports.addArtifact = function(req, res) {
         day: req.body.day,
         currentLocation: req.body.currentLocation,
         originLocation: req.body.originLocation,
-        familyId: req.body.familyId
+        familyId: req.body.familyId,
+        category: req.body.category
     });
 
     artifact.save(function (err, artifact){

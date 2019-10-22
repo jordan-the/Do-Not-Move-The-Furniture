@@ -24,7 +24,9 @@ cloudinary.config({
 //this function is for upload the image to host and database
 module.exports.addImage = function(req,res){
     //upload the image to host
+    console.log(req.body.file);
     cloudinary.uploader.upload(req.body.file,function(err, img){
+        console.log("upload failed");
         if(!err){
             console.log("image uploaded to cloudinary");
             var image = new Image({
@@ -74,7 +76,7 @@ module.exports.deleteImgByArtifact = function(req,res){
     Image.find({artifactId: req.params.id}, function(err, images){
         for (image of images) {
             //delete in coudinary
-            cloudinary.uploader.destory(image.hostId, function(err){
+            cloudinary.uploader.destroy(image.hostId, function(err){
                 if (!err){
                     //delete in database
                     Image.deleteOne({_id: image._id}, function(err){
@@ -87,7 +89,6 @@ module.exports.deleteImgByArtifact = function(req,res){
                 }
             }); 
         }
-        res.status(200).json({"message":"images deleted"});
     });
 };
 
