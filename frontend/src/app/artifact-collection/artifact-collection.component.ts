@@ -57,22 +57,27 @@ export class ArtifactCollectionComponent implements OnInit {
 
     isFiltered(x: Artifact) {
         for (var filter of this.filters) {
-            if (x.category == filter._id) {
+            if (x.category != filter._id) {
                 return false;
             }
         }
         console.log(this.searchTerms);
 
-        for (var term of this.searchTerms) {
-            if (!(x.name.includes(term) || x.description.includes(term))) {
-                return false;
+        if (this.searchTerms[0]) {
+            for (var term of this.searchTerms) {
+                if (term && (x.name.toLowerCase().includes(term) || x.description.toLowerCase().includes(term))) {
+                    return true;
+                }
             }
+        } else {
+            return true;
         }
-        return true;
+
+        return false;
     }
     
     search(text: String) {
-        this.searchTerms = text.split(",");
+        this.searchTerms = text.split(" ");
         this.updateArtifacts();
     }
 
@@ -83,6 +88,7 @@ export class ArtifactCollectionComponent implements OnInit {
         dialogConfig.autoFocus = true;
         dialogConfig.data = x;
         dialogConfig.width = "50vw";
+        dialogConfig.height = "100vh";
 
         this.dialog.open(ArtifactViewComponent, dialogConfig);
     }
@@ -93,6 +99,7 @@ export class ArtifactCollectionComponent implements OnInit {
         dialogConfig.autoFocus = true;
         dialogConfig.data = x;
         dialogConfig.width = "50vw";
+        dialogConfig.height = "100vh";
 
         //todo: add edit
         this.dialog.open(null, dialogConfig);
@@ -105,7 +112,7 @@ export class ArtifactCollectionComponent implements OnInit {
         dialogConfig.autoFocus = true;
         dialogConfig.data = [this.userId, this.familyId]
         dialogConfig.width = "50vw";
-        dialogConfig.height="50vh";
+        dialogConfig.height = "100vh";
         
         this.dialog.open(ArtifactFormComponent, dialogConfig);
         

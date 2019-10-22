@@ -6,16 +6,21 @@
 .image {
     display: inline-block;
     height: 50vh;
+    z-index: -1;
 }
+
+.buttons {
+    width: 100%;
+}
+
+.imageButton {
+    width: 50%;
+}
+
 
 .info {
     margin: 5%;
     padding: 5%;
     border-radius: 10px;
     background-color: #FFFFFF
-}
-
-.images {
-    overflow: auto;
-    white-space: nowrap;
 }
