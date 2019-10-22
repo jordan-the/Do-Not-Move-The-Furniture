@@ -47,7 +47,7 @@ export class ArtifactFormComponent implements OnInit {
   onSubmit(){
     this.artifactService.postArtifact(this.artifactForm.value)
     .then(result => this.artifactService.postArtifactImage(this.images[0].file, result));
-
+    
     this.artifactService.postArtifactImage(null,this.artiID);
   }
 
