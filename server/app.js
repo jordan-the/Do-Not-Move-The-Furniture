@@ -7,7 +7,6 @@ const app = express();
 
 //require routes
 const router = require("./routes/routes.js");
-
 //set port number
 const PORT = process.env.PORT || 3000;
 
@@ -24,7 +23,7 @@ var fc = require("./controllers/familyController.js");
 //require bodyparser
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 
 const cors = require("cors");
 app.use(cors());
