@@ -7,12 +7,4 @@
 .login {
     width: 20%;
     float: left;
-    color: white;
-}
-
-body{
-    background-image: url(https://source.unsplash.com/pwMds57bapI/1900x900);
-    background-position: right top;
-    background-size: cover;
-    background-repeat:no-repeat;
 }

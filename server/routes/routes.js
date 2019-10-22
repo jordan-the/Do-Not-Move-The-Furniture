@@ -17,7 +17,7 @@ router.post("/api/edit/artifact/:id", controller.editArtifact);
 router.get("/api/artifact/delete/:id", controller.deleteArtifact);
 
 //image api
-router.post("/api/image", controller.addImage);
+router.post("/api/image/:id", controller.addImage);
 
 router.get("/api/image/:id", controller.getImageByArtifact);
 

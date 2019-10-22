@@ -32,7 +32,7 @@ module.exports.addImage = function(req,res){
             var image = new Image({
                 hostId: img.public_id,
                 url: img.url,
-                artifactId: req.body.id
+                artifactId: req.params.id
             });
             //if the image is primary modify the attribute in artifact
             //if(req.body.isPrimary == 1){
