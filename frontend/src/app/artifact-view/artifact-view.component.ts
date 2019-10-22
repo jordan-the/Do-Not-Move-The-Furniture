@@ -13,6 +13,7 @@ export class ArtifactViewComponent implements OnInit {
 	artifact;
 	images: Image[];
 	noOfImages;
+	currentImage;
 
   	constructor(
 		public dialogRef: MatDialogRef<ArtifactViewComponent>,
@@ -23,6 +24,8 @@ export class ArtifactViewComponent implements OnInit {
   	ngOnInit() {
 		this.artifact = this.data;
 		this.artifactService.getImages(this.artifact._id).subscribe(images => this.images = images);
+		this.currentImage = 0;
+
 		// this.images = [
 		// 	{
 		// 		hostId: "TEST",
@@ -40,6 +43,18 @@ export class ArtifactViewComponent implements OnInit {
 		// 		artifactId: "TEST",
 		// 	},
 		// ]
+	}
+
+	nextImage() {
+		this.currentImage = (this.currentImage + 1) % this.images.length;
+	}
+
+	prevImage() {
+		if (this.currentImage == 0) {
+			this.currentImage = this.images.length - 1;
+		} else {
+			this.currentImage--;
+		}
 	}
 	  
 	closeThis() {

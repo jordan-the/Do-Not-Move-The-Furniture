@@ -2,8 +2,9 @@ export class Artifact {
     _id: String;
     name: String;
     description: String;
-    time: String;
-    //year,month,date
+    year: String;
+    month: String;
+    day: String;
     primaryImage: String;
     category: String;
     currentLocation: String;

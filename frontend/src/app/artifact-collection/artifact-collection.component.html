@@ -6,7 +6,7 @@
 
 	<div class="sideContent">
 			<mat-form-field class="search">
-				<input matInput placeholder="Enter search terms seperated by commas" type="search" [(ngModel)]="searchText" (keyup)="search(searchText)">
+				<input matInput placeholder="Enter search terms seperated by spaces" type="search" [(ngModel)]="searchText" (keyup)="search(searchText)">
 			</mat-form-field>
 		<div class="filter">
 			<div *ngFor="let category of categories" class="cat">
