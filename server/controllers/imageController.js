@@ -23,8 +23,11 @@ cloudinary.config({
 
 //this function is for upload the image to host and database
 module.exports.addImage = function(req,res){
+    console.log("hello");
     //upload the image to host
+    console.log(req.body.file);
     cloudinary.uploader.upload(req.body.file,function(err, img){
+        console.log("upload failed");
         if(!err){
             console.log("image uploaded to cloudinary");
             var image = new Image({
@@ -74,7 +77,7 @@ module.exports.deleteImgByArtifact = function(req,res){
     Image.find({artifactId: req.params.id}, function(err, images){
         for (image of images) {
             //delete in coudinary
-            cloudinary.uploader.destory(image.hostId, function(err){
+            cloudinary.uploader.destroy(image.hostId, function(err){
                 if (!err){
                     //delete in database
                     Image.deleteOne({_id: image._id}, function(err){
@@ -87,7 +90,6 @@ module.exports.deleteImgByArtifact = function(req,res){
                 }
             }); 
         }
-        res.status(200).json({"message":"images deleted"});
     });
 };
 
@@ -101,4 +103,29 @@ module.exports.getImgByArtifact = function(req,res){
             res.status(400).json({"message":"failed to get all images by artifact"});
         }
     })
+};
+
+
+//this function is for upload the image to host and database
+module.exports.addFakeImage = function(req,res){
+    cloudinary.uploader.upload("./server/images/lc3.jpg",function(err, img){
+        if(!err){
+            var image = new Image({
+                hostId: img.public_id,
+                url: img.url,
+                artifactId: req.params.id
+            });
+
+            image.save(function (err, image){
+                if (!err) {
+                    res.status(200).json({"message":"image added"});
+                } else {
+                    res.status(400).json({"message":"failed to add image"});
+                }
+            });
+        } else {
+            console.log(err);
+            res.status(400).json({"message":"failed to upload image to cloudinary"});
+        }
+    });
 };

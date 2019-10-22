@@ -25,7 +25,7 @@ module.exports.testPost = function(req,res){
 };
 
 module.exports.addFakeImage = function(req,res){
-    ic.addImage2(req,res);
+    ic.addFakeImage(req,res);
 };
 
 
