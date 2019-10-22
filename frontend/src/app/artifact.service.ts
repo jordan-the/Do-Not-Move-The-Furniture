@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Artifact, Image, Category, Msg } from './data-structures';
-import { reject } from 'q';
-import { promise } from 'protractor';
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +18,8 @@ export class ArtifactService {
     }
 
     getSingleArtifact(id) {
-        return this.http.get<Artifact>(`${this.uri}/api/artifact/${id}`);
+        console.log(`http:///api/artifact/${id}`);
+        return this.http.get<Artifact>(`http://localhost:9000/api/artifact/:${id}`);
     }
 
     deleteArtifact(id) {
@@ -49,6 +48,7 @@ export class ArtifactService {
     }
 
     postArtifactImage(image: File, id){
-        return this.http.post(`${this.uri}/api/image/${id}`, image)
+        return this.http.post(`${this.uri}/api/image/${id}`, image);
     }
+
 }
