@@ -24,7 +24,7 @@ cloudinary.config({
 //this function is for upload the image to host and database
 module.exports.addImage = function(req,res){
     //upload the image to host
-    console.log(req.body.file);
+    console.log(req.body);
     cloudinary.uploader.upload(req.body.file,function(err, img){
         console.log("upload failed");
         if(!err){
