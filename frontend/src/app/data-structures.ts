@@ -11,6 +11,8 @@ export class Artifact {
     familyId: String;
 }
 
+
+
 export class FamilyMember {
     id: number;
     familyId: number;

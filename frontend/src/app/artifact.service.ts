@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Artifact, Image, Category, Msg } from './data-structures';
+import { reject } from 'q';
+import { promise } from 'protractor';
 
 @Injectable({
     providedIn: 'root'
@@ -35,8 +37,18 @@ export class ArtifactService {
         return this.http.get<Category[]>(`${this.uri}/api/category`)
     }
 
-    submit(artifactForm: JSON) {
-        console.log(artifactForm);
-        return this.http.post(`${this.uri}/api/artifact`, artifactForm);
+    postArtifact(artifactForm: JSON) {
+        return new Promise((resolve, reject)=>{
+            this.http.post(`${this.uri}/api/artifact`, artifactForm)
+            .subscribe(res=> {
+                resolve(res["artifactId"]);
+            }, (err) => {
+                reject(err);
+            });
+        });
+    }
+
+    postArtifactImage(image: File, id){
+        return this.http.post(`${this.uri}/api/image/${id}`, image)
     }
 }
