@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { FamilyService} from '../family.service';
 import { Router } from '@angular/router';
 import { Family } from '../data-structures';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-family-member-detail',
@@ -15,7 +16,7 @@ export class FamilyMemberDetailComponent implements OnInit {
   createForm: FormGroup;
 
 
-  constructor(private familyService: FamilyService, private fb: FormBuilder, private router: Router) { 
+  constructor(private familyService: FamilyService, private fb: FormBuilder, private router: Router, private snackBar: MatSnackBar) { 
     this.createForm = this.fb.group({
       name: ["", Validators.required],
       bday: ""
@@ -25,21 +26,31 @@ export class FamilyMemberDetailComponent implements OnInit {
   addFamily(name, bday) {
     console.log(name, bday);
     this.familyService.addFamily(name, bday).subscribe(() => {
-      this.router.navigate([`/familyMemberList`]);
+      // this.router.navigate([`/familyMemberList`]);
+      this.snackBar.open('User added successfully', 'OK', {duration: 3000}) ;
+      this.fetchFamily();
+      this.createForm = this.fb.group({
+        name: ["", Validators.required],
+        bday: ""
+      })
     })
   }
   
   delateFamily(id) {
     console.log(id);
     this.familyService.deleteFamily(id).subscribe(() =>{
-      this.router.navigate([`/familyMemberList`]);
+      // this.router.navigate([`/familyMemberList`]);
+      this.snackBar.open('User delated successfully', 'OK', {duration: 3000}) ;
+      this.fetchFamily();
     })
   }  
 
   updateFamily(id, name, bday) {
     console.log(id, name, bday);
     this.familyService.updateFamily(id, name, bday).subscribe(() => {
-      this.router.navigate([`/familyMemberList`]);
+      // this.router.navigate([`/familyMemberList`]);
+      this.snackBar.open('User updated successfully', 'OK', {duration: 3000}) ;
+      this.fetchFamily();
     })
   }
 

@@ -11,6 +11,13 @@
     border-right: 1px solid #000000;
 }
 
+.backButton {
+    float: right;
+    height: 70px;
+    width: 70px;
+    border-left: 1px solid #000000;
+}
+
 h1 {
     height: 70px;
     line-height: 70px;
