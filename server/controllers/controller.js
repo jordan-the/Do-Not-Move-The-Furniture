@@ -11,11 +11,24 @@ var cc = require("../controllers/categoryController.js");
 var fc = require("../controllers/familyController.js");
 var uc = require("../controllers/userController.js");
 var ic = require("../controllers/imageController.js");
+var acrc = require("../controllers/acRelationship.js");
 
 //connect routes to controllers
 module.exports.checkConnection = function(req,res){
     res.send("successfully connected");
-}
+};
+
+module.exports.testPost = function(req,res){
+    console.log(req.body);
+    //console.log(req.body.name);
+    res.send("received");
+};
+
+module.exports.addFakeImage = function(req,res){
+    ic.addFakeImage(req,res);
+};
+
+
 //artifacts
 module.exports.getAllArtifact = function(req,res){
     ac.getAllArtifacts(req,res);
@@ -115,8 +128,26 @@ module.exports.editUser = function(req,res){
     uc.editUser(req,res);
 };
 
-module.exports.testPost = function(req,res){
-    console.log(req.body);
-    //console.log(req.body.name);
-    res.send("received");
+module.exports.addRelationship = function(req,res){
+    acrc.addRelationship(req,res);
+};
+
+module.exports.getRelationship = function(req,res){
+    acrc.getRelationship(req,res);
+};
+
+module.exports.getRelationshipById = function(req,res){
+    acrc.getRelationById(req,res);
+};
+
+module.exports.getRelationshipByArtifact = function(req,res){
+    acrc.getRelationByArtifact(req,res);
+};
+
+module.exports.getRelationshipByCategory = function(req,res){
+    acrc.getRelationByCategory(req,res);
+};
+
+module.exports.deleteRelationship = function(req,res){
+    acrc.deleteRelation(req,res);
 };

@@ -5,7 +5,7 @@
 var mongoose = require("mongoose");
 
 try {
-    mongoose.connect("mongodb+srv://qifan:donotmovethefurniture@cluster0-wdsdl.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true });
+    mongoose.connect("mongodb+srv://qifan:donotmovethefurniture@cluster0-wdsdl.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
 } catch (error) {
     console.log("fall to connect to mongodb");
 }
@@ -16,3 +16,4 @@ require("./artifact.js");
 require("./family.js");
 require("./category.js");
 require("./image.js");
+require("./artifactCategoryRelationship.js");

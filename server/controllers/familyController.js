@@ -10,39 +10,16 @@ var Family = mongoose.model("Family");
 
 //add family member to database
 module.exports.addFamily = function(req, res) {
-    console.log(req.body.name);
-    console.log(req);
-
     var family = new Family({
         name: req.body.name,
-        bday: req.body.bday
-    });
-    
-    family.save(function (err, family){
-        if (!err) {
-            res.send("successfully added family member");
-        } else {
-            console.log("failed to add family member");
-            res.sendStatus(400);
-        }
-    });
-};
-
-
-//add family member to database
-module.exports.addFamily2 = function(req, res) {
-    var family = new Family({
-        name: "name",
-        bday: "2019-10-14"
+        bday: req.body.bday.toString().slice(0,10)
     });
 
     family.save(function (err, family){
         if (!err) {
-            //do sometihing
-            console.log("successfully added family member");
+            res.status(200).json({"message":"family added"});
         } else {
-            console.log("failed to add family member");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to add family"});
         }
     });
 };
@@ -51,11 +28,9 @@ module.exports.addFamily2 = function(req, res) {
 module.exports.getAllFamilys = function(req, res) {
     Family.find(function(err, families){
         if (!err) {
-            //do sometihing
-            res.send(families);
+            res.status(200).json(families);
         } else {
-            console.log("failed to get families");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to get families"});
         }
     });
 };
@@ -64,11 +39,9 @@ module.exports.getAllFamilys = function(req, res) {
 module.exports.getOneFamily = function(req, res) {
     Family.findOne({_id: req.params.id}, function(err, family){
         if (!err) {
-            //do sometihing
-            res.send(family);
+            res.status(200).json(family);
         } else {
-            console.log("failed to get family by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to get family"});
         }
     })
 };
@@ -77,12 +50,18 @@ module.exports.getOneFamily = function(req, res) {
 module.exports.editFamily = function(req, res) {
     Family.findOne({_id: req.params.id}, function(err, family){
         if (!err) {
-            //do sometihing
-            // res.send(family);
-            res.json(family);
+            family.name = req.body.name;
+            family.bday = req.body.bday;
+
+            family.save(function (err, family){
+                if (!err) {
+                    res.status(200).json({"message":"family edited"});
+                } else {
+                    res.status(400).json({"message":"failed to edit family"});
+                }
+            });
         } else {
-            console.log("failed to get family by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to edit family"});
         }
     })
 };
@@ -91,12 +70,9 @@ module.exports.editFamily = function(req, res) {
 module.exports.deleteFamily = function(req, res) {
     Family.deleteOne({_id: req.params.id}, function(err){
         if (!err) {
-            //do sometihing
-            // res.send("family member deleted");
-            res.json("family member deleted");
+            res.status(200).json({"message":"family deleted"});
         } else {
-            console.log("failed to delete family by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to delete family"});
         }
     })
 };

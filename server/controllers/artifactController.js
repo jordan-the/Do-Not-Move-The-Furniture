@@ -12,7 +12,9 @@ module.exports.addArtifact = function(req, res) {
     var artifact = new Artifact({
         name: req.body.name,
         description: req.body.description,
-        time: req.body.time,
+        year : req.body.year,
+        month: req.body.month,
+        day: req.body.day,
         currentLocation: req.body.currentLocation,
         originLocation: req.body.originLocation,
         familyId: req.body.familyId
@@ -20,10 +22,9 @@ module.exports.addArtifact = function(req, res) {
 
     artifact.save(function (err, artifact){
         if (!err) {
-            res.send("successfully added artifact");
+            res.status(200).json({"message":"successfully added artifact", "artifactId": artifact._id});
         } else {
-            console.log("failed to add artifact");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to add artifact"});
         }
     });
 };
@@ -32,10 +33,9 @@ module.exports.addArtifact = function(req, res) {
 module.exports.getAllArtifacts = function(req, res) {
     Artifact.find(function(err, artifacts){
         if (!err) {
-            res.send(artifacts);
+            res.status(200).json(artifacts);
         } else {
-            console.log("failed to get artifacts");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to get all artifacts"});
         }
     });
 };
@@ -44,10 +44,9 @@ module.exports.getAllArtifacts = function(req, res) {
 module.exports.getOneArtifact = function(req, res) {
     Artifact.findOne({_id: req.params.id}, function(err, artifact){
         if (!err) {
-            res.send(artifact);
+            res.status(200).json({artifact});
         } else {
-            console.log("failed to get artifact by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to get artifact by id"});
         }
     })
 };
@@ -58,14 +57,23 @@ module.exports.editArtifact = function(req, res) {
         if (!err) {
             artifact.name = req.body.name;
             artifact.description = req.body.description;
-            artifact.time = req.body.time;
+            artifact.year = req.body.year;
+            artifact.month = req.body.month;
+            artifact.day = req.body.day;
             artifact.currentLocation = req.body.currentLocation;
             artifact.originLocation = req.body.originLocation;
             artifact.familyId = req.body.familyId;
-            res.send(artifact);
+            artifact.category = req.body.category;
+            
+            artifact.save(function (err, artifact){
+                if (!err) {
+                    res.status(200).json({"message":"successfully edited artifact"});
+                } else {
+                    res.status(400).json({"message":"failed to edit artifact"});
+                }
+            });
         } else {
-            console.log("failed to get artifact by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to edit artifact"});
         }
     })
 };
@@ -75,52 +83,21 @@ module.exports.deleteArtifact = function(req, res) {
     //delete the mongoDB info
     Artifact.deleteOne({_id: req.params.id}, function(err){
         if (!err) {
-            res.send("artifact deleted");
+            res.status(200).json({"message":"artifact deleted"});
         } else {
-            console.log("failed to delete artifact by id");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to delete artifact"});
         }
     })
 };
 
-//following are for testing
-
-//add artifact to database
-module.exports.addArtifact2 = function(req, res) {
-    var artifact = new Artifact({
-        name: "name",
-        //name: req.body.username,
-        description: "word discription",
-        //description: req.body.discription,
-        time: "2002-12-09",
-        currentLocation: "location",
-        originLocation: "location"
-    });
-
-    artifact.save(function (err, artifact){
-        if (!err) {
-            res.send("successfully added artifact")
+//edit primary image
+module.exports.editPrimaryImage = function(req, res, imageUrl){
+    Artifact.findOne({_id: req.params.id}, function(err, artifact){
+        if(!err){
+            artifact.primaryImage = imageUrl;
+            res.status(200).json({"message":"primary image added"});
         } else {
-            console.log("failed to add artifact");
-            res.sendStatus(400);
+            res.status(400).json({"message":"failed to add primary image"});
         }
-    });
-};
-
-
-
-//edit an artifact by id
-module.exports.editArtifact2 = function(req, res) {
-    Artifact.findOne({_id: "5d725bdff18690df4098211f"}, function(err, artifact){
-        if (!err) {
-            //do sometihing
-            console.log(artifact);
-        } else {
-            console.log("failed to get artifact by id");
-            res.sendStatus(400);
-        }
-        artifact.name = "changed";
-        artifact.discription = "also changed";
-        artifact.time = "2000-12-09";
     })
 };

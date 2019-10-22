@@ -31,7 +31,7 @@ export class FamilyService {
       name: name,
       bday: bday
     };
-    return this.http.post(`${this.uri}/family/${id}`, family, {responseType: "text"});
+    return this.http.post(`${this.uri}/family/${id}`, family);
   }
   
   deleteFamily(id) {

@@ -1,0 +1,28 @@
+<button mat-button class="backButton" (click)="closeThis()">Back</button>
+<button mat-button class="deleteButton" (click)="deleteArtifact()">Delete</button>
+<div class="mainContent">
+    <div class="images">
+            <img class="image" *ngFor="let image of images" src={{image.url}}>
+    </div>
+    <div class="info">
+        <div class="text">
+            {{artifact.description}}
+        </div>
+        <br>
+        <div class="dates">
+            Date Acquired:
+            <br>
+            {{artifact.time}}
+        </div>
+        <br>
+        <div class="locations">
+            Current Location:
+            <br>
+            {{artifact.currentLocation}}
+            <br>
+            Location of origin:
+            <br>
+            {{artifact.originLocation}}
+        </div>
+    </div>
+</div>

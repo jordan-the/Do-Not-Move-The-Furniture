@@ -1,0 +1,22 @@
+div{
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    text-align: right;
+}
+
+.title{
+    overflow: auto;
+    display:table;
+    margin-bottom: -15px;
+    border: lightblue 3px;
+    border-radius: 30px;
+}
+
+.textbox{
+    resize: none;
+    border: black 3px;
+    border-radius: 30px;
+    height: 30px;
+    
+}

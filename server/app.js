@@ -1,4 +1,3 @@
-
 //This file is done by Qifan Tang
 //It is for running the test environment
 
@@ -23,23 +22,18 @@ var uc = require("./controllers/userController.js");
 var fc = require("./controllers/familyController.js");
 
 //require bodyparser
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
-// app.use(bodyParser.urlencoded({extended: false}));
-
+const cors = require("cors");
+app.use(cors());
 
 // Set the view engine
 app.set("view engine","ejs");
 
 //set the dir
 app.use(express.static(__dirname));
-
-
-const cors = require("cors");
-app.use(cors());
-app.use(bodyParser.json());
-
-
 
 
 //use router
