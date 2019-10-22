@@ -4,6 +4,8 @@ import { ArtifactService } from '../artifact.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { FileHandle } from './upload-files/upload-files.directive';
 
+import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-artifact-form',
   templateUrl: './artifact-form.component.html',
@@ -22,7 +24,8 @@ export class ArtifactFormComponent implements OnInit {
     private fb: FormBuilder, 
     private artifactService: ArtifactService, 
     public dialogRef: MatDialogRef<ArtifactFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: String[]
+    @Inject(MAT_DIALOG_DATA) public data: String[],
+    private http: HttpClient
     ) { }
 
   ngOnInit() {
@@ -45,10 +48,20 @@ export class ArtifactFormComponent implements OnInit {
   }
 
   onSubmit(){
+    console.log(this.images);
+    console.log(this.images[0]);
+    console.log(this.images[0].file);
     this.artifactService.postArtifact(this.artifactForm.value)
-    .then(result => this.artifactService.postArtifactImage(this.images[0].file, result));
-    
-    this.artifactService.postArtifactImage(null,this.artiID);
+    .then(res => this.artifactService.postArtifactImage(this.images[0].file,res).subscribe(
+      data => console.log("Successful", data),
+      err => console.log("Failure", err)
+    ));
+    /*
+    console.log("posting null");
+    this.artifactService.postArtifactImage(null, this.artiID).subscribe(
+      data => console.log("Successful", data),
+      err => console.log("Failure", err)
+    );*/
   }
 
 
