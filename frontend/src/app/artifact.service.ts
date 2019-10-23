@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Artifact, Image, Category, Msg } from './data-structures';
 
+import { map } from "rxjs/operators";
+
 @Injectable({
     providedIn: 'root'
 })
@@ -10,7 +12,7 @@ export class ArtifactService {
     uri = 'http://localhost:3000'
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
     ) { }
 
     getArtifacts() {
@@ -48,7 +50,13 @@ export class ArtifactService {
     }
 
     postArtifactImage(image: File, id){
-        return this.http.post(`${this.uri}/api/image/${id}`, image);
+        const imageForm: FormData = new FormData();
+        imageForm.append("file", image);
+        return this.http.post(`${this.uri}/api/image/${id}`, imageForm)
+        .subscribe(
+            data => console.log(data),
+            err => console.log(err)
+        );
     }
 
 }
