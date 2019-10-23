@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angu
 import { FileHandle } from './upload-files/upload-files.directive';
 
 import { HttpClient } from '@angular/common/http';
+import { Category } from '../data-structures';
 
 @Component({
   selector: 'app-artifact-form',
@@ -17,8 +18,27 @@ export class ArtifactFormComponent implements OnInit {
   familyID= this.data[1];
   artifactID = null;
   images: FileHandle[] = [];
+  catagories = [];
+  chosenCatagories: Category[] = [];
 
-  artiID: "testing";
+  cata= [
+    {
+        "_id": "5d7b79ce417a8abd984181b1",
+        "name": "wooden",
+        "__v": 0
+    },
+    {
+        "_id": "5d7d9c40c6ef0b2a09a6d1cb",
+        "name": "paperwork",
+        "__v": 0
+    }
+  ];
+
+  getCatagoryNames(object){
+    for(var i = 0; i < this.cata.length; i ++){
+      this.catagories.push(this.cata[i]["name"]);
+    }
+  }
 
   constructor(
     private fb: FormBuilder, 
@@ -37,44 +57,53 @@ export class ArtifactFormComponent implements OnInit {
       year: [''],
       month: [''],
       day: [''],
+      category: [''],
       currentLocation: [''],
       originLocation: ['']
     })
+
+    this.getCatagoryNames(this.cata);
+
+    
+    /*console.log("getting catagories");
+        for(var i=0 ; i < this.catagories.length; i++){
+      console.log(this.catagories[i]);
+    }*/
   }
 
   getImages(files: FileHandle[]): void{
     this.images = files;
-    console.log(this.images[0].file);
+  }
+
+  getCategory(catag: Category[]): void{
+    this.chosenCatagories = catag;
+    console.log(this.chosenCatagories);
   }
 
   onSubmit(){
-    console.log(this.images);
-    console.log(this.images[0]);
-    console.log(this.images[0].file);
     this.artifactService.postArtifact(this.artifactForm.value)
-    .then(res => this.artifactService.postArtifactImage(this.images[0].file,res).subscribe(
-      data => console.log("Successful", data),
-      err => console.log("Failure", err)
-    ));
-    /*
-    console.log("posting null");
-    this.artifactService.postArtifactImage(null, this.artiID).subscribe(
-      data => console.log("Successful", data),
-      err => console.log("Failure", err)
-    );*/
+    .then(res => this.submitImagesAndCategories(res, this.images, this.chosenCatagories));
   }
 
+  submitImagesAndCategories(response, images: FileHandle[], catagos: Category[]){
+    this.submitImages(response, images);
+    this.submitCategories(response, catagos);
 
-  submitArtifact() {
+		this.dialogRef.close();
+  }
 
-    /*
-    this.artifactService.submit(this.artifactForm.value).subscribe(
-      data => this.artifactID=data,
-      error => console.log(error),
-    );
-      */
+  submitCategories(response, cat: Category[]){
+    for(var i= 0; i < cat.length; i++){
+      console.log("uploading category ", i);
+      this.artifactService.postCate(response, cat[i]["_id"]);
+    }
+  }
 
-		this.dialogRef.close()
+  submitImages(response, images: FileHandle[]) {
+    for(var i= 0; i < images.length; i++){
+      console.log("uploading image ", i);
+      this.artifactService.postArtifactImage(this.images[i].file, response);
+    }
   }
 
 }

@@ -11,6 +11,7 @@ import { ImageDirective } from './upload-files/image.directive';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LocationComponent } from './location/location.component';
+import { MaterialModule } from '../../material-module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LocationComponent } from './location/location.component';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule
   ],
   exports: [
     ArtifactFormComponent
