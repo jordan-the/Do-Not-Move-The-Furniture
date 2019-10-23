@@ -52,10 +52,7 @@ export class ArtifactFormComponent implements OnInit {
     console.log(this.images[0]);
     console.log(this.images[0].file);
     this.artifactService.postArtifact(this.artifactForm.value)
-    .then(res => this.artifactService.postArtifactImage(this.images[0].file,res).subscribe(
-      data => console.log("Successful", data),
-      err => console.log("Failure", err)
-    ));
+    .then(res => this.submitImages(res, this.images));
     /*
     console.log("posting null");
     this.artifactService.postArtifactImage(null, this.artiID).subscribe(
@@ -65,14 +62,12 @@ export class ArtifactFormComponent implements OnInit {
   }
 
 
-  submitArtifact() {
+  submitImages(response, images: FileHandle[]) {
 
-    /*
-    this.artifactService.submit(this.artifactForm.value).subscribe(
-      data => this.artifactID=data,
-      error => console.log(error),
-    );
-      */
+    for(var i= 0; i < images.length; i++){
+      console.log("uploading image ", i);
+      this.artifactService.postArtifactImage(this.images[i].file, response);
+    }
 
 		this.dialogRef.close()
   }

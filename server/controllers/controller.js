@@ -59,7 +59,7 @@ module.exports.deleteArtifact = function(req,res){
 
 //images
 module.exports.addImage = function(req,res){
-    ic.addImage(req,res);
+    ic.addImage2(req,res);
 };
 
 module.exports.deleteImageById = function(req,res){
