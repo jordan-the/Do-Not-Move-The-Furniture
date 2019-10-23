@@ -1,5 +1,7 @@
-/* body {
+/* .content {
     background-color: #D5E8D4;
+    display: block;
+    height: 100vh;
 } */
 
 .topContent {
@@ -8,6 +10,16 @@
   
 .accountButton {
     float: right;
+}
+
+.categoryDeleteButton {
+    float: right;
+}
+
+.cat {
+    background: #EEEEEE;
+    margin: 5px;
+    padding: 10px;
 }
   
 .sideContent {

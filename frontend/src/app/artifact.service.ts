@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Artifact, Image, Category, Msg } from './data-structures';
+import { reject } from 'q';
+
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +12,7 @@ export class ArtifactService {
     uri = 'http://localhost:3000'
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
     ) { }
 
     getArtifacts() {
@@ -23,17 +25,28 @@ export class ArtifactService {
     }
 
     deleteArtifact(id) {
-        console.log(`${this.uri}/api/artifact/delete/${id}`)
+        return new Promise ((resolve, reject) => {this.http.get<Msg>(`${this.uri}/api/artifact/delete/${id}`).subscribe(data => resolve(data))});
         return this.http.get<Msg>(`${this.uri}/api/artifact/delete/${id}`);
         
     }
 
     getImages(artifactId) {
-        return this.http.get<Image[]>(`${this.uri}/api/image/${artifactId}`)
+        return this.http.get<Image[]>(`${this.uri}/api/image/${artifactId}`);
     }
 
     getCategories() {
-        return this.http.get<Category[]>(`${this.uri}/api/category`)
+        return this.http.get<Category[]>(`${this.uri}/api/category`);
+    }
+
+    postCategory(newName: String) {
+        var catForm = {name: newName}
+        console.log("Added")
+        return new Promise ((resolve, reject) => {this.http.post(`${this.uri}/api/category`, catForm).subscribe(data => resolve(data))});
+    }
+
+    deleteCategory(id) {
+        console.log(id)
+        return new Promise ((resolve, reject) => {this.http.get<Msg>(`${this.uri}/api/category/delete/${id}`).subscribe(data => resolve(data))});
     }
 
     postArtifact(artifactForm: JSON) {
@@ -48,7 +61,15 @@ export class ArtifactService {
     }
 
     postArtifactImage(image: File, id){
-        return this.http.post(`${this.uri}/api/image/${id}`, image);
+        const imageForm: FormData = new FormData();
+        imageForm.append("image", image);
+        return new Promise((resolve, reject) => {
+            this.http.post(`${this.uri}/api/image/${id}`, imageForm)
+        .subscribe(
+            data => resolve(data)
+        );
+        }); 
+        
     }
 
 }

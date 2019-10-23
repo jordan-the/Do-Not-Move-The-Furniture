@@ -5,14 +5,21 @@
 	</div>
 
 	<div class="sideContent">
-			<mat-form-field class="search">
-				<input matInput placeholder="Enter search terms seperated by spaces" type="search" [(ngModel)]="searchText" (keyup)="search(searchText)">
-			</mat-form-field>
+		<mat-form-field class="search">
+			<input matInput placeholder="Enter search terms seperated by spaces" type="search" [(ngModel)]="searchText" (keyup)="search(searchText)">
+		</mat-form-field>
 		<div class="filter">
 			<div *ngFor="let category of categories" class="cat">
 				<mat-checkbox (click)="includeFilter(category)">{{category.name}}</mat-checkbox>
+				<button mat-icon-button class="categoryDeleteButton" (click)="deleteCategory(category._id)">
+					<mat-icon>delete</mat-icon>
+				</button>
 				<br>
 			</div>
+			<mat-form-field class="createCategory">
+				<input matInput placeholder="New Category..." [(ngModel)]="newCategory">
+			</mat-form-field>
+			<button mat-button class="submitCategory" (click)="createCategory(newCategory)">Add</button>
 		</div>
 	</div>
 
