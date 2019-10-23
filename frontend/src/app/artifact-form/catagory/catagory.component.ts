@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Category } from '../../data-structures';
 
 @Component({
   selector: 'app-catagory',
@@ -7,33 +8,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CatagoryComponent implements OnInit {
   catagories: String[] = [];
+  filters: Category[] = [];
+  
+  categories = [
+    {
+      _id: "test",
+      name: "test"
+    },
+    {
+      _id: "test1",
+      name: "test1"
+    },
+    {
+      _id: "test2",
+      name: "test2"
+    },
+    {
+      _id: "test3",
+      name: "test3"
+    }
+  ]
+
+  @Input() catagoryOption : String[];
+  @Output() categoryEvent: EventEmitter<Category[]> = new EventEmitter();
+  
   constructor() { }
 
-  catagoriesAdd(catagory: String){
-    this.catagories.push(catagory);
+  ngOnInit(){
+
   }
 
-  ngOnInit() {
-  }
-
-  onKey(event: any) {
-    console.log(event.target.value);
-  }
-
-  addCatagory(catagory: string){
-    this.catagories.push(catagory);
-    console.log(catagory);
-  }
-
-  removeCatagory(catagory: string){
-    for(var i=0; i < this.catagories.length; i++){
-      if(catagory == this.catagories[i]){
-        console.log(this.catagories.length);
-        this.catagories.splice(i,1);
-        console.log(this.catagories.length);
-        break;
-      }
+  includeFilter(filter) {
+    var i = this.filters.indexOf(filter);
+    if (i > -1) {
+        this.filters.splice(i, 1);
+    } else {
+        this.filters.push(filter);
     }
-  }
+    this.categoryEvent.emit(this.filters);
+}
 
 }

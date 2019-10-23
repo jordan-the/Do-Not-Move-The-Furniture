@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Artifact, Image, Category, Msg } from './data-structures';
+import { reject } from 'q';
+
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +12,7 @@ export class ArtifactService {
     uri = 'http://localhost:3000'
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
     ) { }
 
     getArtifacts() {
@@ -48,7 +50,34 @@ export class ArtifactService {
     }
 
     postArtifactImage(image: File, id){
-        return this.http.post(`${this.uri}/api/image/${id}`, image);
+        const imageForm: FormData = new FormData();
+        imageForm.append("image", image);
+        return new Promise((resolve, reject) => {
+            this.http.post(`${this.uri}/api/image/${id}`, imageForm)
+        .subscribe(
+            data => resolve(data)
+        );
+        }); 
     }
+
+    postCategory(name){
+        return new Promise((resolve, reject)=>{
+            this.http.post(`${this.uri}/api/category`, name)
+            .subscribe(res=> {
+                resolve(res["name"]);
+            }, (err) => {
+                reject(err);
+            });
+        });
+    }
+
+    postCate(id, category){
+        var artifactCategory = {
+            "artifactId": id,
+            "categoryId": category
+        }
+        return this.http.post(`${this.uri}/api/relationship`, artifactCategory).subscribe();
+    }
+    
 
 }
