@@ -77,3 +77,15 @@ module.exports.deleteRelation = function(req, res) {
         }
     })
 };
+
+module.exports.deleteRelationByArtifact = function(req, res){
+    console.log("delete by artifact");
+    ACR.deleteMany({artifactId: req.params.id}, function(err){
+        if(err){
+            console.log(err);
+            res.status(400).json({"message": "failed to delete relation by artifact"});
+        }else{
+            console.log("successfully deleted relations");
+        }
+    });
+};
