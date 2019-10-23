@@ -10,7 +10,6 @@ import { MatSnackBar } from '@angular/material';
     selector: 'app-artifact-collection',
     templateUrl: './artifact-collection.component.html',
     styleUrls: ['./artifact-collection.component.css'],
-    encapsulation: ViewEncapsulation.None
 })
 export class ArtifactCollectionComponent implements OnInit {
 

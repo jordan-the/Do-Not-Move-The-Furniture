@@ -1,5 +1,5 @@
 img {
-    height: 80%;
+    height: 10vh;
     width: 100%;
     object-fit: contain;
 }
@@ -11,3 +11,4 @@ img {
     justify-content: center;
     align-items: center;
 }
+

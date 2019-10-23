@@ -16,10 +16,12 @@
 				</button>
 				<br>
 			</div>
-			<mat-form-field class="createCategory">
-				<input matInput placeholder="New Category..." [(ngModel)]="newCategory">
-			</mat-form-field>
-			<button mat-button class="submitCategory" (click)="createCategory(newCategory)">Add</button>
+			<div class="createCategory">
+				<mat-form-field>
+					<input matInput placeholder="New Category..." [(ngModel)]="newCategory">
+				</mat-form-field>
+				<button mat-button class="submitCategory" (click)="createCategory(newCategory)">Add</button>
+			</div>
 		</div>
 	</div>
 
