@@ -130,12 +130,7 @@ module.exports.addImage3 = function(req,res){
 };
 
 //this function receives the image and delete it
-<<<<<<< HEAD
 module.exports.addImage = async function(req,res){
-=======
-module.exports.addImage2 = async function(req,res){
-    console.log("recieved image");
->>>>>>> origin/jordan1
     console.log(req.file.filename);
 
     await this.addImage3(req,res);
