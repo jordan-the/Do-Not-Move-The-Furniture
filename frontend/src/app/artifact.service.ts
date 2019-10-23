@@ -58,7 +58,26 @@ export class ArtifactService {
             data => resolve(data)
         );
         }); 
-        
     }
+
+    postCategory(name){
+        return new Promise((resolve, reject)=>{
+            this.http.post(`${this.uri}/api/category`, name)
+            .subscribe(res=> {
+                resolve(res["name"]);
+            }, (err) => {
+                reject(err);
+            });
+        });
+    }
+
+    postCate(id, category){
+        var artifactCategory = {
+            "artifactId": id,
+            "categoryId": category
+        }
+        return this.http.post(`${this.uri}/api/relationship`, artifactCategory).subscribe();
+    }
+    
 
 }
