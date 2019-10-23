@@ -25,6 +25,35 @@ cloudinary.config({
 });
 
 
+//this function is for upload the image to host and database
+module.exports.addImage = function(req,res){
+    console.log(req.body);
+    cloudinary.uploader.upload(req.body.file,function(err, img){
+        if(!err){
+            console.log("image uploaded to cloudinary");
+            var image = new Image({
+                hostId: img.public_id,
+                url: img.url,
+                artifactId: req.params.id
+            });
+            //if the image is primary modify the attribute in artifact
+            //if(req.body.isPrimary == 1){
+            //    ac.editPrimaryImage(req, res, img.url);
+            //}
+
+            image.save(function (err, image){
+                if (!err) {
+                    res.status(200).json({"message":"image added"});
+                } else {
+                    res.status(400).json({"message":"failed to add image"});
+                }
+            });
+        } else {
+            res.status(400).json({"message":"failed to upload image to cloudinary"});
+        }
+    });
+};
+
 //delete an artifact
 module.exports.deleteImgById = function(req,res) {
     //delete the image first
@@ -105,6 +134,7 @@ module.exports.addFakeImage = function(req,res){
 
 //this function is for upload the image to host and database
 module.exports.addImage3 = function(req,res){
+    
     //upload image to cloudinary and database
     cloudinary.uploader.upload(req.file.path,function(err, img){
         if(!err){
@@ -130,7 +160,8 @@ module.exports.addImage3 = function(req,res){
 };
 
 //this function receives the image and delete it
-module.exports.addImage = async function(req,res){
+module.exports.addImage2 = async function(req,res){
+    console.log("recieved image");
     console.log(req.file.filename);
 
     await this.addImage3(req,res);

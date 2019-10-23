@@ -20,6 +20,7 @@ import { FamilyService } from './family.service';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { MenuComponent } from './menu/menu.component';
 import { LoginComponent } from './login/login.component';
+import { ArtifactButtonComponent } from './artifact-collection/artifact-button/artifact-button.component';
  
 @NgModule({
     declarations: [
@@ -32,6 +33,7 @@ import { LoginComponent } from './login/login.component';
         FrontPageComponent,
         MenuComponent,
         LoginComponent,
+        ArtifactButtonComponent,
     ],
     imports: [
         BrowserModule,

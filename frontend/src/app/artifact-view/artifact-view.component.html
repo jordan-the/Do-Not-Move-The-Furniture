@@ -2,7 +2,10 @@
 <button mat-button class="deleteButton" (click)="deleteArtifact()">Delete</button>
 <div class="mainContent">
     <div class="images">
-        <img class="image" *ngIf="images" src={{images[currentImage].url}}>
+        <img class="image" *ngIf="images[currentImage]; else noImageBlock" src={{images[currentImage].url}}>
+        <ng-template #noImageBlock>
+            <div class="placeholder">No images found</div>
+        </ng-template>
         <div class="arrows">
             <button mat-button class="imageButton" (click)="prevImage()">
                 <mat-icon>keyboard_arrow_left</mat-icon>

@@ -63,7 +63,7 @@ export class ArtifactViewComponent implements OnInit {
 
 	deleteArtifact() {
 		var out;
-		this.artifactService.deleteArtifact(this.artifact._id).subscribe(outMessage => out = outMessage);
+		this.artifactService.deleteArtifact(this.artifact._id).then(data => location.reload());
 
 		console.log(out)
 	}

@@ -5,14 +5,21 @@
 	</div>
 
 	<div class="sideContent">
-			<mat-form-field class="search">
-				<input matInput placeholder="Enter search terms seperated by spaces" type="search" [(ngModel)]="searchText" (keyup)="search(searchText)">
-			</mat-form-field>
+		<mat-form-field class="search">
+			<input matInput placeholder="Enter search terms seperated by spaces" type="search" [(ngModel)]="searchText" (keyup)="search(searchText)">
+		</mat-form-field>
 		<div class="filter">
 			<div *ngFor="let category of categories" class="cat">
 				<mat-checkbox (click)="includeFilter(category)">{{category.name}}</mat-checkbox>
+				<button mat-icon-button class="categoryDeleteButton" (click)="deleteCategory(category._id)">
+					<mat-icon>delete</mat-icon>
+				</button>
 				<br>
 			</div>
+			<mat-form-field class="createCategory">
+				<input matInput placeholder="New Category..." [(ngModel)]="newCategory">
+			</mat-form-field>
+			<button mat-button class="submitCategory" (click)="createCategory(newCategory)">Add</button>
 		</div>
 	</div>
 
@@ -20,9 +27,7 @@
 		<mat-grid-list cols="6" gutterSize="5px">
 			<mat-grid-tile *ngFor="let artifact of filteredArtifacts" class="artifactTile">
 				<button mat-button class="artifactButton" (click)="openArtifact(artifact)">
-					<img class="image" src="{{artifact.primaryImage}}">
-					<br>
-					{{artifact.name}}
+					<app-artifact-button class="artifactImage" [artifact]="artifact"></app-artifact-button>
 				</button>
 			</mat-grid-tile>
 			<mat-grid-tile class="addArtifactTile">
