@@ -67,4 +67,5 @@ export class ArtifactViewComponent implements OnInit {
 
 		console.log(out)
 	}
+	
 }

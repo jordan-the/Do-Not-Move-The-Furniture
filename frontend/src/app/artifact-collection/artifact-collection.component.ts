@@ -111,8 +111,14 @@ export class ArtifactCollectionComponent implements OnInit {
         
         const dialogConfig = new MatDialogConfig();
 
+        var data = {
+            userId: this.userId,
+            familyId: this.familyId,
+            categories: this.categories,
+        }
+
         dialogConfig.autoFocus = true;
-        dialogConfig.data = [this.userId, this.familyId]
+        dialogConfig.data = data;
         dialogConfig.width = "50vw";
         dialogConfig.height = "100vh";
         

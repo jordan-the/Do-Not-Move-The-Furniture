@@ -25,9 +25,7 @@ export class ArtifactService {
     }
 
     deleteArtifact(id) {
-        return new Promise ((resolve, reject) => {this.http.get<Msg>(`${this.uri}/api/artifact/delete/${id}`).subscribe(data => resolve(data))});
-        return this.http.get<Msg>(`${this.uri}/api/artifact/delete/${id}`);
-        
+        return new Promise ((resolve, reject) => {this.http.get<Msg>(`${this.uri}/api/arti/delete/${id}`).subscribe(data => resolve(data))});
     }
 
     getImages(artifactId) {
@@ -71,6 +69,13 @@ export class ArtifactService {
         }); 
         
     }
-    
+
+    postCate(id, category){
+        var artifactCategory = {
+            "artifactId": id,
+            "categoryId": category
+        }
+        return this.http.post(`${this.uri}/api/relationship`, artifactCategory).subscribe();
+    }
 
 }

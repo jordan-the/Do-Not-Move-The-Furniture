@@ -82,25 +82,22 @@ export class ArtifactFormComponent implements OnInit {
 
   onSubmit(){
     this.artifactService.postArtifact(this.artifactForm.value)
-    .then(res => this.submitImages(res, this.images));
-    /*
-    console.log("posting null");
-    this.artifactService.postArtifactImage(null, this.artiID).subscribe(
-      data => console.log("Successful", data),
-      err => console.log("Failure", err)
-    );*/
+    .then(res => this.submitImagesAndCategories(res, this.images, this.chosenCatagories));
   }
 
   submitImagesAndCategories(response, images: FileHandle[], catagos: Category[]){
     this.submitImages(response, images);
     this.submitCategories(response, catagos);
 
-  submitImages(response, images: FileHandle[]) {
+		this.dialogRef.close();
+  }
 
-    for(var i= 0; i < images.length; i++){
-      console.log("uploading image ", i);
-      this.artifactService.postArtifactImage(this.images[i].file, response);
+  submitCategories(response, cat: Category[]){
+    for(var i= 0; i < cat.length; i++){
+      console.log("uploading category ", i);
+      this.artifactService.postCate(response, cat[i]["_id"]);
     }
+  }
 
   submitImages(response, images: FileHandle[]) {
     for(var i= 0; i < images.length; i++){
