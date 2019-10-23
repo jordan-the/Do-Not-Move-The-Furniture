@@ -161,6 +161,7 @@ module.exports.addImage3 = function(req,res){
 
 //this function receives the image and delete it
 module.exports.addImage2 = async function(req,res){
+    console.log("recieved image");
     console.log(req.file.filename);
 
     await this.addImage3(req,res);

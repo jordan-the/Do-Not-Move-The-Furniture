@@ -52,10 +52,7 @@ export class ArtifactFormComponent implements OnInit {
     console.log(this.images[0]);
     console.log(this.images[0].file);
     this.artifactService.postArtifact(this.artifactForm.value)
-    .then(res => this.artifactService.postArtifactImage(this.images[0].file,res).subscribe(
-      data => console.log("Successful", data),
-      err => console.log("Failure", err)
-    ));
+    .then(res => this.artifactService.postArtifactImage(this.images[0].file,res));
     /*
     console.log("posting null");
     this.artifactService.postArtifactImage(null, this.artiID).subscribe(
