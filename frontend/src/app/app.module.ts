@@ -20,6 +20,7 @@ import { FamilyService } from './family.service';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { MenuComponent } from './menu/menu.component';
 import { LoginComponent } from './login/login.component';
+import { EditArtifactFormModule } from './edit-artifact-form/edit-artifact-form.module';
 import { ArtifactButtonComponent } from './artifact-collection/artifact-button/artifact-button.component';
  
 @NgModule({
@@ -33,7 +34,7 @@ import { ArtifactButtonComponent } from './artifact-collection/artifact-button/a
         FrontPageComponent,
         MenuComponent,
         LoginComponent,
-        ArtifactButtonComponent,
+        ArtifactButtonComponent
     ],
     imports: [
         BrowserModule,
@@ -43,8 +44,8 @@ import { ArtifactButtonComponent } from './artifact-collection/artifact-button/a
         HttpClientModule,
         FormsModule,
         ArtifactFormModule,
+        EditArtifactFormModule,
         ReactiveFormsModule,
-        
     ],
     providers: [ArtifactService,UserService,FamilyService],
     bootstrap: [AppComponent],

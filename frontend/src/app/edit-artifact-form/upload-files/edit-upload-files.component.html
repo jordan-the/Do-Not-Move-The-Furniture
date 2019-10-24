@@ -1,4 +1,4 @@
-<div class="fileDrop" appUploadFiles [uploadFiles] = "files" (files) ="filesDropped($event)">
+<div class="fileDrop" appEditUploadFiles [uploadFiles] = "files" (files) ="filesDropped($event)">
   <div class="text">Drag and drop to upload image</div>
 </div>
 
@@ -6,7 +6,7 @@
   <span>Click To Remove</span>
 </div>
 
-<div *ngFor="let file of files" class="images" (click)="deleteImage(file)" appImageDirective>
+<div *ngFor="let file of files" class="images" (click)="deleteImage(file)" appEditImageDirective>
   <img *ngIf="file" [src]="file.url"> 
   <span class="fileName">{{ file.file.name }}</span>
 </div>

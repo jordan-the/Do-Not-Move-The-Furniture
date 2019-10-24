@@ -2,19 +2,21 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ArtifactService } from '../artifact.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
-import { FileHandle } from './upload-files/upload-files.directive';
+import { FileHandle } from './upload-files/edit-upload-files.directive';
 
 import { HttpClient } from '@angular/common/http';
 import { Category } from '..//data-structures';
 
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Artifact } from '../data-structures';
 
 @Component({
-  selector: 'app-artifact-form',
-  templateUrl: './artifact-form.component.html',
-  styleUrls: ['./artifact-form.component.css']
+  selector: 'app-edit-artifact-form',
+  templateUrl: './edit-artifact-form.component.html',
+  styleUrls: ['./edit-artifact-form.component.css']
 })
-export class ArtifactFormComponent implements OnInit {
+export class EditArtifactFormComponent implements OnInit {
+
   artifactForm: FormGroup;
   userID= this.data[0];
   familyID= this.data[1];
@@ -24,6 +26,7 @@ export class ArtifactFormComponent implements OnInit {
   chosenCatagories: Category[] = [];
 
   uploadFiles: FileHandle[] = [];
+
   
   cata= [
     {
@@ -47,27 +50,27 @@ export class ArtifactFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private artifactService: ArtifactService, 
-    public dialogRef: MatDialogRef<ArtifactFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: String[],
+    public dialogRef: MatDialogRef<EditArtifactFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Artifact,
     private http: HttpClient,
     private sanitizer: DomSanitizer
     ) { }
 
   ngOnInit() {
+    this.artifactID = this.data["_id"];
+    console.log("data = ", this.artifactID);
     this.artifactForm = this.fb.group({
       familyID: this.familyID,
       //  userID: this.userID,
-      name: [''],
-      description: [''],
-      year: [''],
-      month: [''],
-      day: [''],
-      category: [''],
-      currentLocation: [''],
-      originLocation: ['']
+      name: this.data["name"],
+      description: this.data["description"],
+      year: this.data["year"],
+      month: this.data["month"],
+      day: this.data["day"],
+      category: this.data["category"],
+      currentLocation: this.data["currentLocation"],
+      originLocation: this.data["originLocation"]
     })
-    console.log("uploadFiles");
-    console.log(this.uploadFiles);
     this.getCatagoryNames(this.cata);
   }
 
@@ -81,16 +84,8 @@ export class ArtifactFormComponent implements OnInit {
   }
 
   onSubmit(){
-    this.artifactService.postArtifact(this.artifactForm.value)
-    .then(res => this.submitImagesAndCategories(res, this.images, this.chosenCatagories));
-  }
-
-  submitImagesAndCategories(response, images: FileHandle[], catagos: Category[]){
-    this.submitImages(response, images);
-    this.submitCategories(response, catagos);
-
-    this.dialogRef.close();
-    location.reload();
+    this.artifactService.editArtifact(this.artifactForm.value, this.artifactID)
+    .then(res => this.submitImages());
   }
 
   submitCategories(response, cat: Category[]){
@@ -100,11 +95,9 @@ export class ArtifactFormComponent implements OnInit {
     }
   }
 
-  submitImages(response, images: FileHandle[]) {
-    for(var i= 0; i < images.length; i++){
-      console.log("uploading image ", i);
-      this.artifactService.postArtifactImage(this.images[i].file, response);
-    }
+  submitImages() {
+    this.dialogRef.close();
+    location.reload();
   }
 
   sanitizeFile(file: File){
@@ -112,5 +105,6 @@ export class ArtifactFormComponent implements OnInit {
     (window.URL.createObjectURL(file));
     this.uploadFiles.push({ file, url});
   }
+
 
 }

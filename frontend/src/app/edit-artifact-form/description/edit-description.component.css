@@ -1,0 +1,12 @@
+div{
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    text-align: right;
+}
+
+.description{
+    overflow: auto;
+    display:table;
+    margin-bottom: -15px;
+}

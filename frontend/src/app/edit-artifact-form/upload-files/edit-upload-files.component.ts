@@ -1,13 +1,13 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
-import { FileHandle } from './upload-files.directive';
+import { FileHandle } from './edit-upload-files.directive';
 import { EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-upload-files',
-  templateUrl: './upload-files.component.html',
-  styleUrls: ['./upload-files.component.css']
+  selector: 'app-edit-upload-files',
+  templateUrl: './edit-upload-files.component.html',
+  styleUrls: ['./edit-upload-files.component.css']
 })
-export class UploadFilesComponent implements OnInit {
+export class EditUploadFilesComponent implements OnInit {
   files: FileHandle[] = [];
   
   //Changes

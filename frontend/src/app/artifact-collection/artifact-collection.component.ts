@@ -5,6 +5,7 @@ import { Artifact, Category } from '../data-structures';
 import { ArtifactViewComponent } from '../artifact-view/artifact-view.component';
 import { ArtifactFormComponent } from '../artifact-form/artifact-form.component';
 import { MatSnackBar } from '@angular/material';
+import { EditArtifactFormComponent } from '../edit-artifact-form/edit-artifact-form.component';
 
 @Component({
     selector: 'app-artifact-collection',
@@ -109,7 +110,7 @@ export class ArtifactCollectionComponent implements OnInit {
         dialogConfig.height = "100vh";
 
         //todo: add edit
-        this.dialog.open(null, dialogConfig);
+        this.dialog.open(EditArtifactFormComponent, dialogConfig);
     }
 
     openCreate() {

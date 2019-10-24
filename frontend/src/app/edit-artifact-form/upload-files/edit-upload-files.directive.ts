@@ -7,9 +7,9 @@ export interface FileHandle{
 }
 
 @Directive({
-  selector: '[appUploadFiles]'
+  selector: '[appEditUploadFiles]'
 })
-export class UploadFilesDirective {
+export class EditUploadFilesDirective {
   //public uploadFiles: FileHandle[] = []
 
   @Input() uploadFiles: FileHandle[]
