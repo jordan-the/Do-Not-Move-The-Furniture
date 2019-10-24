@@ -1,5 +1,6 @@
 <button mat-button class="backButton" (click)="closeThis()">Back</button>
 <div class="mainContent">
+    <h1>{{artifact.name}}</h1>
     <div class="images">
         <img class="image" *ngIf="images[currentImage]; else noImageBlock" src={{images[currentImage].url}}>
         <ng-template #noImageBlock>

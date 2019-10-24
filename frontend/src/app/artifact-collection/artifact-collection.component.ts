@@ -72,10 +72,16 @@ export class ArtifactCollectionComponent implements OnInit {
 
     isFiltered(x: Artifact) {
         for (var filter of this.filters) {
+            // console.log(filter)
+            // console.log(this.acRelations)
+            var hasFilter = false;
             for (var relation of this.acRelations) {
-                if (filter._id != relation.categoryId && x._id == relation.categoryId) {
-                    return false;
+                if (filter._id == relation.categoryId && x._id == relation.artifactId) {
+                    hasFilter = true;
                 }
+            }
+            if (!hasFilter) {
+                return false;
             }
         }
 
@@ -154,8 +160,8 @@ export class ArtifactCollectionComponent implements OnInit {
     }
 
     deleteCategory(id) {
-        for (var artifact of this.artifacts) {
-            if (id == artifact.category) {
+        for (var relation of this.acRelations) {
+            if (id == relation.categoryId) {
                 this.snackBar.open('Can\'t remove category: Artifacts that belong to this category exist!', 'OK', {duration: 3000}) ;
                 return
             }

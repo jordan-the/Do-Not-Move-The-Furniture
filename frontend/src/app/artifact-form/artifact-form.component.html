@@ -5,7 +5,10 @@
     <app-upload-files (fileEvent) = "getImages($event)" [nfiles] = "uploadFiles"></app-upload-files>
     <app-description [artifactForm]="artifactForm"></app-description>
     <app-catagory [catagoryOption]="cata" (categoryEvent)="getCategories($event)" ></app-catagory>
+    <br>
     <app-acquisition-date [artifactForm]="artifactForm"></app-acquisition-date>
+    <br>
+    <br>
     <app-location [artifactForm]="artifactForm"></app-location>
 </form>
 <div class="submit">

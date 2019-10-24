@@ -1,0 +1,11 @@
+.location {
+    text-align: left;
+    width: 20vw;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input {
+    float: right;
+}
