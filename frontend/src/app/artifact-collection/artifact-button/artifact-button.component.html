@@ -1,0 +1,6 @@
+<img *ngIf="image; else noImageBlock" class="image" src="{{image.url}}">
+<ng-template #noImageBlock>
+    <div class="placeholder">No image found</div>
+</ng-template>
+<br>
+{{artifact.name}}
