@@ -165,7 +165,7 @@ export class ArtifactCollectionComponent implements OnInit {
         }
         else if (this.sortOption == "obtained") {
             this.sortedArtifacts = this.filteredArtifacts.slice();
-            this.sortedArtifacts.sort(this.compareDate);
+            this.sortedArtifacts = this.sortByDate(this.sortedArtifacts);
         }
     }
 
@@ -181,9 +181,21 @@ export class ArtifactCollectionComponent implements OnInit {
         }
     }
 
-    compareDate(a1: Artifact, a2: Artifact) {
-        //todo
-        return 0;
+    sortByDate(unsortedArtifacts: Artifact[]) {
+        var artifactsWithDates = [];
+        for (var unsortedArtifact of unsortedArtifacts) {
+            var year = parseInt(unsortedArtifact.year.valueOf());
+            var month = this.parseMonth(unsortedArtifact.month);
+            var day = parseInt(unsortedArtifact.day.valueOf());
+            var artifactWithDate = [unsortedArtifact, year, month, day];
+            artifactsWithDates.push(artifactWithDate);
+        }
+        artifactsWithDates.sort(this.sortArtifactsWithDates);
+        var sortedArray = [];
+        for (var sorted of artifactsWithDates) {
+            sortedArray.push(sorted[0]);
+        }
+        return sortedArray;
     }
 
     parseMonth(month: String) {
@@ -213,7 +225,46 @@ export class ArtifactCollectionComponent implements OnInit {
             return 12;
         } else {
             //no month first (default start of year)
-            return -1;
+            return 0;
         }
+    }
+
+    sortArtifactsWithDates(ad1, ad2) {
+        //first compare year
+        //no year defaults to end of list
+        if (ad1[1] == NaN && ad2[1] == NaN) {
+            return 0;
+        } else if (ad1[1] == NaN) {
+            return 1;
+        } else if (ad2[1] == NaN) {
+            return -1;
+        } else if (ad1[1] > ad2[1]) {
+            return 1;
+        } else if (ad1[1] < ad2[2]) {
+            return -1;
+        } else {
+            //compare month (never NaN since it's already been parsed)
+            if (ad1[1] > ad2[1]) {
+                return 1;
+            } else if (ad1[1] < ad2[2]) {
+                return -1;
+            } else {
+                //compare day
+                //no day defaults to start of month
+                if (ad1[3] == NaN && ad2[3] == NaN) {
+                    return 0;
+                } else if (ad1[3] == NaN) {
+                    return -1;
+                } else if (ad2[3] == NaN) {
+                    return 1;
+                } else if (ad1[3] > ad2[3]) {
+                    return 1;
+                } else if (ad1[3] < ad2[3]) {
+                    return -1;
+                }
+            }
+        }
+
+        return 0;
     }
 }
