@@ -1,0 +1,11 @@
+<h1>Artifact Form</h1>
+
+<form [formGroup]="artifactForm">
+    <app-edit-title [artifactForm]="artifactForm"></app-edit-title>
+    <app-edit-description [artifactForm]="artifactForm"></app-edit-description>
+    <app-edit-acquisition-date [artifactForm]="artifactForm"></app-edit-acquisition-date>
+    <app-edit-location [artifactForm]="artifactForm"></app-edit-location>
+</form>
+<div class="submit">
+    <input type="submit" (click)="onSubmit()">
+</div>

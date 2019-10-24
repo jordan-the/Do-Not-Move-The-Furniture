@@ -1,10 +1,11 @@
-.date{
+.date {
+    text-align: left;
+    width: 20vw;
+    display: inline-block;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
 }
-.middle{
-    margin-left: auto;
-    margin-right: auto;
-    display: table;
+
+input {
+    float: right;
 }

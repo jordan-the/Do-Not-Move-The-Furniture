@@ -1,8 +1,19 @@
 <button mat-button class="backButton" (click)="closeThis()">Back</button>
-<button mat-button class="deleteButton" (click)="deleteArtifact()">Delete</button>
 <div class="mainContent">
+    <h1>{{artifact.name}}</h1>
     <div class="images">
-            <img class="image" *ngFor="let image of images" src={{image.url}}>
+        <img class="image" *ngIf="images[currentImage]; else noImageBlock" src={{images[currentImage].url}}>
+        <ng-template #noImageBlock>
+            <div class="placeholder">No images found</div>
+        </ng-template>
+        <div class="arrows">
+            <button mat-button class="imageButton" (click)="prevImage()">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+            <button mat-button class="imageButton" (click)="nextImage()">
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+        </div>
     </div>
     <div class="info">
         <div class="text">
@@ -10,9 +21,17 @@
         </div>
         <br>
         <div class="dates">
-            Date Acquired:
+            Acquired:
             <br>
-            {{artifact.time}}
+            <span *ngIf="data.day">
+                {{data.day}} -
+            </span>
+            <span *ngIf="data.month">
+                {{data.month}} -
+            </span>
+            <span *ngIf="data.year">
+                {{data.year}}
+            </span>
         </div>
         <br>
         <div class="locations">

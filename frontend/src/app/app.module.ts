@@ -20,6 +20,9 @@ import { FamilyService } from './family.service';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { MenuComponent } from './menu/menu.component';
 import { LoginComponent } from './login/login.component';
+import { EditArtifactFormModule } from './edit-artifact-form/edit-artifact-form.module';
+import { ArtifactButtonComponent } from './artifact-collection/artifact-button/artifact-button.component';
+import { DeleteWarningComponent } from './artifact-collection/delete-warning/delete-warning.component';
  
 @NgModule({
     declarations: [
@@ -32,6 +35,8 @@ import { LoginComponent } from './login/login.component';
         FrontPageComponent,
         MenuComponent,
         LoginComponent,
+        ArtifactButtonComponent,
+        DeleteWarningComponent
     ],
     imports: [
         BrowserModule,
@@ -41,13 +46,13 @@ import { LoginComponent } from './login/login.component';
         HttpClientModule,
         FormsModule,
         ArtifactFormModule,
+        EditArtifactFormModule,
         ReactiveFormsModule,
-        
     ],
     providers: [ArtifactService,UserService,FamilyService],
     bootstrap: [AppComponent],
     entryComponents: [
-        ArtifactViewComponent,
+        ArtifactViewComponent, DeleteWarningComponent
     ]
 })
 export class AppModule { }

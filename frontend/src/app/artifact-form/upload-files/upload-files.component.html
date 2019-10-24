@@ -1,4 +1,4 @@
-<div class="fileDrop" appUploadFiles (files) ="filesDropped($event)">
+<div class="fileDrop" appUploadFiles [uploadFiles] = "files" (files) ="filesDropped($event)">
   <div class="text">Drag and drop to upload image</div>
 </div>
 

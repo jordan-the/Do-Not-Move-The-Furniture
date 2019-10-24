@@ -16,7 +16,8 @@
             <app-login></app-login>
         </div>
         <div class="fill"></div>
-        <div  (mouseenter)="stopPlay()" (mouseleave)="autoPlay()">
+        <div class="fill"></div>
+        <div (mouseenter)="stopPlay()" (mouseleave)="autoPlay()">
             <ul [@carousel] = 'state' (@carousel.done)="afterPlay()">
                 <img  class="img" src={{bannerPic[0].img}}>
                 <div class = "fill2"></div>

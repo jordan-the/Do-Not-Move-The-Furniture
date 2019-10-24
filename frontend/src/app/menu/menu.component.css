@@ -1,4 +1,37 @@
 button {
     height: 100%;
     width: 100%;
+    font-size: 3em;
+}
+
+.viewButton, .accountButton{
+    background-color: #FFECC7;
+    
+}
+
+.viewButton:hover {
+    background-image: url("../coll.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.accountButton:hover {
+    background-image: url("../acc.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.familyButton {
+    background-color: #D5E8D4;
+}
+
+.familyButton:hover {
+    background-image: url("../fam.png");
+    background-size: cover;
+    background-position: center;
+}
+
+
+.logoutButton {
+    background-color: #DDDDDD;
 }

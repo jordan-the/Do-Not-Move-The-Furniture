@@ -8,6 +8,9 @@ var db = require("../models/db.js");
 var mongoose = require("mongoose");
 var Image = mongoose.model("Image");
 
+//require fs
+const fs = require("fs");
+
 //require artifact Controller
 var ac = require("../controllers/artifactController.js")
 
@@ -21,9 +24,10 @@ cloudinary.config({
     api_secret: "koP_fitGdGntiPk_DJ6yrNnp8fY"
 });
 
+
 //this function is for upload the image to host and database
 module.exports.addImage = function(req,res){
-    //upload the image to host
+    console.log(req.body);
     cloudinary.uploader.upload(req.body.file,function(err, img){
         if(!err){
             console.log("image uploaded to cloudinary");
@@ -74,7 +78,7 @@ module.exports.deleteImgByArtifact = function(req,res){
     Image.find({artifactId: req.params.id}, function(err, images){
         for (image of images) {
             //delete in coudinary
-            cloudinary.uploader.destory(image.hostId, function(err){
+            cloudinary.uploader.destroy(image.hostId, function(err){
                 if (!err){
                     //delete in database
                     Image.deleteOne({_id: image._id}, function(err){
@@ -87,7 +91,6 @@ module.exports.deleteImgByArtifact = function(req,res){
                 }
             }); 
         }
-        res.status(200).json({"message":"images deleted"});
     });
 };
 
@@ -126,4 +129,50 @@ module.exports.addFakeImage = function(req,res){
             res.status(400).json({"message":"failed to upload image to cloudinary"});
         }
     });
+};
+
+
+//this function is for upload the image to host and database
+module.exports.addImage3 = function(req,res){
+    
+    //upload image to cloudinary and database
+    cloudinary.uploader.upload(req.file.path,function(err, img){
+        if(!err){
+            console.log("image uploaded to cloudinary");
+            var image = new Image({
+                hostId: img.public_id,
+                url: img.url,
+                artifactId: req.params.id
+            });
+            
+            image.save(function (err, image){
+                if (err) {
+                    res.status(400).json({"message":"failed to add image"});
+                } else {
+                    console.log("image uploaded to database");
+                }
+            });
+        } else {
+            console.log(err);
+            res.status(400).json({"message":"failed to upload image to cloudinary"});
+        }
+    });
+};
+
+//this function receives the image and delete it
+module.exports.addImage2 = async function(req,res){
+    console.log("recieved image");
+    console.log(req.file.filename);
+
+    await this.addImage3(req,res);
+
+    fs.unlink("uploads/" + req.file.filename, function(err){
+        if(err){
+            console.log(err);
+            res.status(400).json({"message":"failed to delete image"});
+        }else{
+            res.status(200).json({"message":"image deleted"});
+        }
+    })
+
 };

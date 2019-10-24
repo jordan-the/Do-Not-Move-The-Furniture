@@ -2,14 +2,17 @@ export class Artifact {
     _id: String;
     name: String;
     description: String;
-    time: String;
-    //year,month,date
+    year: String;
+    month: String;
+    day: String;
     primaryImage: String;
     category: String;
     currentLocation: String;
     originLocation: String;
     familyId: String;
 }
+
+
 
 export class FamilyMember {
     id: number;
@@ -21,6 +24,11 @@ export class FamilyMember {
 export class Category {
     _id: string;
     name: string;
+}
+
+export class ArtifactCategoryRelationship {
+    artifactId: String;
+    categoryId: String;
 }
 
 export class Image {

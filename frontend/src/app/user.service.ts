@@ -21,6 +21,6 @@ export class UserService {
       password: password,
       email: email,
     };
-    return this.http.post(`${this.uri}/user/update/${id}`, user);
+    return this.http.post(`${this.uri}/user/${id}`, user);
   }
 }

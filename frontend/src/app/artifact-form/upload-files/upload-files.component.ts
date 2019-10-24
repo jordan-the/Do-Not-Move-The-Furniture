@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { FileHandle } from './upload-files.directive';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-upload-files',
@@ -8,9 +9,19 @@ import { FileHandle } from './upload-files.directive';
 })
 export class UploadFilesComponent implements OnInit {
   files: FileHandle[] = [];
+  
+  //Changes
+  @Input() nfiles: FileHandle[];
+  //
+  @Output() fileEvent: EventEmitter<FileHandle[]> = new EventEmitter();
+
   filesDropped(files: FileHandle[]): void {
     this.files = files;
+    if(this.files.length > 0 ){
+      this.fileEvent.emit(this.files);
+    }
   }
+
   constructor() { }
 
   deleteImage(file: File): void{
@@ -22,6 +33,7 @@ export class UploadFilesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.files = this.nfiles;
   }
 
 }

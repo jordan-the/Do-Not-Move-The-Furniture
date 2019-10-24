@@ -54,12 +54,13 @@ module.exports.addArtifact = function(req,res){
 //to delete an artifact, also need to delete the images as well
 module.exports.deleteArtifact = function(req,res){
     ic.deleteImgByArtifact(req,res);
+    acrc.deleteRelationByArtifact(req,res);
     ac.deleteArtifact(req,res);
 };
 
 //images
 module.exports.addImage = function(req,res){
-    ic.addImage(req,res);
+    ic.addImage2(req,res);
 };
 
 module.exports.deleteImageById = function(req,res){
@@ -151,3 +152,7 @@ module.exports.getRelationshipByCategory = function(req,res){
 module.exports.deleteRelationship = function(req,res){
     acrc.deleteRelation(req,res);
 };
+
+module.exports.deleteRelationByArtifact = function(req,res){
+    acrc.deleteRelationByArtifact(req,res);
+}

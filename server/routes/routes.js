@@ -5,6 +5,21 @@ var express = require("express");
 var router = express.Router();
 var controller = require("../controllers/controller");
 
+
+//require multer and set up
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, "uploads/")
+    },
+    filename: function(req, file, cb){
+        cb(null, new Date().toISOString().slice(0,10) + file.originalname);
+    }
+});
+
+const upload = multer({storage: storage});
+
 //artifacts api
 router.get("/api/artifact", controller.getAllArtifact);
 
@@ -17,7 +32,7 @@ router.post("/api/edit/artifact/:id", controller.editArtifact);
 router.get("/api/artifact/delete/:id", controller.deleteArtifact);
 
 //image api
-router.post("/api/image/:id", controller.addImage);
+router.post("/api/image/:id", upload.single("image"), controller.addImage);
 
 router.get("/api/image/:id", controller.getImageByArtifact);
 
@@ -61,12 +76,13 @@ router.get("/api/relationship/category", controller.getRelationshipByCategory);
 
 router.get("/api/relationship/artifact/:id", controller.getRelationshipByArtifact);
 
-router.get("/api/relationship/:id", controller.getRelationshipById);
+router.get("/api/relationship/id/:id", controller.getRelationshipById);
 
 router.post("/api/relationship", controller.addRelationship);
 
 router.get("/api/relationship/delete/:id", controller.deleteRelationship);
 
+router.get("/api/relationship/deletebyartifact", controller.deleteRelationByArtifact);
 //checking connection
 router.get("/api", controller.checkConnection);
 router.post("/api", controller.testPost);
