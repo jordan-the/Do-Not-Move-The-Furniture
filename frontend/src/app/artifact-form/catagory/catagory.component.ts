@@ -7,35 +7,16 @@ import { Category } from '../../data-structures';
   styleUrls: ['./catagory.component.css']
 })
 export class CatagoryComponent implements OnInit {
-  catagories: String[] = [];
+  categories: Category[] = [];
   filters: Category[] = [];
-  
-  categories = [
-    {
-      _id: "test",
-      name: "test"
-    },
-    {
-      _id: "test1",
-      name: "test1"
-    },
-    {
-      _id: "test2",
-      name: "test2"
-    },
-    {
-      _id: "test3",
-      name: "test3"
-    }
-  ]
 
-  @Input() catagoryOption : String[];
+  @Input() catagoryOption : Category[];
   @Output() categoryEvent: EventEmitter<Category[]> = new EventEmitter();
   
   constructor() { }
 
   ngOnInit(){
-
+    this.categories = this.catagoryOption;
   }
 
   includeFilter(filter) {

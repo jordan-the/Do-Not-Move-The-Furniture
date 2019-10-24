@@ -25,23 +25,11 @@ export class ArtifactFormComponent implements OnInit {
 
   uploadFiles: FileHandle[] = [];
   
-  cata= [
-    {
-        "_id": "5d7b79ce417a8abd984181b1",
-        "name": "wooden",
-        "__v": 0
-    },
-    {
-        "_id": "5d7d9c40c6ef0b2a09a6d1cb",
-        "name": "paperwork",
-        "__v": 0
-    }
-  ];
+  cata= []
 
-  getCatagoryNames(object){
-    for(var i = 0; i < this.cata.length; i ++){
-      this.catagories.push(this.cata[i]["name"]);
-    }
+  getCategories(categories: Category[]){
+    this.chosenCatagories = categories;
+    console.log(this.chosenCatagories);
   }
 
   constructor(
@@ -66,9 +54,7 @@ export class ArtifactFormComponent implements OnInit {
       currentLocation: [''],
       originLocation: ['']
     })
-    console.log("uploadFiles");
-    console.log(this.uploadFiles);
-    this.getCatagoryNames(this.cata);
+    this.cata = this.data["categories"];
   }
 
   getImages(files: FileHandle[]): void{
@@ -77,10 +63,12 @@ export class ArtifactFormComponent implements OnInit {
 
   getCategory(catag: Category[]): void{
     this.chosenCatagories = catag;
-    console.log(this.chosenCatagories);
   }
 
   onSubmit(){
+    console.log("chosen Categorues  ")
+    console.log(this.chosenCatagories);
+    
     this.artifactService.postArtifact(this.artifactForm.value)
     .then(res => this.submitImagesAndCategories(res, this.images, this.chosenCatagories));
   }
@@ -89,28 +77,21 @@ export class ArtifactFormComponent implements OnInit {
     this.submitImages(response, images);
     this.submitCategories(response, catagos);
 
+    /*
     this.dialogRef.close();
     location.reload();
+    */
   }
 
   submitCategories(response, cat: Category[]){
     for(var i= 0; i < cat.length; i++){
-      console.log("uploading category ", i);
       this.artifactService.postCate(response, cat[i]["_id"]);
     }
   }
 
   submitImages(response, images: FileHandle[]) {
     for(var i= 0; i < images.length; i++){
-      console.log("uploading image ", i);
       this.artifactService.postArtifactImage(this.images[i].file, response);
     }
   }
-
-  sanitizeFile(file: File){
-    const url = this.sanitizer.bypassSecurityTrustUrl
-    (window.URL.createObjectURL(file));
-    this.uploadFiles.push({ file, url});
-  }
-
 }
