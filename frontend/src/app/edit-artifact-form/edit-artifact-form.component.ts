@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { Category } from '..//data-structures';
 
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Artifact } from '../data-structures';
 
 @Component({
   selector: 'app-edit-artifact-form',
@@ -25,6 +26,7 @@ export class EditArtifactFormComponent implements OnInit {
   chosenCatagories: Category[] = [];
 
   uploadFiles: FileHandle[] = [];
+
   
   cata= [
     {
@@ -49,26 +51,26 @@ export class EditArtifactFormComponent implements OnInit {
     private fb: FormBuilder, 
     private artifactService: ArtifactService, 
     public dialogRef: MatDialogRef<EditArtifactFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: String[],
+    @Inject(MAT_DIALOG_DATA) public data: Artifact,
     private http: HttpClient,
     private sanitizer: DomSanitizer
     ) { }
 
   ngOnInit() {
+    this.artifactID = this.data["_id"];
+    console.log("data = ", this.artifactID);
     this.artifactForm = this.fb.group({
       familyID: this.familyID,
       //  userID: this.userID,
-      name: [''],
-      description: [''],
-      year: [''],
-      month: [''],
-      day: [''],
-      category: [''],
-      currentLocation: [''],
-      originLocation: ['']
+      name: this.data["name"],
+      description: this.data["description"],
+      year: this.data["year"],
+      month: this.data["month"],
+      day: this.data["day"],
+      category: this.data["category"],
+      currentLocation: this.data["currentLocation"],
+      originLocation: this.data["originLocation"]
     })
-    console.log("uploadFiles");
-    console.log(this.uploadFiles);
     this.getCatagoryNames(this.cata);
   }
 
@@ -82,16 +84,8 @@ export class EditArtifactFormComponent implements OnInit {
   }
 
   onSubmit(){
-    this.artifactService.postArtifact(this.artifactForm.value)
-    .then(res => this.submitImagesAndCategories(res, this.images, this.chosenCatagories));
-  }
-
-  submitImagesAndCategories(response, images: FileHandle[], catagos: Category[]){
-    this.submitImages(response, images);
-    this.submitCategories(response, catagos);
-
-    this.dialogRef.close();
-    location.reload();
+    this.artifactService.editArtifact(this.artifactForm.value, this.artifactID)
+    .then(res => this.submitImages());
   }
 
   submitCategories(response, cat: Category[]){
@@ -101,11 +95,9 @@ export class EditArtifactFormComponent implements OnInit {
     }
   }
 
-  submitImages(response, images: FileHandle[]) {
-    for(var i= 0; i < images.length; i++){
-      console.log("uploading image ", i);
-      this.artifactService.postArtifactImage(this.images[i].file, response);
-    }
+  submitImages() {
+    this.dialogRef.close();
+    location.reload();
   }
 
   sanitizeFile(file: File){

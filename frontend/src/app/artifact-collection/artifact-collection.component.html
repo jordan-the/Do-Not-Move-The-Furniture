@@ -39,7 +39,7 @@
 
 		<mat-grid-list cols="6" gutterSize="5px">
 			<mat-grid-tile *ngFor="let artifact of sortedArtifacts" class="artifactTile">
-				<button mat-button class="artifactButton" (click)="openArtifact(artifact)">
+				<button mat-button class="artifactButton" (click)="openEdit(artifact)">
 					<app-artifact-button class="artifactImage" [artifact]="artifact"></app-artifact-button>
 				</button>
 			</mat-grid-tile>

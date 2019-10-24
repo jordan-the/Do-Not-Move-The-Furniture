@@ -76,12 +76,13 @@ router.get("/api/relationship/category", controller.getRelationshipByCategory);
 
 router.get("/api/relationship/artifact/:id", controller.getRelationshipByArtifact);
 
-router.get("/api/relationship/:id", controller.getRelationshipById);
+router.get("/api/relationship/id/:id", controller.getRelationshipById);
 
 router.post("/api/relationship", controller.addRelationship);
 
 router.get("/api/relationship/delete/:id", controller.deleteRelationship);
 
+router.get("/api/relationship/deletebyartifact", controller.deleteRelationByArtifact);
 //checking connection
 router.get("/api", controller.checkConnection);
 router.post("/api", controller.testPost);
