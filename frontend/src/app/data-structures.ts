@@ -26,6 +26,11 @@ export class Category {
     name: string;
 }
 
+export class ArtifactCategoryRelationship {
+    artifactId: String;
+    categoryId: String;
+}
+
 export class Image {
     hostId: String;
     url: String;

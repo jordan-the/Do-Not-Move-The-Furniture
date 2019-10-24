@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ArtifactService } from '../artifact.service';
-import { Artifact, Category } from '../data-structures';
+import { Artifact, Category, ArtifactCategoryRelationship } from '../data-structures';
 import { ArtifactViewComponent } from '../artifact-view/artifact-view.component';
 import { ArtifactFormComponent } from '../artifact-form/artifact-form.component';
 import { MatSnackBar } from '@angular/material';
@@ -28,6 +28,8 @@ export class ArtifactCollectionComponent implements OnInit {
     filters: Category[] = [];
     newCategory: String;
 
+    acRelations: ArtifactCategoryRelationship[];
+
     searchTerms = [];
 
     //used by search bar
@@ -49,6 +51,7 @@ export class ArtifactCollectionComponent implements OnInit {
         this.artifactService.getArtifacts().subscribe(artifacts => this.filteredArtifacts = artifacts);
         this.artifactService.getArtifacts().subscribe(artifacts => this.sortedArtifacts = artifacts);
         this.artifactService.getCategories().subscribe(categories => this.categories = categories);
+        this.artifactService.getCategoryRelationships().subscribe(acRelations => this.acRelations = acRelations);
         this.newCategory = "";
     }
 
@@ -69,8 +72,10 @@ export class ArtifactCollectionComponent implements OnInit {
 
     isFiltered(x: Artifact) {
         for (var filter of this.filters) {
-            if (x.category != filter._id) {
-                return false;
+            for (var relation of this.acRelations) {
+                if (filter._id != relation.categoryId && x._id == relation.categoryId) {
+                    return false;
+                }
             }
         }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { Artifact, Image, Category, Msg } from './data-structures';
+import { Artifact, Image, Category, Msg, ArtifactCategoryRelationship } from './data-structures';
 import { reject } from 'q';
 
 
@@ -34,6 +34,10 @@ export class ArtifactService {
 
     getCategories() {
         return this.http.get<Category[]>(`${this.uri}/api/category`);
+    }
+
+    getCategoryRelationships() {
+        return this.http.get<ArtifactCategoryRelationship[]>(`${this.uri}/api/relationship`);
     }
 
     postCategory(newName: String) {
