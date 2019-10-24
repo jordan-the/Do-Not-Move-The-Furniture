@@ -98,3 +98,7 @@
     position: relative;
     top: -8px;
 }
+
+.editCheckbox {
+    float: right;
+}

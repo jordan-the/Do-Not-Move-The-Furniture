@@ -6,6 +6,7 @@ import { ArtifactViewComponent } from '../artifact-view/artifact-view.component'
 import { ArtifactFormComponent } from '../artifact-form/artifact-form.component';
 import { MatSnackBar } from '@angular/material';
 import { EditArtifactFormComponent } from '../edit-artifact-form/edit-artifact-form.component';
+import { DeleteWarningComponent } from './delete-warning/delete-warning.component';
 
 @Component({
     selector: 'app-artifact-collection',
@@ -32,7 +33,9 @@ export class ArtifactCollectionComponent implements OnInit {
     //used by search bar
     searchText = "";
 
-    sortOption = "added"
+    sortOption = "added";
+
+    isEditMode = false;
 
     constructor(
         public dialog: MatDialog,
@@ -89,28 +92,29 @@ export class ArtifactCollectionComponent implements OnInit {
         this.updateArtifacts();
     }
 
-    openArtifact(x: Artifact) {
+    openArtifact(artifact: Artifact) {
 
         const dialogConfig = new MatDialogConfig();
 
         dialogConfig.autoFocus = true;
-        dialogConfig.data = x;
+        dialogConfig.data = artifact;
         dialogConfig.width = "50vw";
         dialogConfig.height = "100vh";
 
-        this.dialog.open(ArtifactViewComponent, dialogConfig);
+        if (this.isEditMode) {
+            this.dialog.open(EditArtifactFormComponent, dialogConfig);
+        } else {
+            this.dialog.open(ArtifactViewComponent, dialogConfig);
+        }
     }
 
-    openEdit (x: Artifact) {
+    deleteWarning(artifact: Artifact) {
         const dialogConfig = new MatDialogConfig();
 
         dialogConfig.autoFocus = true;
-        dialogConfig.data = x;
-        dialogConfig.width = "50vw";
-        dialogConfig.height = "100vh";
-
-        //todo: add edit
-        this.dialog.open(EditArtifactFormComponent, dialogConfig);
+        dialogConfig.data = artifact;
+        
+        this.dialog.open(DeleteWarningComponent, dialogConfig);
     }
 
     openCreate() {

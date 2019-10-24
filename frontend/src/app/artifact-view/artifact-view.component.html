@@ -1,5 +1,4 @@
 <button mat-button class="backButton" (click)="closeThis()">Back</button>
-<button mat-button class="deleteButton" (click)="deleteArtifact()">Delete</button>
 <div class="mainContent">
     <div class="images">
         <img class="image" *ngIf="images[currentImage]; else noImageBlock" src={{images[currentImage].url}}>

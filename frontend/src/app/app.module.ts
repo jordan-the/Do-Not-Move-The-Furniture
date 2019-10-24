@@ -22,6 +22,7 @@ import { MenuComponent } from './menu/menu.component';
 import { LoginComponent } from './login/login.component';
 import { EditArtifactFormModule } from './edit-artifact-form/edit-artifact-form.module';
 import { ArtifactButtonComponent } from './artifact-collection/artifact-button/artifact-button.component';
+import { DeleteWarningComponent } from './artifact-collection/delete-warning/delete-warning.component';
  
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import { ArtifactButtonComponent } from './artifact-collection/artifact-button/a
         FrontPageComponent,
         MenuComponent,
         LoginComponent,
-        ArtifactButtonComponent
+        ArtifactButtonComponent,
+        DeleteWarningComponent
     ],
     imports: [
         BrowserModule,
@@ -50,7 +52,7 @@ import { ArtifactButtonComponent } from './artifact-collection/artifact-button/a
     providers: [ArtifactService,UserService,FamilyService],
     bootstrap: [AppComponent],
     entryComponents: [
-        ArtifactViewComponent,
+        ArtifactViewComponent, DeleteWarningComponent
     ]
 })
 export class AppModule { }
