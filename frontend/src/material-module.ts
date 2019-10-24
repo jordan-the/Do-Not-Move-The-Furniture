@@ -10,6 +10,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material';
 
 @NgModule({
     exports: [
@@ -23,6 +24,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
         MatCheckboxModule,
         MatDialogModule,
         MatSnackBarModule,
+        MatSelectModule
     ]
 })
 export class MaterialModule {}

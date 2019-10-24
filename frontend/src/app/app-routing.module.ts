@@ -9,7 +9,6 @@ import { PersonalDetailComponent } from './personal-detail/personal-detail.compo
 import { FrontPageComponent } from './front-page/front-page.component';
 import { MenuComponent } from './menu/menu.component';
 
-
 const routes: Routes = [
 	{ path: '', component: FrontPageComponent },
 	{ path: 'menu', component: MenuComponent},

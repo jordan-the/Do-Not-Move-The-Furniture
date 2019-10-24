@@ -1,28 +1,46 @@
 <div class="content">
 	<div class="topContent">
 		<button mat-button class="homeButton" [routerLink]="['/menu']">Home</button>
-		<button mat-button class="accountButton" [routerLink]="['/familyMemberList']">My Account</button>
+		<button mat-button class="accountButton" [routerLink]="['/personalDetail/5da1cd63d2839401a010632b']">My Account</button>
 	</div>
 
 	<div class="sideContent">
-			<mat-form-field class="search">
-				<input matInput placeholder="Enter search terms seperated by spaces" type="search" [(ngModel)]="searchText" (keyup)="search(searchText)">
-			</mat-form-field>
+		<mat-form-field class="search">
+			<input matInput placeholder="Enter search terms seperated by spaces" type="search" [(ngModel)]="searchText" (keyup)="search(searchText)">
+		</mat-form-field>
 		<div class="filter">
 			<div *ngFor="let category of categories" class="cat">
 				<mat-checkbox (click)="includeFilter(category)">{{category.name}}</mat-checkbox>
+				<button mat-icon-button class="categoryDeleteButton" (click)="deleteCategory(category._id)">
+					<mat-icon>delete</mat-icon>
+				</button>
 				<br>
+			</div>
+			<div class="createCategory">
+				<mat-form-field>
+					<input matInput placeholder="New Category..." [(ngModel)]="newCategory" (keyup.enter)="createCategory(newCategory)">
+				</mat-form-field>
+				<button mat-button class="submitCategory" (click)="createCategory(newCategory)">Add</button>
 			</div>
 		</div>
 	</div>
 
 	<div class="artifactContent">
+		<div class="sortBar">
+			<mat-form-field>
+				<mat-label>Order by...</mat-label>
+				<mat-select [(value)]="sortOption" (selectionChange)="sortArtifacts()">
+					<mat-option value="added">Date Added</mat-option>
+					<mat-option value="obtained">Date Obtained</mat-option>
+					<mat-option value="alpha">Alphabetical</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+
 		<mat-grid-list cols="6" gutterSize="5px">
-			<mat-grid-tile *ngFor="let artifact of filteredArtifacts" class="artifactTile">
+			<mat-grid-tile *ngFor="let artifact of sortedArtifacts" class="artifactTile">
 				<button mat-button class="artifactButton" (click)="openArtifact(artifact)">
-					<img class="image" src="{{artifact.primaryImage}}">
-					<br>
-					{{artifact.name}}
+					<app-artifact-button class="artifactImage" [artifact]="artifact"></app-artifact-button>
 				</button>
 			</mat-grid-tile>
 			<mat-grid-tile class="addArtifactTile">

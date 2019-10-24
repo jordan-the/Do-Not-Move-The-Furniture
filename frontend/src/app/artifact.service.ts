@@ -25,17 +25,26 @@ export class ArtifactService {
     }
 
     deleteArtifact(id) {
-        console.log(`${this.uri}/api/artifact/delete/${id}`)
-        return this.http.get<Msg>(`${this.uri}/api/artifact/delete/${id}`);
-        
+        return new Promise ((resolve, reject) => {this.http.get<Msg>(`${this.uri}/api/artifact/delete/${id}`).subscribe(data => resolve(data))});
     }
 
     getImages(artifactId) {
-        return this.http.get<Image[]>(`${this.uri}/api/image/${artifactId}`)
+        return this.http.get<Image[]>(`${this.uri}/api/image/${artifactId}`);
     }
 
     getCategories() {
-        return this.http.get<Category[]>(`${this.uri}/api/category`)
+        return this.http.get<Category[]>(`${this.uri}/api/category`);
+    }
+
+    postCategory(newName: String) {
+        var catForm = {name: newName}
+        console.log("Added")
+        return new Promise ((resolve, reject) => {this.http.post(`${this.uri}/api/category`, catForm).subscribe(data => resolve(data))});
+    }
+
+    deleteCategory(id) {
+        console.log(id)
+        return new Promise ((resolve, reject) => {this.http.get<Msg>(`${this.uri}/api/category/delete/${id}`).subscribe(data => resolve(data))});
     }
 
     postArtifact(artifactForm: JSON) {
@@ -58,17 +67,7 @@ export class ArtifactService {
             data => resolve(data)
         );
         }); 
-    }
-
-    postCategory(name){
-        return new Promise((resolve, reject)=>{
-            this.http.post(`${this.uri}/api/category`, name)
-            .subscribe(res=> {
-                resolve(res["name"]);
-            }, (err) => {
-                reject(err);
-            });
-        });
+        
     }
 
     postCate(id, category){
@@ -78,6 +77,5 @@ export class ArtifactService {
         }
         return this.http.post(`${this.uri}/api/relationship`, artifactCategory).subscribe();
     }
-    
 
 }
