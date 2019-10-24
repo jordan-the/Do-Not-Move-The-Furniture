@@ -1,0 +1,15 @@
+<h1>Artifact Form</h1>
+
+<form [formGroup]="artifactForm">
+    <app-edit-title [artifactForm]="artifactForm"></app-edit-title>
+    <app-edit-upload-files (fileEvent) = "getImages($event)" [nfiles] = "uploadFiles"></app-edit-upload-files>
+    <app-edit-description [artifactForm]="artifactForm"></app-edit-description>
+    <app-edit-catagory [catagoryOption]="catagories" (categoryEvent)="getCategory($event)" ></app-edit-catagory>
+    <app-edit-acquisition-date [artifactForm]="artifactForm"></app-edit-acquisition-date>
+    <app-edit-location [artifactForm]="artifactForm"></app-edit-location>
+</form>
+<div class="submit">
+    <input type="submit" (click)="onSubmit()">
+</div>
+
+<pre>Form Values: {{artifactForm.value | json}}</pre>

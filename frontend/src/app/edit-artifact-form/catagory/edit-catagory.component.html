@@ -1,0 +1,4 @@
+<div *ngFor="let category of categories" class="cat">
+    <mat-checkbox (click)="includeFilter(category)">{{category.name}}</mat-checkbox>
+    <br>
+</div>

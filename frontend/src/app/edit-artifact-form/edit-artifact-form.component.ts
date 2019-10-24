@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ArtifactService } from '../artifact.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
-import { FileHandle } from './upload-files/upload-files.directive';
+import { FileHandle } from './upload-files/edit-upload-files.directive';
 
 import { HttpClient } from '@angular/common/http';
 import { Category } from '..//data-structures';
@@ -10,11 +10,12 @@ import { Category } from '..//data-structures';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-artifact-form',
-  templateUrl: './artifact-form.component.html',
-  styleUrls: ['./artifact-form.component.css']
+  selector: 'app-edit-artifact-form',
+  templateUrl: './edit-artifact-form.component.html',
+  styleUrls: ['./edit-artifact-form.component.css']
 })
-export class ArtifactFormComponent implements OnInit {
+export class EditArtifactFormComponent implements OnInit {
+
   artifactForm: FormGroup;
   userID= this.data[0];
   familyID= this.data[1];
@@ -47,7 +48,7 @@ export class ArtifactFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private artifactService: ArtifactService, 
-    public dialogRef: MatDialogRef<ArtifactFormComponent>,
+    public dialogRef: MatDialogRef<EditArtifactFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: String[],
     private http: HttpClient,
     private sanitizer: DomSanitizer
@@ -112,5 +113,6 @@ export class ArtifactFormComponent implements OnInit {
     (window.URL.createObjectURL(file));
     this.uploadFiles.push({ file, url});
   }
+
 
 }

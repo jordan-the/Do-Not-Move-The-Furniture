@@ -4,6 +4,8 @@ import { ArtifactService } from '../artifact.service';
 import { Artifact, Category } from '../data-structures';
 import { ArtifactViewComponent } from '../artifact-view/artifact-view.component';
 import { ArtifactFormComponent } from '../artifact-form/artifact-form.component';
+import { EditArtifactFormComponent } from '../edit-artifact-form/edit-artifact-form.component';
+
 
 @Component({
     selector: 'app-artifact-collection',
@@ -93,16 +95,17 @@ export class ArtifactCollectionComponent implements OnInit {
         this.dialog.open(ArtifactViewComponent, dialogConfig);
     }
 
-    openEdit (x: Artifact) {
+    openEdit () {
         const dialogConfig = new MatDialogConfig();
 
+
         dialogConfig.autoFocus = true;
-        dialogConfig.data = x;
+        dialogConfig.data = []
         dialogConfig.width = "50vw";
         dialogConfig.height = "100vh";
 
         //todo: add edit
-        this.dialog.open(null, dialogConfig);
+        this.dialog.open(EditArtifactFormComponent, dialogConfig);
     }
 
     openCreate() {
@@ -110,7 +113,7 @@ export class ArtifactCollectionComponent implements OnInit {
         const dialogConfig = new MatDialogConfig();
 
         dialogConfig.autoFocus = true;
-        dialogConfig.data = [this.userId, this.familyId]
+        dialogConfig.data = [[this.userId, this.familyId]]
         dialogConfig.width = "50vw";
         dialogConfig.height = "100vh";
         
