@@ -4,12 +4,12 @@ import { ArtifactService } from '../artifact.service';
 import { Artifact, Category } from '../data-structures';
 import { ArtifactViewComponent } from '../artifact-view/artifact-view.component';
 import { ArtifactFormComponent } from '../artifact-form/artifact-form.component';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
     selector: 'app-artifact-collection',
     templateUrl: './artifact-collection.component.html',
     styleUrls: ['./artifact-collection.component.css'],
-    encapsulation: ViewEncapsulation.None
 })
 export class ArtifactCollectionComponent implements OnInit {
 
@@ -23,6 +23,7 @@ export class ArtifactCollectionComponent implements OnInit {
 
     categories: Category[];
     filters: Category[] = [];
+    newCategory: String;
 
     searchTerms = [];
 
@@ -31,7 +32,8 @@ export class ArtifactCollectionComponent implements OnInit {
 
     constructor(
         public dialog: MatDialog,
-        private artifactService: ArtifactService
+        private artifactService: ArtifactService,
+        private snackBar: MatSnackBar,
     ) { }
 
 
@@ -39,6 +41,7 @@ export class ArtifactCollectionComponent implements OnInit {
         this.artifactService.getArtifacts().subscribe(artifacts => this.artifacts = artifacts);
         this.artifactService.getArtifacts().subscribe(artifacts => this.filteredArtifacts = artifacts);
         this.artifactService.getCategories().subscribe(categories => this.categories = categories);
+        this.newCategory = "";
     }
 
     includeFilter(filter) {
@@ -61,7 +64,6 @@ export class ArtifactCollectionComponent implements OnInit {
                 return false;
             }
         }
-        console.log(this.searchTerms);
 
         if (this.searchTerms[0]) {
             for (var term of this.searchTerms) {
@@ -109,8 +111,14 @@ export class ArtifactCollectionComponent implements OnInit {
         
         const dialogConfig = new MatDialogConfig();
 
+        var data = {
+            userId: this.userId,
+            familyId: this.familyId,
+            categories: this.categories,
+        }
+
         dialogConfig.autoFocus = true;
-        dialogConfig.data = [this.userId, this.familyId]
+        dialogConfig.data = data;
         dialogConfig.width = "50vw";
         dialogConfig.height = "100vh";
         
@@ -118,5 +126,27 @@ export class ArtifactCollectionComponent implements OnInit {
         
     }
 
+    createCategory(name: String) {
+        for (var category of this.categories) {
+            if (name == category.name) {
+                this.snackBar.open('Category already exists!', 'OK', {duration: 3000}) ;
+                return
+            }
+        }
+        if (name) {
+            this.artifactService.postCategory(name).then(res => this.ngOnInit());
+        }
+    }
 
+    deleteCategory(id) {
+        for (var artifact of this.artifacts) {
+            if (id == artifact.category) {
+                this.snackBar.open('Can\'t remove category: Artifacts that belong to this category exist!', 'OK', {duration: 3000}) ;
+                return
+            }
+        }
+        
+        this.artifactService.deleteCategory(id).then(res => this.ngOnInit());
+
+    }
 }

@@ -4,7 +4,7 @@
     <app-title [artifactForm]="artifactForm"></app-title>
     <app-upload-files (fileEvent) = "getImages($event)"></app-upload-files>
     <app-description [artifactForm]="artifactForm"></app-description>
-    <app-catagory></app-catagory>
+    <app-catagory [catagoryOption]="catagories" (categoryEvent)="getCategory($event)" ></app-catagory>
     <app-acquisition-date [artifactForm]="artifactForm"></app-acquisition-date>
     <app-location [artifactForm]="artifactForm"></app-location>
 </form>
