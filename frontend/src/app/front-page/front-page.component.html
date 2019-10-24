@@ -1,13 +1,28 @@
-<div class="info">
-    <h1>Welcome to Family Artifact App</h1>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dolor  sed viverra ipsum nunc aliquet bibendum enim. In massa tempor nec feugiat. Nunc aliquet bibendum enim facilisis gravida. Nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Amet luctus venenatis lectus magna fringilla. Volutpat maecenas volutpat blandit aliquam etiam erat velit scelerisque in. Egestas egestas fringilla phasellus faucibus scelerisque eleifend. Sagittis orci a scelerisque purus semper eget duis. Nulla pharetra diam sit amet nisl suscipit. Sed adipiscing diam donec adipiscing tristique risus nec feugiat in. Fusce ut placerat orci nulla. Pharetra vel turpis nunc eget lorem dolor. Tristique senectus et netus et malesuada.
-  
-    <mat-list>
-    <mat-list-item> Example 1 </mat-list-item>
-    <mat-list-item> Example 2 </mat-list-item>
-    <mat-list-item> Example 3 </mat-list-item>
-    </mat-list>
-</div>
-<div class="login">
-    <app-login></app-login>
+
+<div>
+　　 <div class="all" >
+        <div class="info">
+            <h1>Welcome to Family Artifact App</h1>
+            <p> This web application is designed by Do Not Move The Furniture.<br>
+            It is designed to record the artifacts information.<br> 
+            For now it does not include access control. <br>
+            When it does, everyone get to write their own stories about the artifacts they have.<br>
+            We have created fake data to display what it should look like. <br>
+            Thank you for your time. </p>
+        </div>
+        <div class="fill"></div>
+        <div class="login">
+            <br>
+            <app-login></app-login>
+        </div>
+        <div class="fill"></div>
+        <div  (mouseenter)="stopPlay()" (mouseleave)="autoPlay()">
+            <ul [@carousel] = 'state' (@carousel.done)="afterPlay()">
+                <img  class="img" src={{bannerPic[0].img}}>
+                <div class = "fill2"></div>
+            </ul>
+        </div>
+        
+    </div>
+        
 </div>
