@@ -24,7 +24,7 @@ import { MatSelectModule } from '@angular/material';
         MatCheckboxModule,
         MatDialogModule,
         MatSnackBarModule,
-        MatSelectModule
+        MatSelectModule,
     ]
 })
 export class MaterialModule {}

@@ -19,11 +19,6 @@ export class ArtifactService {
         return this.http.get<Artifact[]>(`${this.uri}/api/artifact`);
     }
 
-    getSingleArtifact(id) {
-        console.log(`http:///api/artifact/${id}`);
-        return this.http.get<Artifact>(`http://localhost:9000/api/artifact/:${id}`);
-    }
-
     deleteArtifact(id) {
         return new Promise ((resolve, reject) => {this.http.get<Msg>(`${this.uri}/api/artifact/delete/${id}`).subscribe(data => resolve(data))});
     }

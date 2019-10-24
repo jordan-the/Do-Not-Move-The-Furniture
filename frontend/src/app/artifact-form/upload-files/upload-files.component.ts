@@ -34,11 +34,6 @@ export class UploadFilesComponent implements OnInit {
 
   ngOnInit() {
     this.files = this.nfiles;
-    console.log("nfiles");
-    console.log(this.nfiles);
-    console.log("files")
-    console.log(this.files);
-
   }
 
 }

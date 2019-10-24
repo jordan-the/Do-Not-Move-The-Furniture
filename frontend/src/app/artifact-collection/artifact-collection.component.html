@@ -35,12 +35,16 @@
 					<mat-option value="alpha">Alphabetical</mat-option>
 				</mat-select>
 			</mat-form-field>
+			<mat-checkbox class="editCheckbox" [(ngModel)]="isEditMode">Edit mode</mat-checkbox>
 		</div>
 
 		<mat-grid-list cols="6" gutterSize="5px">
 			<mat-grid-tile *ngFor="let artifact of sortedArtifacts" class="artifactTile">
-				<button mat-button class="artifactButton" (click)="openEdit(artifact)">
+				<button mat-button class="artifactButton" (click)="openArtifact(artifact)">
 					<app-artifact-button class="artifactImage" [artifact]="artifact"></app-artifact-button>
+				</button>
+				<button mat-icon-button class="artifactDeleteButton" *ngIf="isEditMode" (click)="deleteWarning(artifact)">
+						<mat-icon>delete</mat-icon>
 				</button>
 			</mat-grid-tile>
 			<mat-grid-tile class="addArtifactTile">

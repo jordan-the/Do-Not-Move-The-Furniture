@@ -6,6 +6,7 @@ import { ArtifactViewComponent } from '../artifact-view/artifact-view.component'
 import { ArtifactFormComponent } from '../artifact-form/artifact-form.component';
 import { MatSnackBar } from '@angular/material';
 import { EditArtifactFormComponent } from '../edit-artifact-form/edit-artifact-form.component';
+import { DeleteWarningComponent } from './delete-warning/delete-warning.component';
 
 @Component({
     selector: 'app-artifact-collection',
@@ -32,7 +33,9 @@ export class ArtifactCollectionComponent implements OnInit {
     //used by search bar
     searchText = "";
 
-    sortOption = "added"
+    sortOption = "added";
+
+    isEditMode = false;
 
     constructor(
         public dialog: MatDialog,
@@ -89,28 +92,29 @@ export class ArtifactCollectionComponent implements OnInit {
         this.updateArtifacts();
     }
 
-    openArtifact(x: Artifact) {
+    openArtifact(artifact: Artifact) {
 
         const dialogConfig = new MatDialogConfig();
 
         dialogConfig.autoFocus = true;
-        dialogConfig.data = x;
+        dialogConfig.data = artifact;
         dialogConfig.width = "50vw";
         dialogConfig.height = "100vh";
 
-        this.dialog.open(ArtifactViewComponent, dialogConfig);
+        if (this.isEditMode) {
+            this.dialog.open(EditArtifactFormComponent, dialogConfig);
+        } else {
+            this.dialog.open(ArtifactViewComponent, dialogConfig);
+        }
     }
 
-    openEdit (x: Artifact) {
+    deleteWarning(artifact: Artifact) {
         const dialogConfig = new MatDialogConfig();
 
         dialogConfig.autoFocus = true;
-        dialogConfig.data = x;
-        dialogConfig.width = "50vw";
-        dialogConfig.height = "100vh";
-
-        //todo: add edit
-        this.dialog.open(EditArtifactFormComponent, dialogConfig);
+        dialogConfig.data = artifact;
+        
+        this.dialog.open(DeleteWarningComponent, dialogConfig);
     }
 
     openCreate() {
@@ -166,7 +170,7 @@ export class ArtifactCollectionComponent implements OnInit {
         }
         else if (this.sortOption == "obtained") {
             this.sortedArtifacts = this.filteredArtifacts.slice();
-            this.sortedArtifacts.sort(this.compareDate);
+            this.sortedArtifacts = this.sortByDate(this.sortedArtifacts);
         }
     }
 
@@ -182,9 +186,21 @@ export class ArtifactCollectionComponent implements OnInit {
         }
     }
 
-    compareDate(a1: Artifact, a2: Artifact) {
-        //todo
-        return 0;
+    sortByDate(unsortedArtifacts: Artifact[]) {
+        var artifactsWithDates = [];
+        for (var unsortedArtifact of unsortedArtifacts) {
+            var year = parseInt(unsortedArtifact.year.valueOf());
+            var month = this.parseMonth(unsortedArtifact.month);
+            var day = parseInt(unsortedArtifact.day.valueOf());
+            var artifactWithDate = [unsortedArtifact, year, month, day];
+            artifactsWithDates.push(artifactWithDate);
+        }
+        artifactsWithDates.sort(this.sortArtifactsWithDates);
+        var sortedArray = [];
+        for (var sorted of artifactsWithDates) {
+            sortedArray.push(sorted[0]);
+        }
+        return sortedArray;
     }
 
     parseMonth(month: String) {
@@ -214,7 +230,46 @@ export class ArtifactCollectionComponent implements OnInit {
             return 12;
         } else {
             //no month first (default start of year)
-            return -1;
+            return 0;
         }
+    }
+
+    sortArtifactsWithDates(ad1, ad2) {
+        //first compare year
+        //no year defaults to end of list
+        if (isNaN(ad1[1]) && isNaN(ad2[1])) {
+            return 0;
+        } else if (isNaN(ad1[1])) {
+            return 1;
+        } else if (isNaN(ad2[1])) {
+            return -1;
+        } else if (ad1[1] > ad2[1]) {
+            return 1;
+        } else if (ad1[1] < ad2[2]) {
+            return -1;
+        } else {
+            //compare month (never NaN since it's already been parsed)
+            if (ad1[1] > ad2[1]) {
+                return 1;
+            } else if (ad1[1] < ad2[2]) {
+                return -1;
+            } else {
+                //compare day
+                //no day defaults to start of month
+                if (isNaN(ad1[3]) && isNaN(ad2[3])) {
+                    return 0;
+                } else if (isNaN(ad1[3])) {
+                    return -1;
+                } else if (isNaN(ad2[3])) {
+                    return 1;
+                } else if (ad1[3] > ad2[3]) {
+                    return 1;
+                } else if (ad1[3] < ad2[3]) {
+                    return -1;
+                }
+            }
+        }
+
+        return 0;
     }
 }

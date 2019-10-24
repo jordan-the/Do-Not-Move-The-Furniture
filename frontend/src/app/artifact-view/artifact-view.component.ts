@@ -25,24 +25,6 @@ export class ArtifactViewComponent implements OnInit {
 		this.artifact = this.data;
 		this.artifactService.getImages(this.artifact._id).subscribe(images => this.images = images);
 		this.currentImage = 0;
-
-		// this.images = [
-		// 	{
-		// 		hostId: "TEST",
-		// 		url: "https://i.imgur.com/Pp3Ra0N.png",
-		// 		artifactId: "TEST",
-		// 	},
-		// 	{
-		// 		hostId: "TEST",
-		// 		url: "https://i.imgur.com/D5TdiNt.jpg",
-		// 		artifactId: "TEST",
-		// 	},
-		// 	{
-		// 		hostId: "TEST",
-		// 		url: "https://i.imgur.com/OsUGTJ2.png",
-		// 		artifactId: "TEST",
-		// 	},
-		// ]
 	}
 
 	nextImage() {
@@ -61,11 +43,5 @@ export class ArtifactViewComponent implements OnInit {
 		this.dialogRef.close();
 	}
 
-	deleteArtifact() {
-		var out;
-		this.artifactService.deleteArtifact(this.artifact._id).then(data => location.reload());
-
-		console.log(out)
-	}
 	
 }
