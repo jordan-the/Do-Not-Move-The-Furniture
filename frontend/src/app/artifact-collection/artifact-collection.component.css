@@ -16,14 +16,14 @@
 .homeButton {
     float: left;
     height: 5vh;
-    width: 5vh;
+    width: 3vw;
     border-right: 1px solid #000000;
     text-align: center;
 }
 .accountButton {
     float: right;
     height: 5vh;
-    width: 12vh;
+    width: 6vw;
     border-left: 1px solid #000000;
 } 
 
@@ -93,3 +93,8 @@
     width: 100%;
 }
   
+.categoryDeleteButton{
+
+    position: relative;
+    top: -8px;
+}

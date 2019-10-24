@@ -18,7 +18,7 @@
 			</div>
 			<div class="createCategory">
 				<mat-form-field>
-					<input matInput placeholder="New Category..." [(ngModel)]="newCategory">
+					<input matInput placeholder="New Category..." [(ngModel)]="newCategory" (keyup.enter)="createCategory(newCategory)">
 				</mat-form-field>
 				<button mat-button class="submitCategory" (click)="createCategory(newCategory)">Add</button>
 			</div>
@@ -26,8 +26,19 @@
 	</div>
 
 	<div class="artifactContent">
+		<div class="sortBar">
+			<mat-form-field>
+				<mat-label>Order by...</mat-label>
+				<mat-select [(value)]="sortOption" (selectionChange)="sortArtifacts()">
+					<mat-option value="added">Date Added</mat-option>
+					<mat-option value="obtained">Date Obtained</mat-option>
+					<mat-option value="alpha">Alphabetical</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+
 		<mat-grid-list cols="6" gutterSize="5px">
-			<mat-grid-tile *ngFor="let artifact of filteredArtifacts" class="artifactTile">
+			<mat-grid-tile *ngFor="let artifact of sortedArtifacts" class="artifactTile">
 				<button mat-button class="artifactButton" (click)="openArtifact(artifact)">
 					<app-artifact-button class="artifactImage" [artifact]="artifact"></app-artifact-button>
 				</button>
