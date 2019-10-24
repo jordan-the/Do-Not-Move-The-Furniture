@@ -7,6 +7,8 @@ import { FileHandle } from './upload-files/upload-files.directive';
 import { HttpClient } from '@angular/common/http';
 import { Category } from '../data-structures';
 
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-artifact-form',
   templateUrl: './artifact-form.component.html',
@@ -21,6 +23,8 @@ export class ArtifactFormComponent implements OnInit {
   catagories = [];
   chosenCatagories: Category[] = [];
 
+  uploadFiles: FileHandle[] = [];
+  
   cata= [
     {
         "_id": "5d7b79ce417a8abd984181b1",
@@ -45,7 +49,8 @@ export class ArtifactFormComponent implements OnInit {
     private artifactService: ArtifactService, 
     public dialogRef: MatDialogRef<ArtifactFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: String[],
-    private http: HttpClient
+    private http: HttpClient,
+    private sanitizer: DomSanitizer
     ) { }
 
   ngOnInit() {
@@ -61,14 +66,9 @@ export class ArtifactFormComponent implements OnInit {
       currentLocation: [''],
       originLocation: ['']
     })
-
+    console.log("uploadFiles");
+    console.log(this.uploadFiles);
     this.getCatagoryNames(this.cata);
-
-    
-    /*console.log("getting catagories");
-        for(var i=0 ; i < this.catagories.length; i++){
-      console.log(this.catagories[i]);
-    }*/
   }
 
   getImages(files: FileHandle[]): void{
@@ -89,7 +89,8 @@ export class ArtifactFormComponent implements OnInit {
     this.submitImages(response, images);
     this.submitCategories(response, catagos);
 
-		this.dialogRef.close();
+    this.dialogRef.close();
+    location.reload();
   }
 
   submitCategories(response, cat: Category[]){
@@ -104,6 +105,12 @@ export class ArtifactFormComponent implements OnInit {
       console.log("uploading image ", i);
       this.artifactService.postArtifactImage(this.images[i].file, response);
     }
+  }
+
+  sanitizeFile(file: File){
+    const url = this.sanitizer.bypassSecurityTrustUrl
+    (window.URL.createObjectURL(file));
+    this.uploadFiles.push({ file, url});
   }
 
 }

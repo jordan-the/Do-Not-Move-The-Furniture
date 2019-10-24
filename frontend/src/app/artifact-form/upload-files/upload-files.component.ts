@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { FileHandle } from './upload-files.directive';
 import { EventEmitter } from '@angular/core';
 
@@ -9,7 +9,10 @@ import { EventEmitter } from '@angular/core';
 })
 export class UploadFilesComponent implements OnInit {
   files: FileHandle[] = [];
-
+  
+  //Changes
+  @Input() nfiles: FileHandle[];
+  //
   @Output() fileEvent: EventEmitter<FileHandle[]> = new EventEmitter();
 
   filesDropped(files: FileHandle[]): void {
@@ -30,6 +33,12 @@ export class UploadFilesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.files = this.nfiles;
+    console.log("nfiles");
+    console.log(this.nfiles);
+    console.log("files")
+    console.log(this.files);
+
   }
 
 }

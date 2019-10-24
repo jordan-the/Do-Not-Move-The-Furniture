@@ -1,4 +1,4 @@
-import { Directive, HostListener, HostBinding, EventEmitter, Output } from '@angular/core';
+import { Directive, HostListener, HostBinding, EventEmitter, Output, Input } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 export interface FileHandle{
@@ -10,7 +10,9 @@ export interface FileHandle{
   selector: '[appUploadFiles]'
 })
 export class UploadFilesDirective {
-  public uploadFiles: FileHandle[] = []
+  //public uploadFiles: FileHandle[] = []
+
+  @Input() uploadFiles: FileHandle[]
 
   @Output() files: EventEmitter<FileHandle[]> = new EventEmitter();
 
