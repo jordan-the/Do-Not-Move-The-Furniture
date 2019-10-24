@@ -193,7 +193,6 @@ export class ArtifactCollectionComponent implements OnInit {
         artifactsWithDates.sort(this.sortArtifactsWithDates);
         var sortedArray = [];
         for (var sorted of artifactsWithDates) {
-            console.log(sorted[1])
             sortedArray.push(sorted[0]);
         }
         return sortedArray;
