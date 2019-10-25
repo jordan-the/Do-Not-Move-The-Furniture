@@ -12,7 +12,7 @@ export class ImageDirective {
   @HostListener('mouseover',['$event']) public onMouseOver(evt){
     evt.preventDefault();
     evt.stopPropagation();
-    this.background = '#ff0000';
+    this.background = '#D5E8D4';
   }
 
   @HostListener('mouseout', ['$event']) public onMouseOut(evt){

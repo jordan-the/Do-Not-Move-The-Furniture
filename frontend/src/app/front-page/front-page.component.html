@@ -2,25 +2,22 @@
 <div>
 　　 <div class="all" >
         <div class="info">
-            <h1>Welcome to Family Artifact App</h1>
-            <p> This web application is designed by Do Not Move The Furniture.<br>
+            <img class="logo" src="../../assets/image/path4275-5-5.png">
+            <h1>Welcome to Airloom</h1>
+            <p> This web application was developeded by Do Not Move The Furniture.<br>
             It is designed to record the artifacts information.<br> 
             For now it does not include access control. <br>
-            When it does, everyone get to write their own stories about the artifacts they have.<br>
+            The intention, once this is implemented, is to allow for editting and viewing of artifacts by several users.<br>
             We have created fake data to display what it should look like. <br>
             Thank you for your time. </p>
         </div>
-        <div class="fill"></div>
         <div class="login">
             <br>
             <app-login></app-login>
         </div>
-        <div class="fill"></div>
-        <div class="fill"></div>
         <div (mouseenter)="stopPlay()" (mouseleave)="autoPlay()">
             <ul [@carousel] = 'state' (@carousel.done)="afterPlay()">
                 <img  class="img" src={{bannerPic[0].img}}>
-                <div class = "fill2"></div>
             </ul>
         </div>
         

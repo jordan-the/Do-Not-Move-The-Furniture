@@ -4,14 +4,14 @@
     <mat-divider></mat-divider>
     <div class="loginContainer">
         <mat-form-field>
-            <input matInput placeholder="Email Address" type="email">
+            <input matInput placeholder="Email Address" [(ngModel)]="email" type="email">
         </mat-form-field>
         <br>
         <mat-form-field>
-            <input matInput placeholder="Password" type="password">
+            <input matInput placeholder="Password" [(ngModel)]="password" type="password">
         </mat-form-field>
     </div>
-    <button mat-button [routerLink]="['/menu']">Log in</button>
+    <button mat-button (click)="login()">Log in</button>
     <br>
     <a>Forgot your password?</a>
     <mat-divider></mat-divider>

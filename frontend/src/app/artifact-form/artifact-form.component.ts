@@ -77,10 +77,10 @@ export class ArtifactFormComponent implements OnInit {
     this.submitImages(response, images);
     this.submitCategories(response, catagos);
 
-    /*
-    this.dialogRef.close();
+    setTimeout(function(){
     location.reload();
-    */
+    }, 5000);
+    
   }
 
   submitCategories(response, cat: Category[]){

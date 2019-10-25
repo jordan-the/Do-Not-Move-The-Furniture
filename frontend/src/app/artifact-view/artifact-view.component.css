@@ -6,9 +6,11 @@
 .image {
     display: inline-block;
     height: 50vh;
+    width: 45vw;
     display: flex;
     margin-left: auto;
     margin-right: auto;
+    object-fit: contain;
 }
 
 .buttons {

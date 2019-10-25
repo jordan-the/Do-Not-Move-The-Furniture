@@ -3,7 +3,7 @@
 </div>
 
 <div *ngIf="files.length > 0">
-  <span>Click To Remove</span>
+  <h3>Click To Remove</h3>
 </div>
 
 <div *ngFor="let file of files" class="images" (click)="deleteImage(file)" appImageDirective>
